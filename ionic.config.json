@@ -1,5 +1,8 @@
 {
   "name": "motivation",
-  "integrations": {},
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
   "type": "angular"
 }

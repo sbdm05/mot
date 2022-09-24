@@ -1,17 +1,31 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            Mes infos
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Tab 3</ion-title>
+        </ion-toolbar>
+    </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+
+    <ion-list *ngIf='user'>
+        <ion-item-sliding *ngFor='let letter of user.savedLetters, index as index'>
+            <ion-item>
+                <ion-label>{{letter.newValue.intitule}}</ion-label>
+                <p>{{letter.date}}</p>
+            </ion-item>
+
+            <ion-item-options>
+                <ion-item-option color="danger" (click)='onDelete(user, letter)'>Supprimer</ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+    <ion-button (click)=' onLogout() '>Me déconnecter</ion-button>
 </ion-content>
