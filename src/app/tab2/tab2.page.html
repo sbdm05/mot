@@ -1,10 +1,10 @@
 <ion-header>
-    <ion-toolbar color="shade">
-        <ion-buttons slot="start">
+    <ion-toolbar color="tertiary">
+        <!-- <ion-buttons slot="start">
             <ion-button slot="icon">
                 <ion-icon name="menu"></ion-icon>
             </ion-button>
-        </ion-buttons>
+        </ion-buttons> -->
         <ion-title>
             Créer une candidature
         </ion-title>
@@ -16,48 +16,54 @@
     <ion-accordion-group>
         <ion-accordion value="first">
             <ion-item slot="header" color="light">
-                <ion-label>Remplir les informations de la société</ion-label>
+                <ion-label>Etape 1 - Remplir les informations de la société</ion-label>
             </ion-item>
             <div class="ion-padding" slot="content">
-                <form [formGroup]='formEssai' *ngIf='user' (ngSubmit)='saveInfos()'>
+                <form [formGroup]='form' *ngIf='user' (ngSubmit)='saveInfos()'>
                     <!-- prenom -->
                     <ion-item>
-                        <ion-label position="floating">Intitulé du poste</ion-label>
-                        <ion-input required formControlName='intitule'></ion-input>
+                        <ion-label position="floating">Intitulé du poste (requis)</ion-label>
+                        <ion-input formControlName='intitule'></ion-input>
                     </ion-item>
                     <ion-list>
-                        <ion-item>
+
+
+                      <ion-item>
+                          <ion-label>Votre expérience</ion-label>
                             <ion-select formControlName='experience' placeholder="Niveau d'expérience pour ce poste">
+
                                 <ion-select-option value="debutant">Débutant</ion-select-option>
                                 <ion-select-option value="expert">Déjà exercé un poste similaire</ion-select-option>
                             </ion-select>
                         </ion-item>
                     </ion-list>
                     <ion-item>
-                        <ion-label position="floating">Société</ion-label>
-                        <ion-input required formControlName='societe'></ion-input>
+                        <ion-label position="floating">Société (requis)</ion-label>
+                        <ion-input formControlName='societe'></ion-input>
                     </ion-item>
                     <ion-item>
-                        <ion-label position="floating">Nom du contact</ion-label>
-                        <ion-input required formControlName='contact'></ion-input>
+                        <ion-label position="floating">Nom du contact avec civilité</ion-label>
+                        <ion-label style='font-style: italic;'position="floating">Laisser vide si pas de nom disponible</ion-label>
+
+                        <ion-input formControlName='contact' placeholder='Madame Durand'></ion-input>
                     </ion-item>
                     <ion-item>
-                        <ion-label position="floating">Adresse</ion-label>
-                        <ion-input required formControlName='adresseSociete'></ion-input>
+                        <ion-label position="floating">Adresse (requis)</ion-label>
+                        <ion-input formControlName='adresseSociete'></ion-input>
                     </ion-item>
                     <ion-item>
-                        <ion-label position="floating">Code Postal et Ville</ion-label>
-                        <ion-input required formControlName='cpVille'></ion-input>
+                        <ion-label position="floating">Code Postal et Ville (requis)</ion-label>
+                        <ion-input formControlName='cpVille'></ion-input>
                     </ion-item>
 
-                    <ion-button expand="block" type="submit">Enregistrer</ion-button>
+                    <ion-button expand="block" type="submit" [disabled]='form.invalid'>Etape 1 - Enregistrer</ion-button>
 
                 </form>
             </div>
         </ion-accordion>
         <ion-accordion value="second">
             <ion-item slot="header" color="light">
-                <ion-label>Choisir le modèle</ion-label>
+                <ion-label>Etape 2 - Choisir le modèle</ion-label>
             </ion-item>
             <div class="ion-padding" slot="content">
                 <!-- lettre 1 -->
@@ -69,21 +75,7 @@
                                     <h5 class="ion-no-margin">Modèle 1</h5>
                                 </ion-col>
                             </ion-row>
-                            <ion-row>
-                                <ion-col class="address-text">
-                                    {{user?.adresse}}
-                                </ion-col>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col class="bold">
-                                    <h5 class="ion-no-margin"></h5>
-                                </ion-col>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col class="address-text">
 
-                                </ion-col>
-                            </ion-row>
                         </ion-col>
                         <ion-col size="4">
                             <ion-button (click)="openModal()">
@@ -101,21 +93,6 @@
                             <ion-row>
                                 <ion-col class="bold">
                                     <h5 class="ion-no-margin">Modèle 2</h5>
-                                </ion-col>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col class="address-text">
-                                    {{user?.adresse}}
-                                </ion-col>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col class="bold">
-                                    <h5 class="ion-no-margin"></h5>
-                                </ion-col>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col class="address-text">
-
                                 </ion-col>
                             </ion-row>
                         </ion-col>
@@ -137,21 +114,6 @@
                                     <h5 class="ion-no-margin">Modèle 3</h5>
                                 </ion-col>
                             </ion-row>
-                            <ion-row>
-                                <ion-col class="address-text">
-                                    {{user?.adresse}}
-                                </ion-col>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col class="bold">
-                                    <h5 class="ion-no-margin"></h5>
-                                </ion-col>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col class="address-text">
-
-                                </ion-col>
-                            </ion-row>
                         </ion-col>
                         <ion-col size="4">
                             <ion-button (click)="openModalLetterC()">
@@ -163,17 +125,27 @@
 
             </div>
         </ion-accordion>
-        <ion-accordion value="third">
+        <!-- <ion-accordion value="third">
             <ion-item slot="header" color="light">
-                <ion-label>Choisir le contenu</ion-label>
+                <ion-label>Etape 3 - Choisir le contenu</ion-label>
             </ion-item>
             <div class="ion-padding" slot="content">
                 Choisir le contenu
             </div>
+        </ion-accordion> -->
+        <ion-accordion value="third">
+          <ion-item slot="header" color="light">
+            <ion-label>Etape 3 - Paramètres supplémentaires</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ion-text color="primary">
+              <p>Voulez-vous conservé ce contact dans votre historique ? </p>
+            </ion-text>
+          <ion-button expand="block" (click)='onSaved()'>AJOUTER A L'HISTORIQUE</ion-button>
+          </div>
         </ion-accordion>
     </ion-accordion-group>
 
-    <ion-button (click)='onSaved()'>AJOUTER A L'HISTORIQUE</ion-button>
 
 
 
@@ -183,3 +155,11 @@
 
 
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+
+        <!-- <ion-button expand="block" (click)='onSaved()'>AJOUTER A L'HISTORIQUE</ion-button> -->
+    </ion-toolbar>
+
+</ion-footer>

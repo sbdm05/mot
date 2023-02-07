@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
+    <ion-toolbar color="tertiary">
         <ion-title>
-            Mes infos
+            Historique
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -9,23 +9,48 @@
 <ion-content [fullscreen]="true">
     <ion-header collapse="condense">
         <ion-toolbar>
-            <ion-title size="large">Tab 3</ion-title>
+            <ion-title size="large">Historique</ion-title>
         </ion-toolbar>
     </ion-header>
 
 
-    <ion-list *ngIf='user'>
-        <ion-item-sliding *ngFor='let letter of user.savedLetters, index as index'>
-            <ion-item>
-                <ion-label>{{letter.newValue.intitule}}</ion-label>
-                <p>{{letter.date}}</p>
-            </ion-item>
+    <ng-container *ngIf="savedLetters?.length> 0; then content else noContent"></ng-container>
+    <ng-template #content>
+      <ion-list *ngIf='user'>
+          <ion-item-sliding *ngFor="let letter of user.savedLetters, index as index">
+              <ion-item>
+                  <ion-label>{{letter.newValue.societe}}</ion-label>
+                  <ion-label>{{letter.newValue.intitule}}</ion-label>
 
-            <ion-item-options>
-                <ion-item-option color="danger" (click)='onDelete(user, letter)'>Supprimer</ion-item-option>
-            </ion-item-options>
-        </ion-item-sliding>
-    </ion-list>
 
-    <ion-button (click)=' onLogout() '>Me déconnecter</ion-button>
+                  <p>{{letter.date}}</p>
+              </ion-item>
+
+              <ion-item-options>
+                  <ion-item-option color="danger" (click)='onDelete(user, letter)'>Supprimer</ion-item-option>
+              </ion-item-options>
+          </ion-item-sliding>
+      </ion-list>
+    </ng-template>
+
+    <ng-template #noContent>
+
+      <ion-card>
+        <ion-card-title>Aucun historique</ion-card-title>
+        <ion-card-content>Pour créer une lettre, rendez-vous dans l'onglet Créer une lettre.</ion-card-content>
+
+      </ion-card>
+    </ng-template>
+
+
+
+
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+
+        <ion-button expand="block" (click)=' onLogout() '>Me déconnecter</ion-button>
+    </ion-toolbar>
+
+</ion-footer>

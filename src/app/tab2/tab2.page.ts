@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CoverLetterCPage } from '../components/cover-letter-c/cover-letter-c.page';
@@ -14,7 +14,7 @@ import { User } from '../user/user';
   styleUrls: ['tab2.page.scss'],
 })
 export class Tab2Page implements OnInit, OnChanges {
-  public formEssai!: FormGroup;
+  public form!: FormGroup;
 
   // ici ajouter vérification de l'utilisateur
 
@@ -47,13 +47,30 @@ export class Tab2Page implements OnInit, OnChanges {
           this.user = user;
           //console.log(this.user, 'depuis tab2');
 
-          this.formEssai = this.fb.group({
-            intitule: [this.user?.letters[0]?.intitule || ''],
-            experience: [this.user?.letters[0]?.experience || ''],
-            societe: [this.user?.letters[0]?.societe || ''],
-            contact: [this.user?.letters[0]?.contact || ''],
-            adresseSociete: [this.user?.letters[0]?.adresseSociete || ''],
-            cpVille: [this.user?.letters[0]?.cpVille || ''],
+          this.form = this.fb.group({
+            intitule: [
+              this.user?.letters[0]?.intitule || '',
+              Validators.required,
+            ],
+            experience: [
+              this.user?.letters[0]?.experience || '',
+              Validators.required,
+            ],
+            societe: [
+              this.user?.letters[0]?.societe || '',
+              Validators.required,
+            ],
+            contact: [
+              this.user?.letters[0]?.contact || 'Madame'
+            ],
+            adresseSociete: [
+              this.user?.letters[0]?.adresseSociete || '',
+              Validators.required,
+            ],
+            cpVille: [
+              this.user?.letters[0]?.cpVille || '',
+              Validators.required,
+            ],
           });
         });
       } catch (error) {}
@@ -67,10 +84,10 @@ export class Tab2Page implements OnInit, OnChanges {
   ngOnChanges() {}
 
   saveInfos() {
-    console.log(this.formEssai.value);
+    console.log(this.form.value);
     // const updatedUser = { ...this.form.value, ...this.user };
     //console.log(this.user);
-    this.user.letters[0] = this.formEssai.value;
+    this.user.letters[0] = this.form.value;
 
     console.log(this.user, 'final user');
     // call service
@@ -84,7 +101,7 @@ export class Tab2Page implements OnInit, OnChanges {
 
     // call service
     this.usersService
-      .savedApplication(this.user, this.formEssai.value, this.token)
+      .savedApplication(this.user, this.form.value, this.token)
       .subscribe((data) => {
        // console.log(data);
       });

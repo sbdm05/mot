@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-title>Identifiez-vous</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,18 +13,43 @@
       <!-- email -->
       <ion-item>
         <ion-label position="floating">E-mail</ion-label>
-        <ion-input required minlength="2" type='email' formControlName='email'></ion-input>
+        <ion-input type='email' formControlName='email'></ion-input>
+        <div class="error" *ngIf="form.controls['email'].invalid && form.controls['email'].touched">E-mail invalide</div>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Mot de passe</ion-label>
-        <ion-input required minlength="2" formControlName='pwd'></ion-input>
+        <ion-input type='password' formControlName='pwd'></ion-input>
       </ion-item>
 
-      <ion-button expand="block" (click)="onSubmit()">Enregistrer
+      <div class='error' *ngIf='errorMessage'>{{errorMessage}}</div>
+
+      <ion-button color='success' expand="full" (click)="onSubmit()">Envoyer
       </ion-button>
 
     </form>
+
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Nouveau ?</ion-card-title>
+            <ion-card-subtitle>Créez un compte</ion-card-subtitle>
+            <ion-button color='tertiary' [routerLink]="['/signup']">Je crée un compte</ion-button>
+          </ion-card-header>
+
+
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Mot de passe oublié ?</ion-card-title>
+            <ion-card-subtitle>identifiez-vous</ion-card-subtitle>
+            <ion-button color='tertiary' [routerLink]="['/forgot-password']">Je réinitialise</ion-button>
+          </ion-card-header>
+
+
+        </ion-card>
+
 
   </ion-content>
 

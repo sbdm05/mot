@@ -1,13 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { User } from '../user/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
+  private urlApi = environment.urlApi;
+
   constructor(private http: HttpClient) {}
   // eslint-disable-next-line @typescript-eslint/member-ordering
   //token!: number;
@@ -19,7 +22,7 @@ export class UsersService {
   // attention sans le typage, on ne récupère pas la valeur dans le subscribe !!!!
   onSignUp(user): Observable<any> {
     console.log(user, 'user');
-    return this.http.post<User>('http://localhost:4000/api/v1/letters', user);
+    return this.http.post<User>(`${this.urlApi}/api/v1/letters`, user);
   }
 
   onLogin(user): Observable<any> {
@@ -29,10 +32,13 @@ export class UsersService {
     //   'Bearer ' + token
     // );
     console.log(user, 'user');
-    return this.http.post<User>(
-      'http://localhost:4000/api/v1/letters/login',
-      user
-    );
+    return this.http.post<User>(`${this.urlApi}/api/v1/letters/login`, user);
+    // ).pipe(
+    //   catchError(async (err) => console.log(err))
+    // );
+    // return this.http.post<User>(
+
+    // )
   }
 
   // je commente cette fonction pour des tests
@@ -65,32 +71,30 @@ export class UsersService {
       .set('Authorization', 'Bearer ' + token);
 
     this.http
-      .get('http://localhost:4000/api/v1/letters/user', {
+      .get(`${this.urlApi}/api/v1/letters/user`, {
         headers,
       })
       .subscribe((data) => {
         this.refreshCollection$.next(data);
-        //console.log(data, 'depuis refreshcollection');
+        console.log(data, 'depuis refreshcollection');
       });
     return;
   }
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   collection(token) {
-    //console.log(token, 'toekn depuis collection');
+    console.log(token, 'toekn depuis collection');
     this.refreshCollection(token);
     return this.refreshCollection$;
   }
 
   // je comment cette fonction pour tester avec le behavior chaud
   updateUser(user, token): Observable<any> {
-    return this.http
-      .patch('http://localhost:4000/api/v1/letters/user', user)
-      .pipe(
-        tap(() => {
-          this.refreshCollection(token);
-        })
-      );
+    return this.http.patch(`${this.urlApi}/api/v1/letters/user`, user).pipe(
+      tap(() => {
+        this.refreshCollection(token);
+      })
+    );
   }
 
   // refreshCollection(data): void {
@@ -116,7 +120,7 @@ export class UsersService {
   createApplication(user): Observable<any> {
     console.log(user, 'depuis');
     return this.http.patch(
-      'http://localhost:4000/api/v1/letters/create-application',
+      `${this.urlApi}/api/v1/letters/create-application`,
       user
     );
   }
@@ -129,7 +133,7 @@ export class UsersService {
     data.newValue = newValue;
     //console.log(data);
     return this.http
-      .patch('http://localhost:4000/api/v1/letters/saved-application', data)
+      .patch(`${this.urlApi}/api/v1/letters/saved-application`, data)
       .pipe(
         tap(() => {
           this.refreshCollection(token);
@@ -142,7 +146,7 @@ export class UsersService {
     data.user = user;
     data.toRemove = letter;
     return this.http
-      .patch('http://localhost:4000/api/v1/letters/delete-application', data)
+      .patch(`${this.urlApi}/api/v1/letters/delete-application`, data)
       .pipe(
         tap(() => {
           this.refreshCollection(token);
@@ -152,26 +156,22 @@ export class UsersService {
 
   forgotPassword(email): Observable<any> {
     console.log(email, 'depuis service');
-    return this.http.post(
-      'http://localhost:4000/api/v1/letters/forgot-password',
-      { email }
-    );
+    return this.http.post(`${this.urlApi}/api/v1/letters/forgot-password`, {
+      email,
+    });
   }
 
   resetPassword(obj): Observable<any> {
     console.log('depuis service', obj);
 
-    return this.http.post(
-      'http://localhost:4000/api/v1/letters/reset-password/',
-      obj
-    );
+    return this.http.post(`${this.urlApi}/api/v1/letters/reset-password/`, obj);
   }
 
   saveNewPassword(obj): Observable<any> {
     console.log(obj);
 
     return this.http.post(
-      'http://localhost:4000/api/v1/letters/save-new-password',
+      `${this.urlApi}/api/v1/letters/save-new-password`,
       obj
     );
   }

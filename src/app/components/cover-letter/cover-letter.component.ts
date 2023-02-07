@@ -3,7 +3,6 @@ import { ModalController } from '@ionic/angular';
 import { PDFGenerator } from '@ionic-native/pdf-generator/ngx';
 import { User } from 'src/app/user/user';
 
-
 @Component({
   selector: 'app-cover-letter',
   templateUrl: './cover-letter.component.html',
@@ -23,7 +22,8 @@ export class CoverLetterComponent implements OnInit, OnChanges {
   }
 
   downloadLetter() {
-    this.content = document.getElementById('PrintInvoice').innerHTML;
+    console.log('bouton cliqué');
+    this.content = document.getElementById('main').innerHTML;
     const options = {
       documentSize: 'A4',
       type: 'share',

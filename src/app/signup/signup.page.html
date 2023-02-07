@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>signup</ion-title>
+  <ion-toolbar color='tertiary'>
+    <ion-title>Création de compte</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,22 +13,32 @@
       <!-- email -->
       <ion-item>
         <ion-label position="floating">E-mail</ion-label>
-        <ion-input required minlength="5" type='email' formControlName='email'></ion-input>
+        <ion-input type='email' formControlName='email'></ion-input>
+        <div class="error" *ngIf="form.controls['email'].invalid && form.controls['email'].touched">E-mail invalide</div>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Mot de passe</ion-label>
-        <ion-input required minlength="7" formControlName='pwd'></ion-input>
+        <ion-input required type='password' formControlName='pwd'></ion-input>
+        <div class="error" *ngIf="form.controls['pwd'].invalid && form.controls['pwd'].touched">Le mot de passe doit contenir au moins 7 caractères </div>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Confirmation mot de passe</ion-label>
-        <ion-input required minlength="7" formControlName='pwdConfirm'></ion-input>
+        <ion-input required type='password' formControlName='pwdConfirm'></ion-input>
+        <div class="error" *ngIf="form.controls['pwdConfirm'].invalid && form.controls['pwdConfirm'].touched">Le mot de passe doit contenir au moins 7 caractères </div>
       </ion-item>
+        <!--Ajouter message d'erreur-->
+        <div class="error" *ngIf="form.errors?.verifyPassword">
+          Les mots de passe doivent être identiques
+        </div>
+                <div class='error' *ngIf="form.errors?.improperLength">
+                  Tous les champs doivent être renseignés.
+                </div>
+      <div *ngIf='errorPwd' class='error'>{{errorPwd}}</div>
 
 
-
-      <ion-button expand="block" [disabled]='this.form.invalid' (click)="onSubmit()">Créer un compte
+      <ion-button [disabled]='form.invalid' expand="full" color='success' (click)="onSubmit()">Créer un compte
       </ion-button>
 
     </form>
@@ -37,7 +47,7 @@
       <ion-card-header>
         <ion-card-title>Déjà un compte ?</ion-card-title>
         <ion-card-subtitle>identifiez-vous</ion-card-subtitle>
-        <ion-button [routerLink]="['/login']">Je m'identifie</ion-button>
+        <ion-button color='tertiary' [routerLink]="['/login']">Je m'identifie</ion-button>
       </ion-card-header>
 
 
@@ -47,7 +57,7 @@
           <ion-card-header>
             <ion-card-title>Mot de passe oublié ?</ion-card-title>
             <ion-card-subtitle>identifiez-vous</ion-card-subtitle>
-            <ion-button [routerLink]="['/forgot-password']">Je réinitialise</ion-button>
+            <ion-button color='tertiary' [routerLink]="['/forgot-password']">Je réinitialise</ion-button>
           </ion-card-header>
 
 

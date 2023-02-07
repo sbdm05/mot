@@ -45,7 +45,8 @@ export class Tab3Page {
   }
 
   onLogout() {
+    console.log(this.token);
     localStorage.removeItem('token');
-    this.router.navigate(['/']);
+    this.router.navigate(['/signup']);
   }
 }

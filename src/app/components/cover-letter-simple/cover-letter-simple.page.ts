@@ -22,7 +22,7 @@ export class CoverLetterSimplePage  {
   }
 
   downloadLetter() {
-    this.content = document.getElementById('PrintInvoice').innerHTML;
+    this.content = document.getElementById('main').innerHTML;
     const options = {
       documentSize: 'A4',
       type: 'share',

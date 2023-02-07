@@ -13,6 +13,7 @@ export class ResetPasswordPage implements OnInit {
   token!: number;
   newPwd!: string;
   user!: User;
+  errorForm = false;
 
   constructor(
     //déclencher l'api reset-password
@@ -30,6 +31,7 @@ export class ResetPasswordPage implements OnInit {
 
   ngOnInit() {}
 
+  // rôle
   verifyToken() {
     // appel au service reset-password
     const obj = { id: this.id, token: this.token };
@@ -40,14 +42,37 @@ export class ResetPasswordPage implements OnInit {
   }
 
   onSubmit() {
-    const obj = {
-      user: this.user,
-      newPwd: this.newPwd,
-    };
-    console.log(obj, 'infos à envoyer à saveNewPassword');
-    // appel au service update-user
-    this.usersService.saveNewPassword(obj).subscribe((data) => {
-      console.log(data);
-    });
+    this.errorForm = false;
+    const temp = this.newPwd.trim();
+    console.log(temp.length);
+
+    // vérification
+    if (temp.length <= 6) {
+      this.errorForm = true;
+      return;
+      // Erreur UI
+      // afficher message d'erreur
+    } else if (!this.user) {
+      console.log('pas de user');
+    } else {
+      this.errorForm = false;
+      // création d'un nouvel objet
+      const obj = {
+        user: this.user,
+        newPwd: temp,
+      };
+      console.log(obj, 'infos à envoyer à saveNewPassword');
+      // appel au service update-user
+      this.usersService.saveNewPassword(obj).subscribe((data) => {
+        console.log(data);
+      });
+    }
   }
 }
+
+
+/*
+   `${this.urlApi}/api/v1/letters/save-new-password`,
+      obj
+
+*/
