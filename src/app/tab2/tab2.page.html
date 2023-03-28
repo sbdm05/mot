@@ -56,7 +56,7 @@
                         <ion-input formControlName='cpVille'></ion-input>
                     </ion-item>
 
-                    <ion-button expand="block" type="submit" [disabled]='form.invalid'>Etape 1 - Enregistrer</ion-button>
+                    <ion-button color="success" expand="block" type="submit" [disabled]='form.invalid'>Etape 1 - Enregistrer</ion-button>
 
                 </form>
             </div>
@@ -78,7 +78,7 @@
 
                         </ion-col>
                         <ion-col size="4">
-                            <ion-button (click)="openModal()">
+                            <ion-button color="success" (click)="openModal()">
                                 Choisir
                             </ion-button>
                         </ion-col>
@@ -97,7 +97,7 @@
                             </ion-row>
                         </ion-col>
                         <ion-col size="4">
-                            <ion-button (click)="openModalSimple()">
+                            <ion-button color="success" (click)="openModalSimple()">
                                 Choisir
                             </ion-button>
                         </ion-col>
@@ -116,7 +116,7 @@
                             </ion-row>
                         </ion-col>
                         <ion-col size="4">
-                            <ion-button (click)="openModalLetterC()">
+                            <ion-button color="success" (click)="openModalLetterC()">
                                 Choisir
                             </ion-button>
                         </ion-col>
@@ -141,7 +141,7 @@
             <ion-text color="primary">
               <p>Voulez-vous conservé ce contact dans votre historique ? </p>
             </ion-text>
-          <ion-button expand="block" (click)='onSaved()'>AJOUTER A L'HISTORIQUE</ion-button>
+          <ion-button expand="block" color="success" (click)='onSaved()'>AJOUTER A L'HISTORIQUE</ion-button>
           </div>
         </ion-accordion>
     </ion-accordion-group>
