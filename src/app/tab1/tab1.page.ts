@@ -1,5 +1,13 @@
-import { Component, DoCheck, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { IonModal } from '@ionic/angular';
 import { UsersService } from '../services/users.service';
 import { User } from '../user/user';
 
@@ -9,7 +17,10 @@ import { User } from '../user/user';
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page implements OnInit, OnDestroy {
+  @ViewChild(IonModal) modal: IonModal;
+  public confirmMessage!: string;
   public user!: User;
+
   constructor(private usersService: UsersService, private router: Router) {
     // use capacitor storage
     // // check token
@@ -67,6 +78,27 @@ export class Tab1Page implements OnInit, OnDestroy {
       }
     } else {
       this.router.navigate(['/']);
+    }
+  }
+
+  onLogout() {
+    //console.log(this.token);
+    localStorage.removeItem('token');
+    this.router.navigate(['/signup']);
+  }
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    // this.modal.dismiss(this.name, 'confirm');
+    // vérifier this.name === EFFACER
+    if (this.confirmMessage === 'EFFACER') {
+      console.log('effacé');
+      // appel au service
+    } else {
+      console.log('not the string');
     }
   }
 

@@ -175,4 +175,8 @@ export class UsersService {
       obj
     );
   }
+
+  // deleteUser(user: User): Observable<User>{
+  //   return this.http.delete('')
+  // }
 }
