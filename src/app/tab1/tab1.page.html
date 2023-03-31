@@ -28,6 +28,9 @@
           <ion-label position="stacked">écrivez EFFACER</ion-label>
           <ion-input type="text" placeholder="EFFACER" [(ngModel)]="confirmMessage"></ion-input>
         </ion-item>
+        <ion-item *ngIf='erreurCopy'>
+          <ion-label class='error'>{{erreurCopy}}</ion-label>
+        </ion-item>
       </ion-content>
     </ng-template>
   </ion-modal>

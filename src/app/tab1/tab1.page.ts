@@ -20,6 +20,7 @@ export class Tab1Page implements OnInit, OnDestroy {
   @ViewChild(IonModal) modal: IonModal;
   public confirmMessage!: string;
   public user!: User;
+  public erreurCopy!: string;
 
   constructor(private usersService: UsersService, private router: Router) {
     // use capacitor storage
@@ -92,15 +93,16 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   confirm() {
+    // reset erreurCopy
+    this.erreurCopy = '';
     // this.modal.dismiss(this.name, 'confirm');
     // vérifier this.name === EFFACER
     if (this.confirmMessage === 'EFFACER') {
       console.log('effacé');
       // appel au service
       this.usersService.deleteUser(this.user).subscribe((data) => {
-        console.log(data);
         const token = localStorage.getItem('token');
-        console.log(token);
+
         if (token) {
           // refermer la modal
           this.modal.dismiss('confirm');
@@ -110,7 +112,8 @@ export class Tab1Page implements OnInit, OnDestroy {
         }
       });
     } else {
-      console.log('not the string');
+      // console.log('not the string');
+      this.erreurCopy = 'Erreur dans le mot recopié';
     }
   }
 
