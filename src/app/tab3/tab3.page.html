@@ -7,12 +7,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">Historique</ion-title>
-        </ion-toolbar>
-    </ion-header>
-
 
     <ng-container *ngIf="savedLetters?.length> 0; then content else noContent"></ng-container>
     <ng-template #content>
@@ -47,10 +41,4 @@
 
 </ion-content>
 
-<ion-footer>
-    <ion-toolbar>
 
-        <ion-button color="danger" expand="block" (click)=' onLogout() '>Me déconnecter</ion-button>
-    </ion-toolbar>
-
-</ion-footer>
