@@ -99,6 +99,15 @@ export class Tab1Page implements OnInit, OnDestroy {
       // appel au service
       this.usersService.deleteUser(this.user).subscribe((data) => {
         console.log(data);
+        const token = localStorage.getItem('token');
+        console.log(token);
+        if (token) {
+          // refermer la modal
+          this.modal.dismiss('confirm');
+          // remove le token
+          localStorage.removeItem('token');
+          this.router.navigate(['/signup']);
+        }
       });
     } else {
       console.log('not the string');
