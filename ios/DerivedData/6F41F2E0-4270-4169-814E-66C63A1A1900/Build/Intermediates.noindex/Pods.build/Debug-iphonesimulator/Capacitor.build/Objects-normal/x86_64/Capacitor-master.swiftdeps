@@ -1,0 +1,72 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "858f8a6e48c457d26089022a3a9698904dff7f945c800d3f4beeb53c7c4063b6"
+build_start_time: [1676380914, 474413871]
+build_end_time: [1676380919, 526280879]
+inputs:
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/AppUUID.swift"
+  : [1675776542, 398781538]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/Array+Capacitor.swift"
+  : [1675776542, 404601573]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPApplicationDelegateProxy.swift"
+  : [1675776542, 445426702]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPBridge.swift"
+  : [1675776542, 454474925]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPBridgeDelegate.swift"
+  : [1675776542, 464169502]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPBridgeProtocol.swift"
+  : [1675776542, 483039855]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPBridgeViewController.swift"
+  : [1675776542, 507910251]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPFile.swift"
+  : [1675776542, 517308473]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPInstanceConfiguration.swift"
+  : [1675776542, 522649288]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPInstanceDescriptor.swift"
+  : [1675776542, 530380964]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPLog.swift"
+  : [1675776542, 537501573]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPNotifications.swift"
+  : [1675776542, 562558174]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPPluginCall.swift"
+  : [1675776542, 566000223]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPWebView.swift"
+  : [1675776542, 574094772]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CapacitorBridge.swift"
+  : [1675776542, 426889896]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/CapacitorExtension.swift"
+  : [1675776542, 437912464]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/Data+Capacitor.swift"
+  : [1675776542, 585976839]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/DocLinks.swift"
+  : [1675776542, 589460849]
+  "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/JS.swift": [1675776542, 593798160]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/JSExport.swift"
+  : [1675776542, 597168207]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/JSTypes.swift"
+  : [1675776542, 605267524]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/KeyPath.swift"
+  : [1675776542, 612596988]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/NotificationHandlerProtocol.swift"
+  : [1675776542, 616162776]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/NotificationRouter.swift"
+  : [1675776542, 619336366]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/PluginCallResult.swift"
+  : [1675776542, 623423814]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/PluginConfig.swift"
+  : [1675776542, 627573966]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/Plugins/Console.swift"
+  : [1675776542, 582627534]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/Plugins/WebView.swift"
+  : [1675776542, 648902416]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/Router.swift"
+  : [1675776542, 631058216]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/TmpViewController.swift"
+  : [1675776542, 637425661]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/UIColor.swift"
+  : [1675776542, 641801834]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/WKWebView+Capacitor.swift"
+  : [1675776542, 689730167]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/WebViewAssetHandler.swift"
+  : [1675776542, 660363912]
+  ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/ios/Capacitor/Capacitor/WebViewDelegationHandler.swift"
+  : [1675776542, 676554679]

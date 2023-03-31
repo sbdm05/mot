@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "1807ff5b29cf319e0323a9b96ab881c0222fd93d41bb3ce663b8c0e5fdbfcfa1"
+build_start_time: [1676380919, 848482131]
+build_end_time: [1676380927, 911827087]
+inputs:
+  "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/ios/App/App/AppDelegate.swift": [1660835661, 0]

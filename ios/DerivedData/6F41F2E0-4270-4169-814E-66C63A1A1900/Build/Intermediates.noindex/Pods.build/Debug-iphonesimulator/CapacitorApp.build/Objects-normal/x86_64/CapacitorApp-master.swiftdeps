@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "c2781f5165c32a2656a7c80592146f4139682fa4e7bf2135a612574c2007d088"
+build_start_time: [1676380918, 186228036]
+build_end_time: [1676380919, 734750986]
+inputs:
+  "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/app/ios/Plugin/AppPlugin.swift": [1675776541, 915109634]
