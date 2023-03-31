@@ -362,7 +362,6 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CapacitorKeyboard/CapacitorKeyboard.framework/Headers\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CapacitorStatusBar/CapacitorStatusBar.framework/Headers\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CordovaPlugins/CordovaPlugins.framework/Headers\"",
-					"$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include",
 				);
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -398,7 +397,6 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CapacitorKeyboard/CapacitorKeyboard.framework/Headers\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CapacitorStatusBar/CapacitorStatusBar.framework/Headers\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CordovaPlugins/CordovaPlugins.framework/Headers\"",
-					"$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include",
 				);
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
