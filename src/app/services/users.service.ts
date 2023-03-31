@@ -176,7 +176,13 @@ export class UsersService {
     );
   }
 
-  // deleteUser(user: User): Observable<User>{
-  //   return this.http.delete('')
+  deleteUser(user: User): Observable<User> {
+    const { _id } = user;
+    console.log(_id);
+
+    return this.http.delete<User>(`${this.urlApi}/api/v1/letters/${_id}`);
+  }
+  // deleteUser(user: User) {
+  //   console.log(user);
   // }
 }

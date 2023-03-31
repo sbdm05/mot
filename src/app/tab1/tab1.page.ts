@@ -97,6 +97,9 @@ export class Tab1Page implements OnInit, OnDestroy {
     if (this.confirmMessage === 'EFFACER') {
       console.log('effacé');
       // appel au service
+      this.usersService.deleteUser(this.user).subscribe((data) => {
+        console.log(data);
+      });
     } else {
       console.log('not the string');
     }
