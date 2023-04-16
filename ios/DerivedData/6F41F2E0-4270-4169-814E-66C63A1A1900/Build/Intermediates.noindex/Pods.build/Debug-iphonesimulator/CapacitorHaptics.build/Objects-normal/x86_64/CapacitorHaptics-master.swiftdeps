@@ -1,7 +1,7 @@
 version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
 options: "0f7a7e564862247419835d3120042d35326d4b1da590d30c4e2e75950291a58e"
-build_start_time: [1676380918, 175420045]
-build_end_time: [1676380919, 738664150]
+build_start_time: [1681663435, 169253826]
+build_end_time: [1681663436, 367051124]
 inputs:
   "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/haptics/ios/Plugin/Haptics.swift": [1675776542, 143826961]
   ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/haptics/ios/Plugin/HapticsPlugin.swift"

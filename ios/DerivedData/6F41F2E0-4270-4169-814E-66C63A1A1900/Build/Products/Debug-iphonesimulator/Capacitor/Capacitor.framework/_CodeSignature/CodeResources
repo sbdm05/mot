@@ -38,7 +38,7 @@
 		</data>
 		<key>Headers/Capacitor-Swift.h</key>
 		<data>
-		fUhNLrwBmmgxBlRhRZEbhsV2SYg=
+		ynfFe9RG2GUr/OMAdfecodhYZCM=
 		</data>
 		<key>Headers/Capacitor.h</key>
 		<data>
@@ -46,11 +46,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		oIEGZiZ+O1a5Btymw3dpEE84obw=
+		x0mjHJWU9v/sldFroOL5M30BRgI=
 		</data>
 		<key>Modules/Capacitor.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		fJTm76CniAwFQSk4VSSwkL7q90Y=
+		IHjiukj8vfCngcUhXEG3ZBj6ACg=
 		</data>
 		<key>Modules/Capacitor.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -58,11 +58,11 @@
 		</data>
 		<key>Modules/Capacitor.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		v8wffIL0xTAFd/w7ZKIntvGXCV8=
+		BvHR9MGG1gUVHc39TzUFrkWvSes=
 		</data>
 		<key>Modules/Capacitor.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		SYuhsiIeXB2PW2LO98yV/Uf4h7Q=
+		Tx5SVNWgGME0ZON577/Wo0Uhi3Y=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>native-bridge.js</key>
 		<data>
-		Jt2H7q3l0mdYbGz7MPAUbLuxUnA=
+		E1WTNE5L4URdUWBwxnKz7Htd9Us=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -135,7 +135,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			r3do4OQaAJZPxDMSxdCOZo9cZXBShFFMoJf96HoKuJ4=
+			Ixvifl3Pn1Jclvp/U3WQR4vnZdPacA2fKsc92pQ/il8=
 			</data>
 		</dict>
 		<key>Headers/Capacitor.h</key>
@@ -149,7 +149,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			aRRy2q7YLhnSxM8g+m4oXUKmehAnal/viB9ZF5NqvxU=
+			moN4QDufRlU8PDis0QEuewAeoymCTU/eK4MUTE3K+sQ=
 			</data>
 		</dict>
 		<key>Modules/Capacitor.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -163,14 +163,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GJ5uXbm2E8WSFg748Q+WHNtgdDt+QWZ5iA60yIIj9QY=
+			0qNw7IPTopqzrKaKBs0vB2N+h5ZU+F7uhzNaqG94Gu8=
 			</data>
 		</dict>
 		<key>Modules/Capacitor.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Cyz7nKKscQ4r9KHqy5yD9QTQUsoceMm8VU7B679Gqt0=
+			OmpaPuut2aLpHY7RaoAD/LG6tfC6LjB3sH3Y0SVpGBU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -184,7 +184,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GEwZDtLVWrJkp0P0/fhKUYu0YWrWVMNeYW/TIu3mAgA=
+			a4PY4BhFs3B2inh8E+j8EOqPI+PPKfgeaujTDx8gsRo=
 			</data>
 		</dict>
 	</dict>

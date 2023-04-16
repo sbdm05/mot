@@ -1,7 +1,7 @@
 version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
 options: "cba15606aa217745d3db2fcded35f4a0005c0dc042c6d792e622526b884f9f3e"
-build_start_time: [1676380918, 85072040]
-build_end_time: [1676380919, 730917930]
+build_start_time: [1681663435, 141952991]
+build_end_time: [1681663436, 370774984]
 inputs:
   ? "/Users/macbookpro/Documents/agence/projetsApp/app-front-back/motivation/node_modules/@capacitor/status-bar/ios/Plugin/StatusBarPlugin.swift"
   : [1675776541, 904732942]

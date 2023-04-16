@@ -233,6 +233,7 @@ using UInt = size_t;
 @import ObjectiveC;
 @import UIKit;
 @import UserNotifications;
+@import WebKit;
 #endif
 
 #import <Capacitor/Capacitor.h>
@@ -293,6 +294,7 @@ SWIFT_PROTOCOL("_TtP9Capacitor17CAPBridgeProtocol_")
 @property (nonatomic, readonly) BOOL isSimEnvironment;
 @property (nonatomic, readonly) BOOL isDevEnvironment;
 @property (nonatomic, readonly) UIUserInterfaceStyle userInterfaceStyle;
+@property (nonatomic, readonly) BOOL autoRegisterPlugins;
 @property (nonatomic) BOOL statusBarVisible;
 @property (nonatomic) UIStatusBarStyle statusBarStyle;
 @property (nonatomic) UIStatusBarAnimation statusBarAnimation;
@@ -321,6 +323,8 @@ SWIFT_PROTOCOL("_TtP9Capacitor17CAPBridgeProtocol_")
 - (NSURL * _Nullable)localURLFromWebURL:(NSURL * _Nullable)webURL SWIFT_WARN_UNUSED_RESULT;
 - (NSURL * _Nullable)portablePathFromLocalURL:(NSURL * _Nullable)localURL SWIFT_WARN_UNUSED_RESULT;
 - (void)setServerBasePath:(NSString * _Nonnull)path;
+- (void)registerPluginType:(SWIFT_METATYPE(CAPPlugin) _Nonnull)pluginType;
+- (void)registerPluginInstance:(CAPPlugin * _Nonnull)pluginInstance;
 - (void)showAlertWithTitle:(NSString * _Nonnull)title message:(NSString * _Nonnull)message buttonTitle:(NSString * _Nonnull)buttonTitle;
 - (void)presentVC:(UIViewController * _Nonnull)viewControllerToPresent animated:(BOOL)flag completion:(void (^ _Nullable)(void))completion;
 - (void)dismissVCWithAnimated:(BOOL)flag completion:(void (^ _Nullable)(void))completion;
@@ -360,10 +364,33 @@ SWIFT_CLASS_NAMED("CAPConsolePlugin")
 @end
 
 
+SWIFT_CLASS_NAMED("CAPCookiesPlugin")
+@interface CAPCookiesPlugin : CAPPlugin
+- (void)load;
+- (nonnull instancetype)initWithBridge:(id <CAPBridgeProtocol> _Nonnull)bridge pluginId:(NSString * _Nonnull)pluginId pluginName:(NSString * _Nonnull)pluginName OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 /// CAPFileManager helps map file schemes to physical files, whether they are on
 /// disk, in a bundle, or in another location.
 SWIFT_CLASS("_TtC9Capacitor14CAPFileManager")
 @interface CAPFileManager : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS_NAMED("CAPHttpPlugin")
+@interface CAPHttpPlugin : CAPPlugin
+- (nonnull instancetype)initWithBridge:(id <CAPBridgeProtocol> _Nonnull)bridge pluginId:(NSString * _Nonnull)pluginId pluginName:(NSString * _Nonnull)pluginName OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// A CAPPlugin subclass meant to be explicitly initialized by the caller and not the bridge.
+SWIFT_CLASS("_TtC9Capacitor17CAPInstancePlugin")
+@interface CAPInstancePlugin : CAPPlugin
+- (nonnull instancetype)initWithBridge:(id <CAPBridgeProtocol> _Nonnull)bridge pluginId:(NSString * _Nonnull)pluginId pluginName:(NSString * _Nonnull)pluginName OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -376,6 +403,7 @@ typedef SWIFT_ENUM(NSInteger, CAPNotifications, closed) {
   CAPNotificationsDidFailToRegisterForRemoteNotificationsWithError = 4,
   CAPNotificationsDecidePolicyForNavigationAction = 5,
 };
+
 
 
 @class NSISO8601DateFormatter;
@@ -427,7 +455,6 @@ SWIFT_CLASS("_TtC9Capacitor19CAPPluginCallResult")
 SWIFT_CLASS("_TtC9Capacitor10CAPWebView")
 @interface CAPWebView : UIView
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
@@ -437,6 +464,26 @@ SWIFT_CLASS("_TtC9Capacitor10CAPWebView")
 SWIFT_CLASS_NAMED("CAPWebViewPlugin")
 @interface CAPWebViewPlugin : CAPPlugin
 - (nonnull instancetype)initWithBridge:(id <CAPBridgeProtocol> _Nonnull)bridge pluginId:(NSString * _Nonnull)pluginId pluginName:(NSString * _Nonnull)pluginName OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSURLSession;
+@class NSURLSessionTask;
+@class NSHTTPURLResponse;
+@class NSURLRequest;
+
+SWIFT_CLASS("_TtC9Capacitor19CapacitorUrlRequest")
+@interface CapacitorUrlRequest : NSObject <NSURLSessionTaskDelegate>
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task willPerformHTTPRedirection:(NSHTTPURLResponse * _Nonnull)response newRequest:(NSURLRequest * _Nonnull)request completionHandler:(void (^ _Nonnull)(NSURLRequest * _Nullable))completionHandler;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class WKHTTPCookieStore;
+
+SWIFT_CLASS("_TtC9Capacitor25CapacitorWKCookieObserver")
+@interface CapacitorWKCookieObserver : NSObject <WKHTTPCookieStoreObserver>
+- (void)cookiesDidChangeInCookieStore:(WKHTTPCookieStore * _Nonnull)cookieStore;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
