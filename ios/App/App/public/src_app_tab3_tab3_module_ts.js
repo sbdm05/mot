@@ -315,7 +315,7 @@ let Tab3Page = class Tab3Page {
         }
     }
     onDelete(user, letter) {
-        // console.log(user, letter, index);
+        console.log(user, letter);
         // call service
         this.usersService
             .deleteApplication(user, letter, this.token)

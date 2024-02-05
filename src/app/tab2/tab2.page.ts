@@ -17,6 +17,7 @@ export class Tab2Page implements OnInit, OnChanges {
   public form!: FormGroup;
 
   colorBtn = 'success';
+  textBtn = 'Enregistrer';
 
   // ici ajouter vérification de l'utilisateur
 
@@ -89,10 +90,14 @@ export class Tab2Page implements OnInit, OnChanges {
     //console.log(this.user);
     this.user.letters[0] = this.form.value;
 
+
+
+
     console.log(this.user, 'final user');
     // call service
     this.usersService.createApplication(this.user).subscribe((data) => {
       this.colorBtn = 'warning';
+
       setTimeout(() => {
         this.colorBtn = 'success';
       }, 1000);
@@ -108,10 +113,12 @@ export class Tab2Page implements OnInit, OnChanges {
       .subscribe((data) => {
         console.log(data);
 
-         this.colorBtn = 'warning';
-         setTimeout(() => {
-           this.colorBtn = 'success';
-         }, 1000);
+        this.colorBtn = 'warning';
+        this.textBtn = 'Enregistrement en cours';
+        setTimeout(() => {
+          this.colorBtn = 'success';
+          this.textBtn = 'Enregistrer';
+        }, 1000);
       });
   }
 
