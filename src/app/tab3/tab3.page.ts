@@ -41,7 +41,11 @@ export class Tab3Page {
     // call service
     this.usersService
       .deleteApplication(user, letter, this.token)
-      .subscribe((data) => console.log(data));
+      .subscribe((data) => {
+        if (data.status === 'success') {
+          this.router.navigate(['tabs', 'tab3']);
+        }
+      });
   }
 
   onLogout() {

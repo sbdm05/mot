@@ -13,11 +13,17 @@
       <ion-list *ngIf='user'>
           <ion-item-sliding *ngFor="let letter of user.savedLetters, index as index">
               <ion-item>
-                  <ion-label>{{letter.newValue.societe}}</ion-label>
-                  <ion-label>{{letter.newValue.intitule}}</ion-label>
+                <ion-card class='card-historique'>
+                  <p>Vous avez créé une nouvelle candidature le {{letter.date}}</p>
+                  <ion-label><span>Entreprise :</span> {{letter.newValue.societe}}</ion-label>
+                  <ion-label><span>Lieu :</span> {{letter.newValue.adresseSociete}} - {{letter.newValue.cpVille}}</ion-label>
+                  <ion-label><span>Contact :</span> {{letter.newValue.contact}}</ion-label>
 
 
-                  <p>{{letter.date}}</p>
+                  <ion-label><span>Poste :</span> {{letter.newValue.intitule}}</ion-label>
+
+                </ion-card>
+
               </ion-item>
 
               <ion-item-options>

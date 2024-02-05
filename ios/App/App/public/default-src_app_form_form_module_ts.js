@@ -108,6 +108,7 @@ let FormPage = class FormPage {
     constructor(fb, usersService) {
         this.fb = fb;
         this.usersService = usersService;
+        this.colorBtn = 'success';
         this.adjs = [];
         this.isModified = false;
         this.qualitesFemme = [
@@ -198,7 +199,7 @@ let FormPage = class FormPage {
     onSubmit() {
         //console.log(this.form.status);
         if (this.form.status === 'VALID') {
-            //console.log(this.token, 'token');
+            console.log(this.token, 'token');
             this.usersService
                 .updateUser(this.form.value, this.token)
                 .subscribe((data) => {
@@ -206,6 +207,10 @@ let FormPage = class FormPage {
                 //console.log('submit ok');
                 //console.log(this.form.value);
                 //this.usersService.refreshCollection(data);
+                this.colorBtn = 'warning';
+                setTimeout(() => {
+                    this.colorBtn = 'success';
+                }, 1000);
                 this.isModified = false;
             });
             //localStorage.setItem('infos', JSON.stringify(this.form.value));
@@ -432,7 +437,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-content>\n\n    <form [formGroup]=\"form\" *ngIf='user'>\n\n        <!-- select gender -->\n        <ion-list>\n            <ion-item>\n                <ion-select placeholder=\"Je suis\" formControlName='gender' (ionChange)=\"selectGender($event)\" required>\n                    <ion-select-option value=\"homme\">Homme</ion-select-option>\n                    <ion-select-option value=\"femme\">Femme</ion-select-option>\n                </ion-select>\n            </ion-item>\n        </ion-list>\n\n        <!-- prenom -->\n        <ion-item>\n            <ion-label position=\"floating\">Prénom</ion-label>\n            <ion-input required formControlName='prenom'></ion-input>\n        </ion-item>\n\n        <!-- nom -->\n        <ion-item>\n            <ion-label position=\"floating\">Nom</ion-label>\n            <ion-input required formControlName='nom'></ion-input>\n        </ion-item>\n\n        <!-- tel -->\n        <ion-item>\n            <ion-label position=\"floating\">Téléphone</ion-label>\n            <ion-input required formControlName='tel'></ion-input>\n        </ion-item>\n\n        <!-- adresse -->\n        <ion-item>\n            <ion-label position=\"floating\">Adresse complète</ion-label>\n            <ion-input required formControlName='adresse'></ion-input>\n        </ion-item>\n\n        <!-- email -->\n        <ion-item>\n            <ion-label position=\"floating\">E-mail</ion-label>\n            <ion-input required formControlName='email'></ion-input>\n        </ion-item>\n\n        <!-- pick adjectives -->\n        <ion-list *ngIf=\"user.gender === 'femme'\">\n            <ion-item>\n                <ion-select formControlName='adjs' placeholder=\"Choisir 3 qualités\" [multiple]=\"true\" required (ionChange)=\"selectAdj($event)\">\n                    <ion-select-option *ngFor='let i of qualitesFemme' value=\"{{i}}\">{{i}}</ion-select-option>\n                </ion-select>\n            </ion-item>\n        </ion-list>\n        <ion-list *ngIf=\"user.gender === 'homme'\">\n            <ion-item>\n                <ion-select placeholder=\"Choisir 3 qualités\" [multiple]=\"true\" (ionChange)=\"selectAdj($event)\" formControlName='adjs' required>\n                    <ion-select-option *ngFor='let i of qualitesHomme' value=\"{{i}}\">{{i}}</ion-select-option>\n                </ion-select>\n            </ion-item>\n        </ion-list>\n\n        <ion-button *ngIf='!isModified' expand=\"block\" (click)='onSubmit()' [disabled]='form.invalid' color='success'>Enregistrer</ion-button>\n        <ion-button *ngIf='isModified' [disabled]='form.invalid' color='danger' expand=\"block\" (click)='onSubmit()'>Mettre à jour</ion-button>\n\n    </form>\n\n</ion-content>\n";
+module.exports = "<ion-content>\n\n    <form [formGroup]=\"form\" *ngIf='user'>\n\n        <!-- select gender -->\n        <ion-list>\n            <ion-item>\n                <ion-select placeholder=\"Je suis\" formControlName='gender' (ionChange)=\"selectGender($event)\" required>\n                    <ion-select-option value=\"homme\">Homme</ion-select-option>\n                    <ion-select-option value=\"femme\">Femme</ion-select-option>\n                </ion-select>\n            </ion-item>\n        </ion-list>\n\n        <!-- prenom -->\n        <ion-item>\n            <ion-label position=\"floating\">Prénom</ion-label>\n            <ion-input required formControlName='prenom'></ion-input>\n        </ion-item>\n\n        <!-- nom -->\n        <ion-item>\n            <ion-label position=\"floating\">Nom</ion-label>\n            <ion-input required formControlName='nom'></ion-input>\n        </ion-item>\n\n        <!-- tel -->\n        <ion-item>\n            <ion-label position=\"floating\">Téléphone</ion-label>\n            <ion-input required formControlName='tel'></ion-input>\n        </ion-item>\n\n        <!-- adresse -->\n        <ion-item>\n            <ion-label position=\"floating\">Adresse complète</ion-label>\n            <ion-input required formControlName='adresse'></ion-input>\n        </ion-item>\n\n        <!-- email -->\n        <ion-item>\n            <ion-label position=\"floating\">E-mail</ion-label>\n            <ion-input required formControlName='email'></ion-input>\n        </ion-item>\n\n        <!-- pick adjectives -->\n        <ion-list *ngIf=\"user.gender === 'femme'\">\n            <ion-item>\n                <ion-select formControlName='adjs' placeholder=\"Choisir 3 qualités\" [multiple]=\"true\" required (ionChange)=\"selectAdj($event)\">\n                    <ion-select-option *ngFor='let i of qualitesFemme' value=\"{{i}}\">{{i}}</ion-select-option>\n                </ion-select>\n            </ion-item>\n        </ion-list>\n        <ion-list *ngIf=\"user.gender === 'homme'\">\n            <ion-item>\n                <ion-select placeholder=\"Choisir 3 qualités\" [multiple]=\"true\" (ionChange)=\"selectAdj($event)\" formControlName='adjs' required>\n                    <ion-select-option *ngFor='let i of qualitesHomme' value=\"{{i}}\">{{i}}</ion-select-option>\n                </ion-select>\n            </ion-item>\n        </ion-list>\n\n        <ion-button *ngIf='!isModified' expand=\"block\" (click)='onSubmit()' [disabled]='form.invalid' [color]='colorBtn'>Enregistrer</ion-button>\n        <ion-button *ngIf='isModified' [disabled]='form.invalid' color='danger' expand=\"block\" (click)='onSubmit()'>Mettre à jour</ion-button>\n\n    </form>\n\n</ion-content>\n";
 
 /***/ })
 

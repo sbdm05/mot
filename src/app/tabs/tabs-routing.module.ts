@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
+    path: 'reglages',
+    loadChildren: () => import('../vue-settings/vue-settings.module').then( m => m.VueSettingsPageModule)
+  },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

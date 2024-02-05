@@ -319,7 +319,11 @@ let Tab3Page = class Tab3Page {
         // call service
         this.usersService
             .deleteApplication(user, letter, this.token)
-            .subscribe((data) => console.log(data));
+            .subscribe((data) => {
+            if (data.status === 'success') {
+                this.router.navigate(['tabs', 'tab3']);
+            }
+        });
     }
     onLogout() {
         console.log(this.token);
@@ -349,7 +353,7 @@ Tab3Page = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ0YWIzLnBhZ2Uuc2NzcyJ9 */";
+module.exports = ".card-historique {\n  width: 100%;\n  padding: 1rem;\n}\n\nspan {\n  font-weight: 900;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYjMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBRUUsV0FBQTtFQUNBLGFBQUE7QUFBRjs7QUFFQTtFQUNFLGdCQUFBO0FBQ0YiLCJmaWxlIjoidGFiMy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY2FyZC1oaXN0b3JpcXVlXG57XG4gIHdpZHRoOiAxMDAlO1xuICBwYWRkaW5nOiAxcmVtO1xufVxuc3BhbntcbiAgZm9udC13ZWlnaHQ6IDkwMDtcbn1cbiJdfQ== */";
 
 /***/ }),
 
@@ -359,7 +363,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"true\">\n  <ion-toolbar color=\"tertiary\">\n    <ion-title>\n      Historique\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n\n    <ng-container *ngIf=\"savedLetters?.length> 0; then content else noContent\"></ng-container>\n    <ng-template #content>\n      <ion-list *ngIf='user'>\n          <ion-item-sliding *ngFor=\"let letter of user.savedLetters, index as index\">\n              <ion-item>\n                  <ion-label>{{letter.newValue.societe}}</ion-label>\n                  <ion-label>{{letter.newValue.intitule}}</ion-label>\n\n\n                  <p>{{letter.date}}</p>\n              </ion-item>\n\n              <ion-item-options>\n                  <ion-item-option color=\"danger\" (click)='onDelete(user, letter)'>Supprimer</ion-item-option>\n              </ion-item-options>\n          </ion-item-sliding>\n      </ion-list>\n    </ng-template>\n\n    <ng-template #noContent>\n\n      <ion-card>\n        <ion-card-title>Aucun historique</ion-card-title>\n        <ion-card-content>Pour créer une lettre, rendez-vous dans l'onglet Créer une lettre.</ion-card-content>\n\n      </ion-card>\n    </ng-template>\n\n\n\n\n</ion-content>\n\n\n";
+module.exports = "<ion-header [translucent]=\"true\">\n  <ion-toolbar color=\"tertiary\">\n    <ion-title>\n      Historique\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n\n    <ng-container *ngIf=\"savedLetters?.length> 0; then content else noContent\"></ng-container>\n    <ng-template #content>\n      <ion-list *ngIf='user'>\n          <ion-item-sliding *ngFor=\"let letter of user.savedLetters, index as index\">\n              <ion-item>\n                <ion-card class='card-historique'>\n                  <p>Vous avez créé une nouvelle candidature le {{letter.date}}</p>\n                  <ion-label><span>Entreprise :</span> {{letter.newValue.societe}}</ion-label>\n                  <ion-label><span>Lieu :</span> {{letter.newValue.adresseSociete}} - {{letter.newValue.cpVille}}</ion-label>\n                  <ion-label><span>Contact :</span> {{letter.newValue.contact}}</ion-label>\n\n\n                  <ion-label><span>Poste :</span> {{letter.newValue.intitule}}</ion-label>\n\n                </ion-card>\n\n              </ion-item>\n\n              <ion-item-options>\n                  <ion-item-option color=\"danger\" (click)='onDelete(user, letter)'>Supprimer</ion-item-option>\n              </ion-item-options>\n          </ion-item-sliding>\n      </ion-list>\n    </ng-template>\n\n    <ng-template #noContent>\n\n      <ion-card>\n        <ion-card-title>Aucun historique</ion-card-title>\n        <ion-card-content>Pour créer une lettre, rendez-vous dans l'onglet Créer une lettre.</ion-card-content>\n\n      </ion-card>\n    </ng-template>\n\n\n\n\n</ion-content>\n\n\n";
 
 /***/ })
 

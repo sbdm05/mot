@@ -58,7 +58,7 @@
             </ion-item>
         </ion-list>
 
-        <ion-button *ngIf='!isModified' expand="block" (click)='onSubmit()' [disabled]='form.invalid' color='success'>Enregistrer</ion-button>
+        <ion-button *ngIf='!isModified' expand="block" (click)='onSubmit()' [disabled]='form.invalid' [color]='colorBtn'>Enregistrer</ion-button>
         <ion-button *ngIf='isModified' [disabled]='form.invalid' color='danger' expand="block" (click)='onSubmit()'>Mettre à jour</ion-button>
 
     </form>

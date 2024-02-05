@@ -16,10 +16,12 @@ import { User } from '../user/user';
 export class Tab2Page implements OnInit, OnChanges {
   public form!: FormGroup;
 
+  colorBtn = 'success';
+
   // ici ajouter vérification de l'utilisateur
 
   public user!: User;
-  token !: any;
+  token!: any;
 
   constructor(
     private usersService: UsersService,
@@ -60,9 +62,7 @@ export class Tab2Page implements OnInit, OnChanges {
               this.user?.letters[0]?.societe || '',
               Validators.required,
             ],
-            contact: [
-              this.user?.letters[0]?.contact || 'Madame'
-            ],
+            contact: [this.user?.letters[0]?.contact || 'Madame'],
             adresseSociete: [
               this.user?.letters[0]?.adresseSociete || '',
               Validators.required,
@@ -91,19 +91,27 @@ export class Tab2Page implements OnInit, OnChanges {
 
     console.log(this.user, 'final user');
     // call service
-    this.usersService
-      .createApplication(this.user)
-      .subscribe((data) => console.log(data));
+    this.usersService.createApplication(this.user).subscribe((data) => {
+      this.colorBtn = 'warning';
+      setTimeout(() => {
+        this.colorBtn = 'success';
+      }, 1000);
+    });
   }
 
   onSaved() {
-   // console.log(this.user);
+    // console.log(this.user);
 
     // call service
     this.usersService
       .savedApplication(this.user, this.form.value, this.token)
       .subscribe((data) => {
-       // console.log(data);
+        console.log(data);
+
+         this.colorBtn = 'warning';
+         setTimeout(() => {
+           this.colorBtn = 'success';
+         }, 1000);
       });
   }
 

@@ -1,3 +1,10 @@
 ion-label.sc-ion-label-md-h.sc-ion-label-md-s.md.in-item-color.hydrated {
   padding: 2rem 0rem;
+
+}
+ion-label{
+  overflow: hidden!important;
+    white-space: normal!important;
+    text-overflow: ellipsis!important;
+    line-height: 3rem;
 }

@@ -37,6 +37,10 @@ const routes = [
                 loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_tab3_tab3_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../tab3/tab3.module */ 3746)).then(m => m.Tab3PageModule)
             },
             {
+                path: 'reglages',
+                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_vue-settings_vue-settings_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../vue-settings/vue-settings.module */ 2794)).then(m => m.VueSettingsPageModule)
+            },
+            {
                 path: '',
                 redirectTo: '/tabs/tab1',
                 pathMatch: 'full'
@@ -153,7 +157,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\">\n    <ion-tab-button tab=\"tab1\">\n      <ion-icon name=\"person-circle-outline\"></ion-icon>\n      <ion-label>Mes infos</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab2\">\n      <ion-icon name=\"create-outline\"></ion-icon>\n      <ion-label>Créer une lettre</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab3\">\n      <ion-icon name=\"list-outline\"></ion-icon>\n      <ion-label>Historique</ion-label>\n    </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n";
+module.exports = "<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\">\n    <ion-tab-button tab=\"tab1\">\n      <ion-icon name=\"person-circle-outline\"></ion-icon>\n      <ion-label>1 - Mes infos</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab2\">\n      <ion-icon name=\"create-outline\"></ion-icon>\n      <ion-label>2 - Créer une lettre</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab3\">\n      <ion-icon name=\"list-outline\"></ion-icon>\n      <ion-label>3 - Historique</ion-label>\n    </ion-tab-button>\n        <ion-tab-button tab=\"reglages\">\n          <ion-icon name=\"settings-outline\"></ion-icon>\n          <ion-label>Réglages</ion-label>\n        </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n";
 
 /***/ })
 

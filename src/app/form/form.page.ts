@@ -20,6 +20,8 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
   @Input() user!: User;
   form!: FormGroup;
 
+  colorBtn = 'success';
+
   adjs: [] = [];
 
   obj!: User;
@@ -123,7 +125,7 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
     //console.log(this.form.status);
 
     if (this.form.status === 'VALID') {
-      //console.log(this.token, 'token');
+      console.log(this.token, 'token');
       this.usersService
         .updateUser(this.form.value, this.token)
         .subscribe((data) => {
@@ -131,6 +133,10 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
           //console.log('submit ok');
           //console.log(this.form.value);
           //this.usersService.refreshCollection(data);
+          this.colorBtn = 'warning';
+          setTimeout(() => {
+            this.colorBtn = 'success';
+          }, 1000);
           this.isModified = false;
         });
 

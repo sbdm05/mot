@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.lettresmotivation.lettres20220505;
 
 import com.getcapacitor.BridgeActivity;
 

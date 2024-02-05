@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		2FAD9763203C412B000D30F8 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
+		3CEE144A97AD8632C28CF097 /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53DC3267EC342A0ED334731 /* Pods_App.framework */; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
 		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
-		66A1B6BC0F8C73BD3BFAD453 /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53DC3267EC342A0ED334731 /* Pods_App.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,11 +33,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4FDE225103E1A031A01A5E4E /* Frameworks */ = {
+		6E129E2633DB65B4AC5B5D20 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66A1B6BC0F8C73BD3BFAD453 /* Pods_App.framework in Frameworks */,
+				3CEE144A97AD8632C28CF097 /* Pods_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +105,7 @@
 				504EC3001FED79650016851F /* Sources */,
 				504EC3021FED79650016851F /* Resources */,
 				2B52F1AEB9AD8EF9C0B1D3ED /* [CP] Embed Pods Frameworks */,
-				4FDE225103E1A031A01A5E4E /* Frameworks */,
+				6E129E2633DB65B4AC5B5D20 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -364,9 +364,10 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CordovaPlugins/CordovaPlugins.framework/Headers\"",
 				);
 				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 2.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lettresmotivation.lettres20220505;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -399,9 +400,10 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CordovaPlugins/CordovaPlugins.framework/Headers\"",
 				);
 				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lettresmotivation.lettres20220505;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
