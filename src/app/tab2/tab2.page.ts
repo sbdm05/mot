@@ -3,10 +3,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CoverLetterCPage } from '../components/cover-letter-c/cover-letter-c.page';
+import { CoverLetterPremium1PageRoutingModule } from '../components/cover-letter-premium1/cover-letter-premium1-routing.module';
+import { CoverLetterPremium1Page } from '../components/cover-letter-premium1/cover-letter-premium1.page';
 import { CoverLetterSimplePage } from '../components/cover-letter-simple/cover-letter-simple.page';
 import { CoverLetterComponent } from '../components/cover-letter/cover-letter.component';
 import { UsersService } from '../services/users.service';
 import { User } from '../user/user';
+import html2canvas from 'html2canvas'; // Import html2canvas library
+import { TemplateScreenshotPage } from '../components/template-screenshot/template-screenshot.page';
+import {Canvg} from 'canvg';
 
 @Component({
   selector: 'app-tab2',
@@ -90,9 +95,6 @@ export class Tab2Page implements OnInit, OnChanges {
     //console.log(this.user);
     this.user.letters[0] = this.form.value;
 
-
-
-
     console.log(this.user, 'final user');
     // call service
     this.usersService.createApplication(this.user).subscribe((data) => {
@@ -122,38 +124,50 @@ export class Tab2Page implements OnInit, OnChanges {
       });
   }
 
-  async openModal() {
+  async openModal(letterName: any) {
+    let componentType: any;
     console.log(this.user);
     const user = this.user;
     console.log(user, 'infos');
+    switch (letterName) {
+      case 'coverLetterComponent':
+        componentType = CoverLetterComponent;
+        break;
+      case 'coverLetterSimplePage':
+        componentType = CoverLetterSimplePage;
+        break;
+      case 'coverLetterCPage':
+        componentType = CoverLetterCPage;
+        break;
+      case 'coverLetterPremiumBubble':
+        componentType = CoverLetterPremium1Page;
+        break;
+      // Add more cases for other component types as needed
+      default:
+        console.error('Unknown component type:', letterName);
+        return;
+    }
+
     // attention l'objet envoyé (ici user) doit correspondre à l'objet dans @Input()
-    const coverLetter = await this.createModal(CoverLetterComponent, {
+    const coverLetter = await this.createModal(componentType, {
       user,
     });
     await coverLetter.present();
   }
 
-  async openModalSimple() {
-    console.log(this.user);
-    const user = this.user;
-    console.log(user, 'infos');
-    // attention l'objet envoyé (ici user) doit correspondre à l'objet dans @Input()
-    const coverLetter = await this.createModal(CoverLetterSimplePage, {
-      user,
-    });
-    await coverLetter.present();
-  }
-
-  async openModalLetterC() {
-    console.log(this.user);
-    const user = this.user;
-    console.log(user, 'infos');
-    // attention l'objet envoyé (ici user) doit correspondre à l'objet dans @Input()
-    const coverLetter = await this.createModal(CoverLetterCPage, {
-      user,
-    });
-    await coverLetter.present();
-  }
+  // async createModal(
+  //   component,
+  //   componentProps?,
+  //   cssClass?
+  // ): Promise<HTMLIonModalElement> {
+  //   const modal = await this.modalCtrl.create({
+  //     component,
+  //     cssClass,
+  //     componentProps,
+  //     backdropDismiss: true,
+  //   });
+  //   return modal;
+  // }
 
   async createModal(
     component,
@@ -166,6 +180,35 @@ export class Tab2Page implements OnInit, OnChanges {
       componentProps,
       backdropDismiss: true,
     });
-    return modal;
+    console.log(componentProps); // exists
+
+    await modal.present();
+
+    // Wait for the modal to be displayed before taking a screenshot
+    await new Promise((resolve) => setTimeout(resolve, 500)); // Adjust the delay as needed
+
+    // Get the modal content by its class or ID
+    const modalContent = document.querySelector('#main') as HTMLElement; // Adjust the selector as needed
+
+
+    // Take a screenshot of the modal content using html2canvas
+    const canvas = await html2canvas(modalContent);
+    console.log(canvas);
+    const imageDataUrl = canvas.toDataURL('image/jpeg');
+    console.log(imageDataUrl);
+
+    const imageModal = await this.modalCtrl.create({
+      component: TemplateScreenshotPage, // Replace YourImageComponent with the component that will display the image
+      componentProps: {
+        imageDataUrl,
+      },
+    });
+
+    await modal.dismiss();
+    await imageModal.present();
+
+    return imageModal;
+
+    //return modal;
   }
 }

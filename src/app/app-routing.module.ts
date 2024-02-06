@@ -44,6 +44,14 @@ const routes: Routes = [
     path: 'cover-letter-c',
     loadChildren: () => import('./components/cover-letter-c/cover-letter-c.module').then( m => m.CoverLetterCPageModule)
   },
+  {
+    path: 'cover-letter-premium1',
+    loadChildren: () => import('./components/cover-letter-premium1/cover-letter-premium1.module').then( m => m.CoverLetterPremium1PageModule)
+  },
+  {
+    path: 'template-screenshot',
+    loadChildren: () => import('./components/template-screenshot/template-screenshot.module').then( m => m.TemplateScreenshotPageModule)
+  },
 ];
 @NgModule({
   imports: [
