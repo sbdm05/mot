@@ -108,6 +108,7 @@ let CoverLetterSimplePage = class CoverLetterSimplePage {
     }
     downloadLetter() {
         this.content = document.getElementById('main').innerHTML;
+        console.log(this.content, 'depuis cover letter simple');
         const options = {
             documentSize: 'A4',
             type: 'share',

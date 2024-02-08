@@ -11,7 +11,8 @@ import { UsersService } from '../services/users.service';
 import { User } from '../user/user';
 import html2canvas from 'html2canvas'; // Import html2canvas library
 import { TemplateScreenshotPage } from '../components/template-screenshot/template-screenshot.page';
-import {Canvg} from 'canvg';
+import { Canvg } from 'canvg';
+import { ModalStateService } from '../services/modal-state/modal-state.service';
 
 @Component({
   selector: 'app-tab2',
@@ -28,17 +29,24 @@ export class Tab2Page implements OnInit, OnChanges {
 
   public user!: User;
   token!: any;
+  modalInstance;
 
   constructor(
     private usersService: UsersService,
     private fb: FormBuilder,
     private modalCtrl: ModalController,
-    private router: Router
+    private router: Router,
+    private modalStateService: ModalStateService
   ) {
     // souscrire à l'observable()
-    // this.usersService.refreshCollection$.subscribe((data) => {
-    //   console.log(data, 'data');
-    // });
+    this.modalStateService.modalstate$.subscribe({
+      next: (data) => {
+        console.log(data);
+
+        this.closeModal();
+        //this.router.navigate(['/tabs/tab2']);
+      },
+    });
     // check token
     this.token = localStorage.getItem('token');
     //console.log(token, 'token');
@@ -153,6 +161,8 @@ export class Tab2Page implements OnInit, OnChanges {
       user,
     });
     await coverLetter.present();
+    // Store the modal instance
+    this.modalInstance = coverLetter;
   }
 
   // async createModal(
@@ -185,30 +195,36 @@ export class Tab2Page implements OnInit, OnChanges {
     await modal.present();
 
     // Wait for the modal to be displayed before taking a screenshot
-    await new Promise((resolve) => setTimeout(resolve, 500)); // Adjust the delay as needed
+    //await new Promise((resolve) => setTimeout(resolve, 500)); // Adjust the delay as needed
 
     // Get the modal content by its class or ID
-    const modalContent = document.querySelector('#main') as HTMLElement; // Adjust the selector as needed
-
+    //const modalContent = document.querySelector('#main') as HTMLElement; // Adjust the selector as needed
 
     // Take a screenshot of the modal content using html2canvas
-    const canvas = await html2canvas(modalContent);
-    console.log(canvas);
-    const imageDataUrl = canvas.toDataURL('image/jpeg');
-    console.log(imageDataUrl);
+    // const canvas = await html2canvas(modalContent);
+    // console.log(canvas);
+    // const imageDataUrl = canvas.toDataURL('image/jpeg');
+    // console.log(imageDataUrl);
 
-    const imageModal = await this.modalCtrl.create({
-      component: TemplateScreenshotPage, // Replace YourImageComponent with the component that will display the image
-      componentProps: {
-        imageDataUrl,
-      },
-    });
+    // const imageModal = await this.modalCtrl.create({
+    //   component: TemplateScreenshotPage, // Replace YourImageComponent with the component that will display the image
+    //   componentProps: {
+    //     imageDataUrl,
+    //   },
+    // });
 
-    await modal.dismiss();
-    await imageModal.present();
+    //await modal.dismiss();
+    //await imageModal.present();
 
-    return imageModal;
+    //return imageModal;
 
-    //return modal;
+    return modal;
+  }
+
+  async closeModal() {
+    if (this.modalInstance) {
+      await this.modalInstance.dismiss();
+      this.modalInstance = null; // Reset modal instance after dismissal
+    }
   }
 }

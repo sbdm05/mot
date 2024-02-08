@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoverLetterComponent } from './components/cover-letter/cover-letter.component';
 
+
 @NgModule({
   declarations: [AppComponent, CoverLetterComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],

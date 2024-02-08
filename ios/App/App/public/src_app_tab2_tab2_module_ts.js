@@ -273,17 +273,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Tab2Page": () => (/* binding */ Tab2Page)
 /* harmony export */ });
 /* harmony import */ var _Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _tab2_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tab2.page.html?ngResource */ 1748);
 /* harmony import */ var _tab2_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tab2.page.scss?ngResource */ 1597);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ 2508);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 3819);
 /* harmony import */ var _components_cover_letter_c_cover_letter_c_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/cover-letter-c/cover-letter-c.page */ 6851);
-/* harmony import */ var _components_cover_letter_simple_cover_letter_simple_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/cover-letter-simple/cover-letter-simple.page */ 6705);
-/* harmony import */ var _components_cover_letter_cover_letter_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/cover-letter/cover-letter.component */ 3030);
-/* harmony import */ var _services_users_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/users.service */ 4961);
+/* harmony import */ var _components_cover_letter_premium1_cover_letter_premium1_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/cover-letter-premium1/cover-letter-premium1.page */ 6783);
+/* harmony import */ var _components_cover_letter_simple_cover_letter_simple_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/cover-letter-simple/cover-letter-simple.page */ 6705);
+/* harmony import */ var _components_cover_letter_cover_letter_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/cover-letter/cover-letter.component */ 3030);
+/* harmony import */ var _services_users_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/users.service */ 4961);
+/* harmony import */ var _services_modal_state_modal_state_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/modal-state/modal-state.service */ 4397);
+
+
 
 
 
@@ -297,17 +301,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let Tab2Page = class Tab2Page {
-  constructor(usersService, fb, modalCtrl, router) {
+  constructor(usersService, fb, modalCtrl, router, modalStateService) {
     this.usersService = usersService;
     this.fb = fb;
     this.modalCtrl = modalCtrl;
     this.router = router;
+    this.modalStateService = modalStateService;
     this.colorBtn = 'success';
     this.textBtn = 'Enregistrer'; // souscrire à l'observable()
-    // this.usersService.refreshCollection$.subscribe((data) => {
-    //   console.log(data, 'data');
-    // });
-    // check token
+
+    this.modalStateService.modalstate$.subscribe({
+      next: data => {
+        console.log(data);
+        this.closeModal(); //this.router.navigate(['/tabs/tab2']);
+      }
+    }); // check token
 
     this.token = localStorage.getItem('token'); //console.log(token, 'token');
     // 1 - je vérifie l'identite du user
@@ -324,12 +332,12 @@ let Tab2Page = class Tab2Page {
           this.user = user; //console.log(this.user, 'depuis tab2');
 
           this.form = this.fb.group({
-            intitule: [this.user?.letters[0]?.intitule || '', _angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required],
-            experience: [this.user?.letters[0]?.experience || '', _angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required],
-            societe: [this.user?.letters[0]?.societe || '', _angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required],
+            intitule: [this.user?.letters[0]?.intitule || '', _angular_forms__WEBPACK_IMPORTED_MODULE_9__.Validators.required],
+            experience: [this.user?.letters[0]?.experience || '', _angular_forms__WEBPACK_IMPORTED_MODULE_9__.Validators.required],
+            societe: [this.user?.letters[0]?.societe || '', _angular_forms__WEBPACK_IMPORTED_MODULE_9__.Validators.required],
             contact: [this.user?.letters[0]?.contact || 'Madame'],
-            adresseSociete: [this.user?.letters[0]?.adresseSociete || '', _angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required],
-            cpVille: [this.user?.letters[0]?.cpVille || '', _angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required]
+            adresseSociete: [this.user?.letters[0]?.adresseSociete || '', _angular_forms__WEBPACK_IMPORTED_MODULE_9__.Validators.required],
+            cpVille: [this.user?.letters[0]?.cpVille || '', _angular_forms__WEBPACK_IMPORTED_MODULE_9__.Validators.required]
           });
         });
       } catch (error) {}
@@ -371,78 +379,122 @@ let Tab2Page = class Tab2Page {
     });
   }
 
-  openModal() {
+  openModal(letterName) {
     var _this = this;
 
     return (0,_Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      let componentType;
       console.log(_this.user);
       const user = _this.user;
-      console.log(user, 'infos'); // attention l'objet envoyé (ici user) doit correspondre à l'objet dans @Input()
+      console.log(user, 'infos');
 
-      const coverLetter = yield _this.createModal(_components_cover_letter_cover_letter_component__WEBPACK_IMPORTED_MODULE_5__.CoverLetterComponent, {
+      switch (letterName) {
+        case 'coverLetterComponent':
+          componentType = _components_cover_letter_cover_letter_component__WEBPACK_IMPORTED_MODULE_6__.CoverLetterComponent;
+          break;
+
+        case 'coverLetterSimplePage':
+          componentType = _components_cover_letter_simple_cover_letter_simple_page__WEBPACK_IMPORTED_MODULE_5__.CoverLetterSimplePage;
+          break;
+
+        case 'coverLetterCPage':
+          componentType = _components_cover_letter_c_cover_letter_c_page__WEBPACK_IMPORTED_MODULE_3__.CoverLetterCPage;
+          break;
+
+        case 'coverLetterPremiumBubble':
+          componentType = _components_cover_letter_premium1_cover_letter_premium1_page__WEBPACK_IMPORTED_MODULE_4__.CoverLetterPremium1Page;
+          break;
+        // Add more cases for other component types as needed
+
+        default:
+          console.error('Unknown component type:', letterName);
+          return;
+      } // attention l'objet envoyé (ici user) doit correspondre à l'objet dans @Input()
+
+
+      const coverLetter = yield _this.createModal(componentType, {
         user
       });
-      yield coverLetter.present();
-    })();
-  }
+      yield coverLetter.present(); // Store the modal instance
 
-  openModalSimple() {
+      _this.modalInstance = coverLetter;
+    })();
+  } // async createModal(
+  //   component,
+  //   componentProps?,
+  //   cssClass?
+  // ): Promise<HTMLIonModalElement> {
+  //   const modal = await this.modalCtrl.create({
+  //     component,
+  //     cssClass,
+  //     componentProps,
+  //     backdropDismiss: true,
+  //   });
+  //   return modal;
+  // }
+
+
+  createModal(component, componentProps, cssClass) {
     var _this2 = this;
 
     return (0,_Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      console.log(_this2.user);
-      const user = _this2.user;
-      console.log(user, 'infos'); // attention l'objet envoyé (ici user) doit correspondre à l'objet dans @Input()
-
-      const coverLetter = yield _this2.createModal(_components_cover_letter_simple_cover_letter_simple_page__WEBPACK_IMPORTED_MODULE_4__.CoverLetterSimplePage, {
-        user
-      });
-      yield coverLetter.present();
-    })();
-  }
-
-  openModalLetterC() {
-    var _this3 = this;
-
-    return (0,_Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      console.log(_this3.user);
-      const user = _this3.user;
-      console.log(user, 'infos'); // attention l'objet envoyé (ici user) doit correspondre à l'objet dans @Input()
-
-      const coverLetter = yield _this3.createModal(_components_cover_letter_c_cover_letter_c_page__WEBPACK_IMPORTED_MODULE_3__.CoverLetterCPage, {
-        user
-      });
-      yield coverLetter.present();
-    })();
-  }
-
-  createModal(component, componentProps, cssClass) {
-    var _this4 = this;
-
-    return (0,_Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const modal = yield _this4.modalCtrl.create({
+      const modal = yield _this2.modalCtrl.create({
         component,
         cssClass,
         componentProps,
         backdropDismiss: true
       });
+      console.log(componentProps); // exists
+
+      yield modal.present(); // Wait for the modal to be displayed before taking a screenshot
+      //await new Promise((resolve) => setTimeout(resolve, 500)); // Adjust the delay as needed
+      // Get the modal content by its class or ID
+      //const modalContent = document.querySelector('#main') as HTMLElement; // Adjust the selector as needed
+      // Take a screenshot of the modal content using html2canvas
+      // const canvas = await html2canvas(modalContent);
+      // console.log(canvas);
+      // const imageDataUrl = canvas.toDataURL('image/jpeg');
+      // console.log(imageDataUrl);
+      // const imageModal = await this.modalCtrl.create({
+      //   component: TemplateScreenshotPage, // Replace YourImageComponent with the component that will display the image
+      //   componentProps: {
+      //     imageDataUrl,
+      //   },
+      // });
+      //await modal.dismiss();
+      //await imageModal.present();
+      //return imageModal;
+
       return modal;
+    })();
+  }
+
+  closeModal() {
+    var _this3 = this;
+
+    return (0,_Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      if (_this3.modalInstance) {
+        yield _this3.modalInstance.dismiss();
+        _this3.modalInstance = null; // Reset modal instance after dismissal
+      }
     })();
   }
 
 };
 
 Tab2Page.ctorParameters = () => [{
-  type: _services_users_service__WEBPACK_IMPORTED_MODULE_6__.UsersService
+  type: _services_users_service__WEBPACK_IMPORTED_MODULE_7__.UsersService
 }, {
-  type: _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormBuilder
+  type: _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormBuilder
 }, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.ModalController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.ModalController
 }, {
-  type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router
+  type: _angular_router__WEBPACK_IMPORTED_MODULE_11__.Router
+}, {
+  type: _services_modal_state_modal_state_service__WEBPACK_IMPORTED_MODULE_8__.ModalStateService
 }];
 
-Tab2Page = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
+Tab2Page = (0,tslib__WEBPACK_IMPORTED_MODULE_12__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_13__.Component)({
   selector: 'app-tab2',
   template: _tab2_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_tab2_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -467,7 +519,7 @@ module.exports = "ion-label.sc-ion-label-md-h.sc-ion-label-md-s.md.in-item-color
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header>\n    <ion-toolbar color=\"tertiary\">\n        <!-- <ion-buttons slot=\"start\">\n            <ion-button slot=\"icon\">\n                <ion-icon name=\"menu\"></ion-icon>\n            </ion-button>\n        </ion-buttons> -->\n        <ion-title>\n            Créer une candidature\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-accordion-group [value]=\"['first']\">\n        <ion-accordion value=\"first\">\n            <ion-item slot=\"header\" color=\"light\">\n                <ion-label>Etape 1 - Remplir les informations de la société</ion-label>\n            </ion-item>\n            <div class=\"ion-padding\" slot=\"content\">\n                <form [formGroup]='form' *ngIf='user' (ngSubmit)='saveInfos()'>\n                    <!-- prenom -->\n                    <ion-item>\n                        <ion-label position=\"floating\">Intitulé du poste (requis)</ion-label>\n                        <ion-input formControlName='intitule'></ion-input>\n                    </ion-item>\n                    <ion-list>\n\n\n                      <ion-item>\n                          <ion-label>Votre expérience</ion-label>\n                            <ion-select formControlName='experience' placeholder=\"Niveau d'expérience pour ce poste\">\n\n                                <ion-select-option value=\"debutant\">Débutant</ion-select-option>\n                                <ion-select-option value=\"expert\">Déjà exercé un poste similaire</ion-select-option>\n                            </ion-select>\n                        </ion-item>\n                    </ion-list>\n                    <ion-item>\n                        <ion-label position=\"floating\">Société (requis)</ion-label>\n                        <ion-input formControlName='societe'></ion-input>\n                    </ion-item>\n                    <ion-item>\n                        <ion-label position=\"floating\">Nom du contact avec civilité</ion-label>\n                        <ion-label style='font-style: italic;'position=\"floating\">Laisser vide si pas de nom disponible</ion-label>\n\n                        <ion-input formControlName='contact' placeholder='Madame Durand'></ion-input>\n                    </ion-item>\n                    <ion-item>\n                        <ion-label position=\"floating\">Adresse (requis)</ion-label>\n                        <ion-input formControlName='adresseSociete'></ion-input>\n                    </ion-item>\n                    <ion-item>\n                        <ion-label position=\"floating\">Code Postal et Ville (requis)</ion-label>\n                        <ion-input formControlName='cpVille'></ion-input>\n                    </ion-item>\n\n                    <ion-button [color]=\"colorBtn\" expand=\"block\" type=\"submit\" [disabled]='form.invalid'>Etape 1 - Enregistrer</ion-button>\n\n                </form>\n            </div>\n        </ion-accordion>\n        <ion-accordion value=\"second\">\n            <ion-item slot=\"header\" color=\"light\">\n                <ion-label>Etape 2 - Choisir le modèle</ion-label>\n            </ion-item>\n            <div class=\"ion-padding\" slot=\"content\">\n                <!-- lettre 1 -->\n                <ion-card class=\"ion-no-padding\">\n                    <ion-row class=\"ion-align-items-center\">\n                        <ion-col size=\"8\" class=\"ion-padding\">\n                            <ion-row>\n                                <ion-col class=\"bold\">\n                                    <h5 class=\"ion-no-margin\">Modèle 1</h5>\n\n                                      <img src='../../assets/lettres-apercus/cover-letter-1.png' />\n\n                                </ion-col>\n                            </ion-row>\n\n                        </ion-col>\n                        <ion-col size=\"4\">\n                            <ion-button color=\"success\" (click)=\"openModal()\">\n                                Choisir\n                            </ion-button>\n                        </ion-col>\n                    </ion-row>\n                </ion-card>\n\n                <!-- lettre 2 -->\n                <ion-card class=\"ion-no-padding\">\n\n                    <ion-row class=\"ion-align-items-center\">\n                        <ion-col size=\"8\" class=\"ion-padding\">\n                            <ion-row>\n                                <ion-col class=\"bold\">\n                                    <h5 class=\"ion-no-margin\">Modèle 2</h5>\n                                    <img src='../../assets/lettres-apercus/cover-letter.png' />\n                                </ion-col>\n                            </ion-row>\n                        </ion-col>\n                        <ion-col size=\"4\">\n                            <ion-button color=\"success\" (click)=\"openModalSimple()\">\n                                Choisir\n                            </ion-button>\n                        </ion-col>\n                    </ion-row>\n                </ion-card>\n\n                <!-- lettre 3 -->\n                <ion-card class=\"ion-no-padding\">\n\n                    <ion-row class=\"ion-align-items-center\">\n                        <ion-col size=\"8\" class=\"ion-padding\">\n                            <ion-row>\n                                <ion-col class=\"bold\">\n                                    <h5 class=\"ion-no-margin\">Modèle 3</h5>\n                                    <img src='../../assets/lettres-apercus/cover-letter-2.png' />\n\n                                </ion-col>\n                            </ion-row>\n                        </ion-col>\n                        <ion-col size=\"4\">\n                            <ion-button color=\"success\" (click)=\"openModalLetterC()\">\n                                Choisir\n                            </ion-button>\n                        </ion-col>\n                    </ion-row>\n                </ion-card>\n\n            </div>\n        </ion-accordion>\n        <!-- <ion-accordion value=\"third\">\n            <ion-item slot=\"header\" color=\"light\">\n                <ion-label>Etape 3 - Choisir le contenu</ion-label>\n            </ion-item>\n            <div class=\"ion-padding\" slot=\"content\">\n                Choisir le contenu\n            </div>\n        </ion-accordion> -->\n        <ion-accordion value=\"third\">\n          <ion-item slot=\"header\" color=\"light\">\n            <ion-label>Etape 3 - Sauvegarder votre candidature</ion-label>\n          </ion-item>\n          <div class=\"ion-padding\" slot=\"content\">\n            <ion-text color=\"primary\">\n              <p>Pour une meilleur gestion de votre recherche d'emploi, n'oubliez pas d'enregistrer cette candidature dans votre historique. </p>\n\n            </ion-text>\n          <ion-button expand=\"block\" [color]=\"colorBtn\" (click)='onSaved()'>{{this.textBtn}}</ion-button>\n          </div>\n        </ion-accordion>\n    </ion-accordion-group>\n\n\n\n</ion-content>\n\n<ion-footer>\n    <ion-toolbar>\n\n        <!-- <ion-button expand=\"block\" (click)='onSaved()'>AJOUTER A L'HISTORIQUE</ion-button> -->\n    </ion-toolbar>\n\n</ion-footer>\n";
+module.exports = "<ion-header>\n    <ion-toolbar color=\"tertiary\">\n        <!-- <ion-buttons slot=\"start\">\n            <ion-button slot=\"icon\">\n                <ion-icon name=\"menu\"></ion-icon>\n            </ion-button>\n        </ion-buttons> -->\n        <ion-title>\n            Créer une candidature\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-accordion-group [value]=\"['first']\">\n        <ion-accordion value=\"first\">\n            <ion-item slot=\"header\" color=\"light\">\n                <ion-label>Etape 1 - Remplir les informations de la société</ion-label>\n            </ion-item>\n            <div class=\"ion-padding\" slot=\"content\">\n                <form [formGroup]='form' *ngIf='user' (ngSubmit)='saveInfos()'>\n                    <!-- prenom -->\n                    <ion-item>\n                        <ion-label position=\"floating\">Intitulé du poste (requis)</ion-label>\n                        <ion-input formControlName='intitule'></ion-input>\n                    </ion-item>\n                    <ion-list>\n\n\n                      <ion-item>\n                          <ion-label>Votre expérience</ion-label>\n                            <ion-select formControlName='experience' placeholder=\"Niveau d'expérience pour ce poste\">\n\n                                <ion-select-option value=\"debutant\">Débutant</ion-select-option>\n                                <ion-select-option value=\"expert\">Déjà exercé un poste similaire</ion-select-option>\n                            </ion-select>\n                        </ion-item>\n                    </ion-list>\n                    <ion-item>\n                        <ion-label position=\"floating\">Société (requis)</ion-label>\n                        <ion-input formControlName='societe'></ion-input>\n                    </ion-item>\n                    <ion-item>\n                        <ion-label position=\"floating\">Nom du contact avec civilité</ion-label>\n                        <ion-label style='font-style: italic;'position=\"floating\">Laisser vide si pas de nom disponible</ion-label>\n\n                        <ion-input formControlName='contact' placeholder='Madame Durand'></ion-input>\n                    </ion-item>\n                    <ion-item>\n                        <ion-label position=\"floating\">Adresse (requis)</ion-label>\n                        <ion-input formControlName='adresseSociete'></ion-input>\n                    </ion-item>\n                    <ion-item>\n                        <ion-label position=\"floating\">Code Postal et Ville (requis)</ion-label>\n                        <ion-input formControlName='cpVille'></ion-input>\n                    </ion-item>\n\n                    <ion-button [color]=\"colorBtn\" expand=\"block\" type=\"submit\" [disabled]='form.invalid'>Etape 1 - Enregistrer</ion-button>\n\n                </form>\n            </div>\n        </ion-accordion>\n        <ion-accordion value=\"second\">\n            <ion-item slot=\"header\" color=\"light\">\n                <ion-label>Etape 2 - Choisir le modèle</ion-label>\n            </ion-item>\n            <div class=\"ion-padding\" slot=\"content\">\n                <!-- lettre 1 -->\n                <ion-card class=\"ion-no-padding\">\n                    <ion-row class=\"ion-align-items-center\">\n                        <ion-col size=\"8\" class=\"ion-padding\">\n                            <ion-row>\n                                <ion-col class=\"bold\">\n                                    <h5 class=\"ion-no-margin\">Modèle 1</h5>\n\n                                      <img src='../../assets/lettres-apercus/cover-letter-1.png' />\n\n                                </ion-col>\n                            </ion-row>\n\n                        </ion-col>\n                        <ion-col size=\"4\">\n                            <ion-button color=\"success\" (click)=\"openModal('coverLetterComponent')\">\n                                Choisir\n                            </ion-button>\n                        </ion-col>\n                    </ion-row>\n                </ion-card>\n\n                <!-- lettre 2 -->\n                <ion-card class=\"ion-no-padding\">\n\n                    <ion-row class=\"ion-align-items-center\">\n                        <ion-col size=\"8\" class=\"ion-padding\">\n                            <ion-row>\n                                <ion-col class=\"bold\">\n                                    <h5 class=\"ion-no-margin\">Modèle 2</h5>\n                                    <img src='../../assets/lettres-apercus/cover-letter.png' />\n                                </ion-col>\n                            </ion-row>\n                        </ion-col>\n                        <ion-col size=\"4\">\n                            <ion-button color=\"success\" (click)=\"openModal('coverLetterSimplePage')\">\n                                Choisir\n                            </ion-button>\n                        </ion-col>\n                    </ion-row>\n                </ion-card>\n\n                <!-- lettre 3 -->\n                <ion-card class=\"ion-no-padding\">\n\n                    <ion-row class=\"ion-align-items-center\">\n                        <ion-col size=\"8\" class=\"ion-padding\">\n                            <ion-row>\n                                <ion-col class=\"bold\">\n                                    <h5 class=\"ion-no-margin\">Modèle 3</h5>\n                                    <img src='../../assets/lettres-apercus/cover-letter-2.png' />\n\n                                </ion-col>\n                            </ion-row>\n                        </ion-col>\n                        <ion-col size=\"4\">\n                          <ion-button color=\"success\" (click)=\"openModal('coverLetterCPage')\">\n                                Choisir\n                            </ion-button>\n                        </ion-col>\n                    </ion-row>\n                </ion-card>\n            <ion-card class=\"ion-no-padding\">\n\n                                <ion-row class=\"ion-align-items-center\">\n                                    <ion-col size=\"8\" class=\"ion-padding\">\n                                        <ion-row>\n                                            <ion-col class=\"bold\">\n                                                <h5 class=\"ion-no-margin\">Modèle Premium Bubble</h5>\n                                                <img src='../../assets/lettres-apercus/cover-letter-2.png' />\n\n                                            </ion-col>\n                                        </ion-row>\n                                    </ion-col>\n                                    <ion-col size=\"4\">\n                                        <ion-button color=\"success\" (click)=\"openModal('coverLetterPremiumBubble')\">\n                                            Choisir\n                                        </ion-button>\n                                    </ion-col>\n                                </ion-row>\n            </ion-card>\n\n            </div>\n        </ion-accordion>\n        <!-- <ion-accordion value=\"third\">\n            <ion-item slot=\"header\" color=\"light\">\n                <ion-label>Etape 3 - Choisir le contenu</ion-label>\n            </ion-item>\n            <div class=\"ion-padding\" slot=\"content\">\n                Choisir le contenu\n            </div>\n        </ion-accordion> -->\n        <ion-accordion value=\"third\">\n          <ion-item slot=\"header\" color=\"light\">\n            <ion-label>Etape 3 - Sauvegarder votre candidature</ion-label>\n          </ion-item>\n          <div class=\"ion-padding\" slot=\"content\">\n            <ion-text color=\"primary\">\n              <p>Pour une meilleur gestion de votre recherche d'emploi, n'oubliez pas d'enregistrer cette candidature dans votre historique. </p>\n\n            </ion-text>\n          <ion-button expand=\"block\" [color]=\"colorBtn\" (click)='onSaved()'>{{this.textBtn}}</ion-button>\n          </div>\n        </ion-accordion>\n    </ion-accordion-group>\n\n\n\n</ion-content>\n\n<ion-footer>\n    <ion-toolbar>\n\n        <!-- <ion-button expand=\"block\" (click)='onSaved()'>AJOUTER A L'HISTORIQUE</ion-button> -->\n    </ion-toolbar>\n\n</ion-footer>\n";
 
 /***/ })
 

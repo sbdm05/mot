@@ -8,7 +8,7 @@ import { User } from 'src/app/user/user';
   templateUrl: './cover-letter-simple.page.html',
   styleUrls: ['./cover-letter-simple.page.scss'],
 })
-export class CoverLetterSimplePage  {
+export class CoverLetterSimplePage {
   @Input() user: User;
   content: string;
   today: number = Date.now();
@@ -23,6 +23,8 @@ export class CoverLetterSimplePage  {
 
   downloadLetter() {
     this.content = document.getElementById('main').innerHTML;
+    console.log(this.content, 'depuis cover letter simple');
+
     const options = {
       documentSize: 'A4',
       type: 'share',
