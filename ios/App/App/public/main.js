@@ -314,13 +314,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TemplateScreenshotPage": () => (/* binding */ TemplateScreenshotPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _template_screenshot_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./template-screenshot.page.html?ngResource */ 5999);
 /* harmony import */ var _template_screenshot_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./template-screenshot.page.scss?ngResource */ 7798);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 3819);
-/* harmony import */ var src_app_services_modal_state_modal_state_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/modal-state/modal-state.service */ 4397);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _ionic_native_pdf_generator_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/pdf-generator/ngx */ 7330);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var src_app_services_modal_state_modal_state_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/modal-state/modal-state.service */ 4397);
+
 
 
 
@@ -329,10 +331,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let TemplateScreenshotPage = class TemplateScreenshotPage {
-    constructor(modalController, router, modalStateService) {
+    constructor(modalController, router, modalStateService, pdfGenerator) {
         this.modalController = modalController;
         this.router = router;
         this.modalStateService = modalStateService;
+        this.pdfGenerator = pdfGenerator;
     }
     ngOnInit() {
         console.log('test', this.base64); // renvoie string
@@ -341,18 +344,36 @@ let TemplateScreenshotPage = class TemplateScreenshotPage {
         this.modalStateService.modalstate$.next('close');
         this.modalController.dismiss();
     }
+    downloadLetter() {
+        // this.content = document.getElementById('content').innerHTML;
+        const options = {
+            documentSize: 'A4',
+            type: 'share',
+            // landscape: 'portrait',
+            fileName: 'motiv-pro.pdf',
+        };
+        this.pdfGenerator
+            .fromData(this.htmlBase, options)
+            .then((base64) => {
+            console.log('OK', this.base64);
+        })
+            .catch((error) => {
+            console.log('error', error);
+        });
+    }
 };
 TemplateScreenshotPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.ModalController },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router },
-    { type: src_app_services_modal_state_modal_state_service__WEBPACK_IMPORTED_MODULE_2__.ModalStateService }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
+    { type: src_app_services_modal_state_modal_state_service__WEBPACK_IMPORTED_MODULE_3__.ModalStateService },
+    { type: _ionic_native_pdf_generator_ngx__WEBPACK_IMPORTED_MODULE_2__.PDFGenerator }
 ];
 TemplateScreenshotPage.propDecorators = {
-    imageDataUrl: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.Input }],
-    base64: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.Input }]
+    base64: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input }],
+    htmlBase: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input }]
 };
-TemplateScreenshotPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+TemplateScreenshotPage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-template-screenshot',
         template: _template_screenshot_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_template_screenshot_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -727,7 +748,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /***/ ((module) => {
 
 "use strict";
-module.exports = ".pdfEmbed {\n  width: 794px;\n  /* A4 width in pixels */\n  height: 1123px;\n  /* A4 height in pixels */\n  border: red;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlbXBsYXRlLXNjcmVlbnNob3QucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0EsWUFBQTtFQUNFLHVCQUFBO0VBQ0EsY0FBQTtFQUNBLHdCQUFBO0VBQ0EsV0FBQTtBQUNGIiwiZmlsZSI6InRlbXBsYXRlLXNjcmVlbnNob3QucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBkZkVtYmVkIHtcbndpZHRoOiA3OTRweDtcbiAgLyogQTQgd2lkdGggaW4gcGl4ZWxzICovXG4gIGhlaWdodDogMTEyM3B4O1xuICAvKiBBNCBoZWlnaHQgaW4gcGl4ZWxzICovXG4gIGJvcmRlcjogcmVkO1xufVxuIl19 */";
+module.exports = ".pdfEmbed {\n  width: 90%;\n  /* A4 height in pixels */\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlbXBsYXRlLXNjcmVlbnNob3QucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0EsVUFBQTtFQUNFLHdCQUFBO0FBQ0YiLCJmaWxlIjoidGVtcGxhdGUtc2NyZWVuc2hvdC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucGRmRW1iZWQge1xud2lkdGg6IDkwJTtcbiAgLyogQTQgaGVpZ2h0IGluIHBpeGVscyAqL1xufVxuIl19 */";
 
 /***/ }),
 
@@ -760,7 +781,7 @@ module.exports = "\n<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-butt
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-buttons slot=\"start\">\n      <ion-buttons (click)=\"closeModal()\" slot=\"start\">\n        <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>\n      </ion-buttons>\n    </ion-buttons>\n    <ion-title class=\"title-ios ion-text-capitalize\">Prévisualiser</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n\n\n    <!-- <div >\n\n      <embed [src]=\"base64\" type=\"application/pdf\" />\n    </div> -->\n<div class='pdfEmbed'>\n\n  <img src=\"data:application/pdf;base64,{{base64}}\">\n</div>\n</ion-content>\n\n\n<!-- modifier pdfEmbed pour visualiser en plus petit -->\n";
+module.exports = "<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-buttons slot=\"start\">\n      <ion-buttons (click)=\"closeModal()\" slot=\"start\">\n        <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>\n      </ion-buttons>\n    </ion-buttons>\n    <ion-title class=\"title-ios ion-text-capitalize\">Prévisualiser</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n\n\n    <div style='background-color: rgb(129, 129, 138); height: 100%;text-align: center;'>\n\n      <div id='content'>\n        <img src=\"data:application/pdf;base64,{{base64}}\" class='pdfEmbed'>\n      </div>\n\n\n    </div>\n</ion-content>\n\n<ion-footer (click)=\"downloadLetter()\">\n  <ion-toolbar color=\"success\" class=\"ion-padding-horizontal\">\n    <div class=\"ion-text-center\">\n      <h4 class=\"ion-no-margin\">Télécharger la lettre</h4>\n    </div>\n  </ion-toolbar>\n</ion-footer>\n\n\n<!-- modifier pdfEmbed pour visualiser en plus petit -->\n";
 
 /***/ })
 

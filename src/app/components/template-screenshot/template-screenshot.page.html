@@ -13,15 +13,23 @@
 
 
 
-    <!-- <div >
+    <div style='background-color: rgb(129, 129, 138); height: 100%;text-align: center;'>
 
-      <embed [src]="base64" type="application/pdf" />
-    </div> -->
-<div style='background-color: rgb(129, 129, 138); height: 100%;text-align: center;'>
+      <div id='content'>
+        <img src="data:application/pdf;base64,{{base64}}" class='pdfEmbed'>
+      </div>
 
-  <img src="data:application/pdf;base64,{{base64}}" class='pdfEmbed'>
-</div>
+
+    </div>
 </ion-content>
+
+<ion-footer (click)="downloadLetter()">
+  <ion-toolbar color="success" class="ion-padding-horizontal">
+    <div class="ion-text-center">
+      <h4 class="ion-no-margin">Télécharger la lettre</h4>
+    </div>
+  </ion-toolbar>
+</ion-footer>
 
 
 <!-- modifier pdfEmbed pour visualiser en plus petit -->

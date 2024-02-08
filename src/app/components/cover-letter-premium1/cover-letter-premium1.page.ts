@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { PDFGenerator } from '@ionic-native/pdf-generator/ngx';
 import { ModalController } from '@ionic/angular';
 import { User } from 'src/app/user/user';
@@ -9,9 +15,7 @@ import { TemplateScreenshotPage } from '../template-screenshot/template-screensh
   templateUrl: './cover-letter-premium1.page.html',
   styleUrls: ['./cover-letter-premium1.page.scss'],
 })
-export class CoverLetterPremium1Page
-  implements  AfterViewInit
-{
+export class CoverLetterPremium1Page implements AfterViewInit {
   @Input() user: User;
   content: string;
   today: number = Date.now();
@@ -59,6 +63,7 @@ export class CoverLetterPremium1Page
 
     const coverLetter = await this.createModal(TemplateScreenshotPage, {
       base64,
+      htmlBase: this.content,
     });
     await coverLetter.present();
   }
@@ -98,5 +103,4 @@ export class CoverLetterPremium1Page
         console.log('error', error);
       });
   }
-
 }
