@@ -167,17 +167,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CoverLetterComponent": () => (/* binding */ CoverLetterComponent)
 /* harmony export */ });
 /* harmony import */ var _Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _cover_letter_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cover-letter.component.html?ngResource */ 3802);
 /* harmony import */ var _cover_letter_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cover-letter.component.scss?ngResource */ 6109);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 3819);
 /* harmony import */ var _ionic_native_pdf_generator_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/pdf-generator/ngx */ 7330);
 /* harmony import */ var _template_screenshot_template_screenshot_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../template-screenshot/template-screenshot.page */ 8225);
-/* harmony import */ var src_app_services_modal_state_modal_state_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/modal-state/modal-state.service */ 4397);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 124);
-
-
 
 
 
@@ -189,11 +185,9 @@ __webpack_require__.r(__webpack_exports__);
 let CoverLetterComponent = class CoverLetterComponent {
   //private modalState$!: Observable<any>;
   // on vérifie !
-  constructor(modalController, pdfGenerator, router, modalStateService) {
+  constructor(modalController, pdfGenerator) {
     this.modalController = modalController;
     this.pdfGenerator = pdfGenerator;
-    this.router = router;
-    this.modalStateService = modalStateService;
     this.today = Date.now();
   }
 
@@ -230,9 +224,13 @@ let CoverLetterComponent = class CoverLetterComponent {
 
     return (0,_Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       console.log(base64, 'depuis openPdfPreview'); // string
+      // documentation
+      // ici on passe à la modal le document au format base64 et le contenu HTML
+      // pour générer le pdf
 
       const coverLetter = yield _this.createModal(_template_screenshot_template_screenshot_page__WEBPACK_IMPORTED_MODULE_4__.TemplateScreenshotPage, {
-        base64
+        base64,
+        htmlBase: _this.content
       });
       yield coverLetter.present();
     })();
@@ -255,23 +253,6 @@ let CoverLetterComponent = class CoverLetterComponent {
   closeModal() {
     console.log('depuis closemodal');
     this.modalController.dismiss();
-  } // this is working
-
-
-  downloadLetter() {
-    console.log('bouton cliqué');
-    this.content = document.getElementById('main').innerHTML;
-    const options = {
-      documentSize: 'A4',
-      type: 'share',
-      // landscape: 'portrait',
-      fileName: 'cover-letter.pdf'
-    };
-    this.pdfGenerator.fromData(this.content, options).then(base64 => {
-      console.log('OK', base64);
-    }).catch(error => {
-      console.log('error', error);
-    });
   }
 
   ngOnInit() {//console.log(this.user, 'Invoice Page ngOnInit');
@@ -280,21 +261,17 @@ let CoverLetterComponent = class CoverLetterComponent {
 };
 
 CoverLetterComponent.ctorParameters = () => [{
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ModalController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController
 }, {
   type: _ionic_native_pdf_generator_ngx__WEBPACK_IMPORTED_MODULE_3__.PDFGenerator
-}, {
-  type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router
-}, {
-  type: src_app_services_modal_state_modal_state_service__WEBPACK_IMPORTED_MODULE_5__.ModalStateService
 }];
 
 CoverLetterComponent.propDecorators = {
   user: [{
-    type: _angular_core__WEBPACK_IMPORTED_MODULE_8__.Input
+    type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
   }]
 };
-CoverLetterComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+CoverLetterComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
   selector: 'app-cover-letter',
   template: _cover_letter_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_cover_letter_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -770,7 +747,7 @@ module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-ap
 /***/ ((module) => {
 
 "use strict";
-module.exports = "\n<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-buttons (click)=\"closeModal()\" slot=\"start\">\n      <ion-button slot=\"icon\">\n        <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title class=\"title-ios ion-text-capitalize\">Modèle 1</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n<div id='main' style='font-family: arial;font-size:16px; margin:50px'>\n  <header style='display: flex; text-align: left; '>\n    <div style='flex:1;  padding: 15px; background-color: #2f74b7; color: white; font-size:18px; font-weight: 600' >\n\n      <p>{{user.prenom}} {{user.nom}}</p>\n      <p>{{user?.letters[0].intitule}}</p>\n\n    </div>\n    <div style='flex:1;  padding: 15px; background-color:white;' >\n      <!-- ici icône -->\n      <p><ion-icon name=\"pin\"></ion-icon> {{user.adresse}}</p>\n      <p>\n        <ion-icon name=\"phone-portrait\"></ion-icon> {{user.tel}}\n      </p>\n      <p>\n      <ion-icon name=\"send\"></ion-icon> {{user.email}}\n      </p>\n\n\n    </div>\n  </header>\n\n  <section id='contactInfos' style='text-align: right; line-height: 12px;'>\n    <p>{{user.letters[0].societe}}</p>\n    <p>{{user.letters[0].contact}}</p>\n    <p>{{user.letters[0].adresseSociete}}</p>\n    <p>{{user.letters[0].cpVille}}</p>\n  </section>\n\n  <!-- partie expert -->\n  <section id='content' style='text-align: justify;' *ngIf=\"user.letters[0].experience ===  'expert' \">\n    <p  style='padding-bottom:35px; text-align: right;'>Le {{today | date:'dd/MM/yyyy'}}</p>\n    <p style='padding-bottom:10px'>Objet : candidature pour le poste de {{user.letters[0].intitule}}</p>\n    <p *ngIf='user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n      {{user.letters[0].contact}},\n    </p>\n    <p *ngIf='!user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n       Madame, Monsieur,\n    </p>\n    <!-- premier paragraphe -->\n    <p>\n      Je suis actuellement à la recherche d'un emploi dans votre secteur d'activité, c'est pourquoi, je me permets de vous écrire pour postuler au poste de {{user.letters[0].intitule}}.\n    </p>\n    <p>\n    En effet, j'ai déjà pu exercer à ce poste lors d'une précédente mission. Cette expérience a été très enrichissante et\n    formatrice. Je souhaiterais vivement mettre ces compétences à profit dans votre structure. Dès le début de notre collaboration, vous pourrez constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et {{user.adjs[2]}}, des qualités essentielles dans ce métier. </p>\n    <!-- conclusion -->\n    <p>Je suis disponible pour m'entretenir avec vous, par téléphone ou en personne afin de déterminer comment je pourrais contribuer au mieux au développement de votre entreprise. </p>\n    <p>Je vous remercie de l'attention que vous pourrez accorder à ma candidature,</p>\n    <p>Sincères salutations,</p>\n\n\n    <p>{{user.prenom}} {{user.nom}}</p>\n  </section>\n\n\n  <!-- partie débutant -->\n  <section id='content' style='text-align: justify;' *ngIf=\"user.letters[0].experience ===  'debutant' \">\n      <p style='padding-bottom:35px; text-align: right;'>Le {{today | date:'dd/MM/yyyy'}}</p>\n      <p style='padding-bottom:10px'>Objet : candidature pour le poste de {{user.letters[0].intitule}}</p>\n      <p *ngIf='user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n        {{user.letters[0].contact}},\n      </p>\n      <p *ngIf='!user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n        Madame, Monsieur,\n      </p>\n      <!-- premier paragraphe -->\n      <p>\n        Je suis actuellement à la recherche d'un emploi dans votre secteur d'activité, c'est pourquoi, je me permets de vous\n        écrire pour postuler au poste de {{user.letters[0].intitule}}.</p>\n        <p>\n        <!-- si pas expérience -->\n        <span *ngIf=\"user.gender ==='femme'\">\n         Je débute mon activité professionnelle avec beaucoup d'enthousiasme à l'idée de m'intégrer à une nouvelle équipe et d'acquérir de nouvelles compétences. Ma capacité d'adaptation et mon envie de bien faire les tâches demandées me permettront d'être opérationnelle rapidement. Je souhaiterais vivement mettre ces compétences à profit dans votre structure.\n        </span>\n                <span *ngIf=\"user.gender ==='homme'\">\n                  Je débute mon activité professionnelle avec beaucoup d'enthousiasme à l'idée de m'intégrer à une nouvelle équipe et\n                  d'acquérir de nouvelles compétences. Ma capacité d'adaptation et mon envie de bien faire les tâches demandées me\n                  permettront d'être opérationnel rapidement. Je souhaiterais vivement mettre ces compétences à profit dans votre\n                  structure.\n                </span>\n      </p>\n\n      <!-- second paragraphe -->\n\n      <p >Dès le début de notre collaboration, vous pourrez constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et\n        {{user.adjs[2]}}, des qualités essentielles dans ce métier. </p>\n      <!-- conclusion -->\n      <p>Je suis disponible pour m'entretenir avec vous, par téléphone ou en personne afin de déterminer comment je pourrais\n        contribuer au mieux au développement de votre entreprise. </p>\n        <p >Je vous remercie de l'attention que vous pourrez accorder à ma candidature,</p>\n        <p style='padding: 20px 0px'>Sincères salutations,</p>\n\n      <p>{{user.prenom}} {{user.nom}}</p>\n  </section>\n\n\n</div>\n\n\n\n<ion-footer (click)=\"downloadLetter()\">\n  <ion-toolbar color=\"success\" class=\"ion-padding-horizontal\">\n    <div class=\"ion-text-center\">\n      <h4 class=\"ion-no-margin\">Télécharger la lettre</h4>\n    </div>\n  </ion-toolbar>\n</ion-footer>\n";
+module.exports = "<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-buttons (click)=\"closeModal()\" slot=\"start\">\n      <ion-button slot=\"icon\">\n        <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title class=\"title-ios ion-text-capitalize\">Modèle 1</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <div id='main' style='font-family: arial;font-size:16px; margin:50px'>\n\n    <div id=\"container\" style='padding: 3rem 5rem;'>\n      <header style='display: flex; text-align: left; '>\n        <div style='flex:1;  padding: 15px; background-color: #2f74b7; color: white; font-size:18px; font-weight: 600'>\n\n          <p>{{user.prenom}} {{user.nom}}</p>\n          <p>{{user?.letters[0].intitule}}</p>\n\n        </div>\n        <div style='flex:1;  padding: 15px; background-color:white;'>\n          <!-- ici icône -->\n          <p>\n            <ion-icon name=\"navigate-circle-outline\"></ion-icon> {{user.adresse}}\n          </p>\n          <p>\n            <ion-icon name=\"phone-portrait\"></ion-icon> {{user.tel}}\n          </p>\n          <p>\n            <ion-icon name=\"send\"></ion-icon> {{user.email}}\n          </p>\n\n\n        </div>\n      </header>\n\n      <section id='contactInfos' style='text-align: right; line-height: 12px;'>\n        <p>{{user.letters[0].societe}}</p>\n        <p>{{user.letters[0].contact}}</p>\n        <p>{{user.letters[0].adresseSociete}}</p>\n        <p>{{user.letters[0].cpVille}}</p>\n      </section>\n\n      <!-- partie expert -->\n      <section id='content' style='text-align: justify;' *ngIf=\"user.letters[0].experience ===  'expert' \">\n        <p style='padding-bottom:35px; text-align: right;'>Le {{today | date:'dd/MM/yyyy'}}</p>\n        <p style='padding-bottom:10px'>Objet : candidature pour le poste de {{user.letters[0].intitule}}</p>\n        <p *ngIf='user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          {{user.letters[0].contact}},\n        </p>\n        <p *ngIf='!user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          Madame, Monsieur,\n        </p>\n        <!-- premier paragraphe -->\n        <p>\n          Je suis actuellement à la recherche d'un emploi dans votre secteur d'activité, c'est pourquoi, je me permets\n          de vous\n          écrire pour postuler au poste de {{user.letters[0].intitule}}.\n        </p>\n        <p>\n          En effet, j'ai déjà pu exercer à ce poste lors d'une précédente mission. Cette expérience a été très\n          enrichissante\n          et\n          formatrice. Je souhaiterais vivement mettre ces compétences à profit dans votre structure. Dès le début de\n          notre\n          collaboration, vous pourrez constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et {{user.adjs[2]}}, des\n          qualités essentielles dans ce métier. </p>\n        <!-- conclusion -->\n        <p>Je suis disponible pour m'entretenir avec vous, par téléphone ou en personne afin de déterminer comment je\n          pourrais\n          contribuer au mieux au développement de votre entreprise. </p>\n        <p>Je vous remercie de l'attention que vous pourrez accorder à ma candidature,</p>\n        <p>Sincères salutations,</p>\n\n\n        <p>{{user.prenom}} {{user.nom}}</p>\n      </section>\n\n\n      <!-- partie débutant -->\n      <section id='content' style='text-align: justify;' *ngIf=\"user.letters[0].experience ===  'debutant' \">\n        <p style='padding-bottom:35px; text-align: right;'>Le {{today | date:'dd/MM/yyyy'}}</p>\n        <p style='padding-bottom:10px'>Objet : candidature pour le poste de {{user.letters[0].intitule}}</p>\n        <p *ngIf='user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          {{user.letters[0].contact}},\n        </p>\n        <p *ngIf='!user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          Madame, Monsieur,\n        </p>\n        <!-- premier paragraphe -->\n        <p>\n          Je suis actuellement à la recherche d'un emploi dans votre secteur d'activité, c'est pourquoi, je me permets\n          de vous\n          écrire pour postuler au poste de {{user.letters[0].intitule}}.</p>\n        <p>\n          <!-- si pas expérience -->\n          <span *ngIf=\"user.gender ==='femme'\">\n            Je débute mon activité professionnelle avec beaucoup d'enthousiasme à l'idée de m'intégrer à une nouvelle\n            équipe\n            et d'acquérir de nouvelles compétences. Ma capacité d'adaptation et mon envie de bien faire les tâches\n            demandées\n            me permettront d'être opérationnelle rapidement. Je souhaiterais vivement mettre ces compétences à profit\n            dans\n            votre structure.\n          </span>\n          <span *ngIf=\"user.gender ==='homme'\">\n            Je débute mon activité professionnelle avec beaucoup d'enthousiasme à l'idée de m'intégrer à une nouvelle\n            équipe\n            et\n            d'acquérir de nouvelles compétences. Ma capacité d'adaptation et mon envie de bien faire les tâches\n            demandées me\n            permettront d'être opérationnel rapidement. Je souhaiterais vivement mettre ces compétences à profit dans\n            votre\n            structure.\n          </span>\n        </p>\n\n        <!-- second paragraphe -->\n\n        <p>Dès le début de notre collaboration, vous pourrez constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et\n          {{user.adjs[2]}}, des qualités essentielles dans ce métier. </p>\n        <!-- conclusion -->\n        <p>Je suis disponible pour m'entretenir avec vous, par téléphone ou en personne afin de déterminer comment je\n          pourrais\n          contribuer au mieux au développement de votre entreprise. </p>\n        <p>Je vous remercie de l'attention que vous pourrez accorder à ma candidature,</p>\n        <p style='padding: 20px 0px'>Sincères salutations,</p>\n\n        <p>{{user.prenom}} {{user.nom}}</p>\n      </section>\n    </div>\n\n\n\n  </div>\n\n\n";
 
 /***/ }),
 
@@ -781,7 +758,7 @@ module.exports = "\n<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-butt
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-buttons slot=\"start\">\n      <ion-buttons (click)=\"closeModal()\" slot=\"start\">\n        <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>\n      </ion-buttons>\n    </ion-buttons>\n    <ion-title class=\"title-ios ion-text-capitalize\">Prévisualiser</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n\n\n    <div style='background-color: rgb(129, 129, 138); height: 100%;text-align: center;'>\n\n      <div id='content'>\n        <img src=\"data:application/pdf;base64,{{base64}}\" class='pdfEmbed'>\n      </div>\n\n\n    </div>\n</ion-content>\n\n<ion-footer (click)=\"downloadLetter()\">\n  <ion-toolbar color=\"success\" class=\"ion-padding-horizontal\">\n    <div class=\"ion-text-center\">\n      <h4 class=\"ion-no-margin\">Télécharger la lettre</h4>\n    </div>\n  </ion-toolbar>\n</ion-footer>\n\n\n<!-- modifier pdfEmbed pour visualiser en plus petit -->\n";
+module.exports = "<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-buttons slot=\"start\">\n      <ion-buttons (click)=\"closeModal()\" slot=\"start\">\n        <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>\n      </ion-buttons>\n    </ion-buttons>\n    <ion-title class=\"title-ios ion-text-capitalize\">Prévisualiser</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n\n\n    <div style='background-color: rgb(129, 129, 138); height: 100%;text-align: center;'>\n\n      <div id='content'>\n        <img src=\"data:application/pdf;base64,{{base64}}\">\n      </div>\n\n\n    </div>\n</ion-content>\n\n<ion-footer (click)=\"downloadLetter()\">\n  <ion-toolbar color=\"success\" class=\"ion-padding-horizontal\">\n    <div class=\"ion-text-center\">\n      <h4 class=\"ion-no-margin\">Télécharger la lettre</h4>\n    </div>\n  </ion-toolbar>\n</ion-footer>\n\n\n<!-- modifier pdfEmbed pour visualiser en plus petit -->\n";
 
 /***/ })
 

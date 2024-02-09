@@ -86,21 +86,5 @@ export class CoverLetterPremium1Page implements AfterViewInit {
     this.modalController.dismiss();
   }
 
-  downloadLetter() {
-    this.content = document.getElementById('main').innerHTML;
-    const options = {
-      documentSize: 'A4',
-      type: 'share',
-      // landscape: 'portrait',
-      fileName: 'cover-letter.pdf',
-    };
-    this.pdfGenerator
-      .fromData(this.content, options)
-      .then((base64) => {
-        console.log('OK', base64);
-      })
-      .catch((error) => {
-        console.log('error', error);
-      });
-  }
+
 }

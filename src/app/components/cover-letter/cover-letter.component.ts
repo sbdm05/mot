@@ -31,9 +31,7 @@ export class CoverLetterComponent implements OnInit, AfterViewInit {
 
   constructor(
     private modalController: ModalController,
-    private pdfGenerator: PDFGenerator,
-    private router: Router,
-    private modalStateService: ModalStateService
+    private pdfGenerator: PDFGenerator
   ) {}
 
   ngAfterViewInit() {
@@ -72,8 +70,12 @@ export class CoverLetterComponent implements OnInit, AfterViewInit {
   async openPdfPreview(base64: string) {
     console.log(base64, 'depuis openPdfPreview'); // string
 
+    // documentation
+    // ici on passe à la modal le document au format base64 et le contenu HTML
+    // pour générer le pdf
     const coverLetter = await this.createModal(TemplateScreenshotPage, {
       base64,
+      htmlBase: this.content,
     });
     await coverLetter.present();
   }
@@ -96,26 +98,6 @@ export class CoverLetterComponent implements OnInit, AfterViewInit {
     console.log('depuis closemodal');
 
     this.modalController.dismiss();
-  }
-
-  // this is working
-  downloadLetter() {
-    console.log('bouton cliqué');
-    this.content = document.getElementById('main').innerHTML;
-    const options = {
-      documentSize: 'A4',
-      type: 'share',
-      // landscape: 'portrait',
-      fileName: 'cover-letter.pdf',
-    };
-    this.pdfGenerator
-      .fromData(this.content, options)
-      .then((base64) => {
-        console.log('OK', base64);
-      })
-      .catch((error) => {
-        console.log('error', error);
-      });
   }
 
   ngOnInit() {
