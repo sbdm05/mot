@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="shade">
     <ion-buttons (click)="closeModal()" slot="start">
       <ion-button slot="icon">
@@ -9,23 +9,32 @@
       >Modèle Premium 1</ion-title
     >
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <!-- <meta name="viewport" content="width=device-width, initial-scale=0" /> -->
 
-<ion-content style="width: 21cm; max-height: 29.7cm">
+<!-- essai -->
+
+<ion-content
+  style="
+    width: 210mm;
+    max-height: 297mm;
+    overflow: hidden;
+    margin: 0mm !important;
+  "
+>
   <div
     id="main"
     style="
       position: relative;
-      width: 21cm;
-      height: 29.7cm;
+      width: 100%;
+      max-height: 297mm !important;
       font-size: 16px;
       font-family: arial;
       text-align: right;
       border: none !important;
       margin: 0 !important;
-      width: 100%;
+
       overflow: hidden;
     "
   >
@@ -58,7 +67,15 @@
       "
     ></div>
 
-    <div id="container" style="padding: 0rem 5rem; margin: 0 !important">
+    <div
+      id="container"
+      style="
+        padding: 0rem 3rem;
+        margin: 0 !important;
+        border: 1px solid red;
+        height: 100%;
+      "
+    >
       <header style="display: flex">
         <div
           style="
@@ -182,7 +199,7 @@
       <!-- partie débutant -->
       <section
         id="content"
-        style="text-align: justify"
+        style="text-align: justify; display: none"
         *ngIf="user.letters[0].experience ===  'debutant' "
       >
         <div>
@@ -251,13 +268,13 @@
           </p>
         </div>
       </section>
-    </div>
 
-    <!-- effets -->
+      <!-- effets -->
+      <!-- div -->
 
-    <div style="margin: 0 !important">
-      <div style="position: relative">
-        <div
+      <div style="margin: 0 !important">
+        <div style="position: relative">
+          <!-- <div
           style="
             width: 500px;
             border-radius: 50%;
@@ -267,23 +284,24 @@
             opacity: 0.5;
             height: 500px;
             background-color: #f17d81; /* Nuance de violet */
-            z-index: -9999;
+            z-index: 8;
           "
-        ></div>
+        ></div> -->
 
-        <div
-          style="
-            width: 600px;
-            border-radius: 50%;
-            position: absolute;
-            bottom: -600px;
-            right: 50px;
-            opacity: 0.5;
-            height: 600px;
-            background-color: #8b5cf6; /* Nuance de violet */
-            z-index: -9999;
-          "
-        ></div>
+          <div
+            style="
+              width: 600px;
+              border-radius: 50%;
+              position: absolute;
+              bottom: -600px;
+              right: 50px;
+              opacity: 0.5;
+              height: 600px;
+              background-color: #8b5cf6; /* Nuance de violet */
+              z-index: 3;
+            "
+          ></div>
+        </div>
       </div>
     </div>
   </div>
