@@ -1,158 +1,177 @@
 <ion-header>
-    <ion-toolbar color="tertiary">
-        <!-- <ion-buttons slot="start">
+  <ion-toolbar color="tertiary">
+    <!-- <ion-buttons slot="start">
             <ion-button slot="icon">
                 <ion-icon name="menu"></ion-icon>
             </ion-button>
         </ion-buttons> -->
-        <ion-title>
-            Créer une candidature
-        </ion-title>
-    </ion-toolbar>
+    <ion-title> Créer une candidature </ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-    <ion-accordion-group [value]="['first']">
-        <ion-accordion value="first">
-            <ion-item slot="header" color="light">
-                <ion-label>Etape 1 - Remplir les informations de la société</ion-label>
+  <ion-accordion-group [value]="['first']" (ionChange)="saveInfos()">
+    <ion-accordion value="first" id='first'>
+      <ion-item slot="header" color="light">
+        <ion-label>Etape 1 - Remplir les informations de la société</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <form [formGroup]="form" *ngIf="user" (ngSubmit)="saveInfos()">
+          <!-- prenom -->
+          <ion-item>
+            <ion-label position="floating"
+              >Intitulé du poste (requis)</ion-label
+            >
+            <ion-input formControlName="intitule"></ion-input>
+          </ion-item>
+          <ion-list>
+            <ion-item>
+              <ion-label>Votre expérience</ion-label>
+              <ion-select
+                formControlName="experience"
+                placeholder="Niveau d'expérience pour ce poste"
+              >
+                <ion-select-option value="debutant">Débutant</ion-select-option>
+                <ion-select-option value="expert"
+                  >Déjà exercé un poste similaire</ion-select-option
+                >
+              </ion-select>
             </ion-item>
-            <div class="ion-padding" slot="content">
-                <form [formGroup]='form' *ngIf='user' (ngSubmit)='saveInfos()'>
-                    <!-- prenom -->
-                    <ion-item>
-                        <ion-label position="floating">Intitulé du poste (requis)</ion-label>
-                        <ion-input formControlName='intitule'></ion-input>
-                    </ion-item>
-                    <ion-list>
+          </ion-list>
+          <ion-item>
+            <ion-label position="floating">Société (requis)</ion-label>
+            <ion-input formControlName="societe"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating"
+              >Nom du contact avec civilité</ion-label
+            >
+            <ion-label style="font-style: italic" position="floating"
+              >Laisser vide si pas de nom disponible</ion-label
+            >
 
+            <ion-input
+              formControlName="contact"
+              placeholder="Madame Durand"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Adresse (requis)</ion-label>
+            <ion-input formControlName="adresseSociete"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating"
+              >Code Postal et Ville (requis)</ion-label
+            >
+            <ion-input formControlName="cpVille"></ion-input>
+          </ion-item>
 
-                      <ion-item>
-                          <ion-label>Votre expérience</ion-label>
-                            <ion-select formControlName='experience' placeholder="Niveau d'expérience pour ce poste">
+          <ion-button
+            [color]="colorBtn"
+            expand="block"
+            type="submit"
+            [disabled]="form.invalid"
+            >Etape 1 - Enregistrer
+          </ion-button>
+        </form>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="second" id='second'>
+      <ion-item slot="header" color="light">
+        <ion-label>Etape 2 - Choisir le modèle</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <!-- lettre 1 -->
+        <ion-card class="ion-no-padding">
+          <ion-row class="ion-align-items-center">
+            <ion-col size="8" class="ion-padding">
+              <ion-row>
+                <ion-col class="bold">
+                  <h5 class="ion-no-margin">Modèle 1</h5>
 
-                                <ion-select-option value="debutant">Débutant</ion-select-option>
-                                <ion-select-option value="expert">Déjà exercé un poste similaire</ion-select-option>
-                            </ion-select>
-                        </ion-item>
-                    </ion-list>
-                    <ion-item>
-                        <ion-label position="floating">Société (requis)</ion-label>
-                        <ion-input formControlName='societe'></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label position="floating">Nom du contact avec civilité</ion-label>
-                        <ion-label style='font-style: italic;'position="floating">Laisser vide si pas de nom disponible</ion-label>
+                  <img src="../../assets/lettres-apercus/cover-letter-1.png" />
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col size="4">
+              <ion-button
+                color="success"
+                (click)="openModal('coverLetterComponent')"
+              >
+                Choisir
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
 
-                        <ion-input formControlName='contact' placeholder='Madame Durand'></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label position="floating">Adresse (requis)</ion-label>
-                        <ion-input formControlName='adresseSociete'></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label position="floating">Code Postal et Ville (requis)</ion-label>
-                        <ion-input formControlName='cpVille'></ion-input>
-                    </ion-item>
+        <!-- lettre 2 -->
+        <ion-card class="ion-no-padding">
+          <ion-row class="ion-align-items-center">
+            <ion-col size="8" class="ion-padding">
+              <ion-row>
+                <ion-col class="bold">
+                  <h5 class="ion-no-margin">Modèle 2</h5>
+                  <img src="../../assets/lettres-apercus/cover-letter.png" />
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col size="4">
+              <ion-button
+                color="success"
+                (click)="openModal('coverLetterSimplePage')"
+              >
+                Choisir
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
 
-                    <ion-button [color]="colorBtn" expand="block" type="submit" [disabled]='form.invalid'>Etape 1 - Enregistrer</ion-button>
-
-                </form>
-            </div>
-        </ion-accordion>
-        <ion-accordion value="second">
-            <ion-item slot="header" color="light">
-                <ion-label>Etape 2 - Choisir le modèle</ion-label>
-            </ion-item>
-            <div class="ion-padding" slot="content">
-                <!-- lettre 1 -->
-                <ion-card class="ion-no-padding">
-                    <ion-row class="ion-align-items-center">
-                        <ion-col size="8" class="ion-padding">
-                            <ion-row>
-                                <ion-col class="bold">
-                                    <h5 class="ion-no-margin">Modèle 1</h5>
-
-                                      <img src='../../assets/lettres-apercus/cover-letter-1.png' />
-
-                                </ion-col>
-                            </ion-row>
-
-                        </ion-col>
-                        <ion-col size="4">
-                            <ion-button color="success" (click)="openModal('coverLetterComponent')">
-                                Choisir
-                            </ion-button>
-                        </ion-col>
-                    </ion-row>
-                </ion-card>
-
-                <!-- lettre 2 -->
-                <ion-card class="ion-no-padding">
-
-                    <ion-row class="ion-align-items-center">
-                        <ion-col size="8" class="ion-padding">
-                            <ion-row>
-                                <ion-col class="bold">
-                                    <h5 class="ion-no-margin">Modèle 2</h5>
-                                    <img src='../../assets/lettres-apercus/cover-letter.png' />
-                                </ion-col>
-                            </ion-row>
-                        </ion-col>
-                        <ion-col size="4">
-                            <ion-button color="success" (click)="openModal('coverLetterSimplePage')">
-                                Choisir
-                            </ion-button>
-                        </ion-col>
-                    </ion-row>
-                </ion-card>
-
-                <!-- lettre 3 -->
-                <ion-card class="ion-no-padding">
-
-                    <ion-row class="ion-align-items-center">
-                        <ion-col size="8" class="ion-padding">
-                            <ion-row>
-                                <ion-col class="bold">
-                                    <h5 class="ion-no-margin">Modèle 3</h5>
-                                    <img src='../../assets/lettres-apercus/cover-letter-2.png' />
-
-                                </ion-col>
-                            </ion-row>
-                        </ion-col>
-                        <ion-col size="4">
-                          <ion-button color="success" (click)="openModal('coverLetterCPage')">
-                                Choisir
-                            </ion-button>
-                        </ion-col>
-                    </ion-row>
-                </ion-card>
-            <ion-card class="ion-no-padding">
-
-                                <ion-row class="ion-align-items-center">
-                                    <ion-col size="6" class="ion-padding">
-                                        <ion-row>
-                                            <ion-col class="bold">
-                                                <h5 class="ion-no-margin">Modèle Premium Bubble</h5>
-                                                <img src='../../assets/lettres-apercus/cover-letter-premium-bubble.png' />
-
-                                            </ion-col>
-                                        </ion-row>
-                                    </ion-col>
-                                    <ion-col size="6">
-                                        <ion-button color="success" (click)="openModal('coverLetterPremiumBubble')">
-                                            Prévisualiser
-                                        </ion-button>
-
-
-                                    </ion-col>
-                                </ion-row>
-            </ion-card>
-
-            </div>
-        </ion-accordion>
-        <!-- <ion-accordion value="third">
+        <!-- lettre 3 -->
+        <ion-card class="ion-no-padding">
+          <ion-row class="ion-align-items-center">
+            <ion-col size="8" class="ion-padding">
+              <ion-row>
+                <ion-col class="bold">
+                  <h5 class="ion-no-margin">Modèle 3</h5>
+                  <img src="../../assets/lettres-apercus/cover-letter-2.png" />
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col size="4">
+              <ion-button
+                color="success"
+                (click)="openModal('coverLetterCPage')"
+              >
+                Choisir
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        <ion-card class="ion-no-padding">
+          <ion-row class="ion-align-items-center">
+            <ion-col size="6" class="ion-padding">
+              <ion-row>
+                <ion-col class="bold">
+                  <h5 class="ion-no-margin">Modèle Premium Bubble</h5>
+                  <img
+                    src="../../assets/lettres-apercus/cover-letter-premium-bubble.png"
+                  />
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button
+                color="success"
+                (click)="openModal('coverLetterPremiumBubble')"
+              >
+                Prévisualiser
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+    </ion-accordion>
+    <!-- <ion-accordion value="third">
             <ion-item slot="header" color="light">
                 <ion-label>Etape 3 - Choisir le contenu</ion-label>
             </ion-item>
@@ -160,28 +179,27 @@
                 Choisir le contenu
             </div>
         </ion-accordion> -->
-        <ion-accordion value="third">
-          <ion-item slot="header" color="light">
-            <ion-label>Etape 3 - Sauvegarder votre candidature</ion-label>
-          </ion-item>
-          <div class="ion-padding" slot="content">
-            <ion-text color="primary">
-              <p>Pour une meilleur gestion de votre recherche d'emploi, n'oubliez pas d'enregistrer cette candidature dans votre historique. </p>
-
-            </ion-text>
-          <ion-button expand="block" [color]="colorBtn" (click)='onSaved()'>{{this.textBtn}}</ion-button>
-          </div>
-        </ion-accordion>
-    </ion-accordion-group>
-
-
-
+    <ion-accordion value="third">
+      <ion-item slot="header" color="light">
+        <ion-label>Etape 3 - Sauvegarder votre candidature</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-text color="primary">
+          <p>
+            Pour une meilleur gestion de votre recherche d'emploi, n'oubliez pas
+            d'enregistrer cette candidature dans votre historique.
+          </p>
+        </ion-text>
+        <ion-button expand="block" [color]="colorBtn" (click)="onSaved()"
+          >{{this.textBtn}}</ion-button
+        >
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
 </ion-content>
 
 <ion-footer>
-    <ion-toolbar>
-
-        <!-- <ion-button expand="block" (click)='onSaved()'>AJOUTER A L'HISTORIQUE</ion-button> -->
-    </ion-toolbar>
-
+  <ion-toolbar>
+    <!-- <ion-button expand="block" (click)='onSaved()'>AJOUTER A L'HISTORIQUE</ion-button> -->
+  </ion-toolbar>
 </ion-footer>

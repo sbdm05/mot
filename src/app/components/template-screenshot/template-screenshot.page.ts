@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { PDFGenerator } from '@ionic-native/pdf-generator/ngx';
 import { ModalController } from '@ionic/angular';
 import { ModalStateService } from 'src/app/services/modal-state/modal-state.service';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-template-screenshot',
@@ -21,7 +22,7 @@ import { ModalStateService } from 'src/app/services/modal-state/modal-state.serv
 export class TemplateScreenshotPage implements OnInit {
   @Input() base64: string;
   @Input() htmlBase!: any;
-  public content!: string;
+  public content!: any;
 
   constructor(
     private modalController: ModalController,
@@ -31,7 +32,7 @@ export class TemplateScreenshotPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('test', this.base64); // renvoie string
+    console.log(this.htmlBase, 'htmlBase'); // renvoie string
   }
 
   closeModal() {
@@ -40,13 +41,20 @@ export class TemplateScreenshotPage implements OnInit {
   }
 
   downloadLetter() {
-    // this.content = document.getElementById('content').innerHTML;
+    const content = document.getElementById('content').innerHTML;
+
+    // Extract the base64-encoded string from the src attribute
+    //const base64String = imgElement.src.split(',')[1];
+
+    //console.log(base64String);
+
     const options = {
       documentSize: 'A4',
       type: 'share',
       // landscape: 'portrait',
       fileName: 'motiv-pro.pdf',
     };
+
     this.pdfGenerator
       .fromData(this.htmlBase, options)
       .then((base64) => {
@@ -57,44 +65,15 @@ export class TemplateScreenshotPage implements OnInit {
       });
   }
 
-  downloadLetterCanvas() {
-    const img = new Image();
+  downloadLetterJs() {
+    console.log('cliqué');
 
-    img.onload = () => {
-      const A4_WIDTH_MM = 210; // Largeur en millimètres
-      const A4_HEIGHT_MM = 297; // Hauteur en millimètres
-      const A4_WIDTH_PX = Math.floor(A4_WIDTH_MM * 2.83); // Convertir en pixels à 72 ppp
-      const A4_HEIGHT_PX = Math.floor(A4_HEIGHT_MM * 2.83); // Convertir en pixels à 72 ppp
-
-      const canvas = document.createElement('canvas');
-      canvas.width = A4_WIDTH_PX;
-      canvas.height = A4_HEIGHT_PX;
-
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, A4_WIDTH_PX, A4_HEIGHT_PX); // Dessiner l'image sur le canvas avec les dimensions A4
-
-      const imageData = canvas.toDataURL('image/jpeg');
-
-      const options = {
-        documentSize: 'A4',
-        type: 'share',
-        // landscape: 'portrait',
-        fileName: 'motiv-pro.pdf',
-      };
-      this.pdfGenerator
-        .fromData(imageData, options)
-        .then((base64) => {
-          console.log('PDF généré avec succès');
-        })
-        .catch((error) => {
-          console.log('Erreur lors de la génération du PDF :', error);
-        });
-    };
-
-    img.onerror = (error) => {
-      console.error('Erreur lors du chargement de image', error);
-    };
-
-    img.src = `data:image/png;base64,${this.base64}`;
+    // Default export is a4 paper, portrait, using millimeters for units
+    const doc = new jsPDF();
+    // Add HTML content to the PDF
+    // Add a circle to the PDF
+    doc.circle(100, 100, 50, 'S');
+    doc.save('example.pdf');
+    const blobPDF = doc.output('bloburl');
   }
 }

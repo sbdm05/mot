@@ -36,6 +36,7 @@
     "cordova-ios": "6.2.0",
     "html2canvas": "^1.4.1",
     "ionicons": "^6.0.3",
+    "jspdf": "^2.5.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

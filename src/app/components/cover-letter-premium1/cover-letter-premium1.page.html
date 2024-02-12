@@ -13,298 +13,248 @@
 
 <!-- <meta name="viewport" content="width=device-width, initial-scale=0" /> -->
 
-<!-- essai -->
-
-<ion-content
-  style="
-    width: 210mm;
-    max-height: 297mm;
+<!-- documentation : besoin d'exprimer margin en mm (pas px, ni vide) -->
+<!-- <html style="
+    min-width: 210mm;
+    max-height: 297mm !important;
     overflow: hidden;
     margin: 0mm !important;
-  "
->
-  <div
-    id="main"
-    style="
-      position: relative;
-      width: 100%;
-      max-height: 297mm !important;
-      font-size: 16px;
-      font-family: arial;
-      text-align: right;
-      border: none !important;
-      margin: 0 !important;
+    height: 100%;
+  ">
+-->
+<!-- test -->
 
-      overflow: hidden;
-    "
-  >
-    <div
-      style="
-        width: 500px;
-        border: none;
-        border-radius: 50%;
-        position: absolute;
-        top: -250px;
-        left: -100px;
-        opacity: 0.5;
-        height: 500px;
-        background-color: #a07df1; /* Nuance de violet */
-        z-index: 3;
-      "
-    ></div>
-
-    <div
-      style="
-        width: 600px;
-        border: none;
-        border-radius: 50%;
-        position: absolute;
-        top: -450px;
-        opacity: 0.5;
-        height: 600px;
-        background-color: #8b5cf6; /* Nuance de violet */
-        z-index: 2;
-      "
-    ></div>
-
-    <div
-      id="container"
-      style="
-        padding: 0rem 3rem;
+<body style="
+    /* max-height: 100%;
+    overflow: hidden;
+     margin: 0mm !important;
+    padding: 0mm !important; */
+  ">
+  <ion-content id="main">
+    <style>
+      body {
         margin: 0 !important;
-        border: 1px solid red;
-        height: 100%;
-      "
-    >
-      <header style="display: flex">
-        <div
-          style="
-            font-size: 16px;
-            font-weight: 600;
-            text-align: right;
-            width: 100%;
-          "
-        >
-          <p style="font-size: 24px">{{user.prenom}} {{user.nom}}</p>
-          <p style="padding: 6px; color: white">
-            {{user?.letters[0].intitule}}
-          </p>
+      }
+    </style>
+    <div style="
+        min-width: 100%; /* 210mm converted to pixels */
+        max-width: 793px; /* 210mm converted to pixels */
+        min-height: 100%; /* 291mm converted to pixels */
+        max-height: 1050px; /* 291mm converted to pixels */
 
-          <p><ion-icon name="pin"></ion-icon> {{user.adresse}}</p>
-          <p><ion-icon name="phone-portrait"></ion-icon> {{user.tel}}</p>
-          <p><ion-icon name="send"></ion-icon> {{user.email}}</p>
-        </div>
-      </header>
+        overflow: hidden;
+        margin: 0mm !important;
+        padding: 0mm !important;
+        position: relative;
 
-      <section id="contactInfos" style="text-align: left">
-        <p>{{user.letters[0].societe}}</p>
-        <p>{{user.letters[0].contact}}</p>
-        <p>{{user.letters[0].adresseSociete}}</p>
-        <p>{{user.letters[0].cpVille}}</p>
-        <p style="padding: 10px 0px; text-align: right">
-          Le {{today | date:'dd/MM/yyyy'}}
-        </p>
-      </section>
-
-      <!-- partie expert -->
-      <section
-        id="content"
-        *ngIf="user.letters[0].experience ===  'expert' "
-        style="text-align: justify"
-      >
-        <div>
-          <p style="padding-bottom: 10px">
-            Objet : candidature pour le poste de {{user.letters[0].intitule}}
-          </p>
-          <p
-            *ngIf="user.letters[0].contact"
-            style="padding-bottom: 8px; text-align: left"
-          >
-            {{user.letters[0].contact}},
-          </p>
-          <p
-            *ngIf="!user.letters[0].contact"
-            style="padding-bottom: 8px; text-align: left"
-          >
-            Madame, Monsieur,
-          </p>
-          <!-- premier paragraphe -->
-          <p>
-            Je suis actuellement à la recherche d'un emploi dans votre secteur
-            d'activité, c'est pourquoi, je me permets de vous écrire pour
-            postuler au poste de {{user.letters[0].intitule}}.
-          </p>
-          <!-- second paragraphe -->
-          <p>
-            En effet, j'ai déjà pu exercer à ce poste lors d'une précédente
-            mission. Cette expérience a été très enrichissante et formatrice. Je
-            souhaiterais vivement mettre ces compétences à profit dans votre
-            structure. Dès le début de notre collaboration, vous pourrez
-            constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et
-            {{user.adjs[2]}} des qualités essentielles dans ce métier.
-          </p>
-
-          <!-- conclusion -->
-          <p>
-            Je suis disponible pour m'entretenir avec vous, par téléphone ou en
-            personne afin de déterminer comment je pourrais contribuer au mieux
-            au développement de votre entreprise.
-          </p>
-          <p>
-            Je vous remercie de l'attention que vous pourrez accorder à ma
-            candidature,
-          </p>
-          <p>Sincères salutations,</p>
-
-          <p style="margin: 24px 0rem; font-weight: 600">
-            {{user.prenom}} {{user.nom}}
-          </p>
-          <div style="border-bottom: 3px solid black"></div>
-        </div>
-
-        <!-- effets -->
-
-        <!-- effets -->
-        <div style="position: relative">
-          <div
-            style="
-              width: 500px;
-              border-radius: 50%;
-              position: absolute;
-              bottom: -400px;
-              right: -200px;
-              opacity: 0.5;
-              height: 500px;
-              background-color: #a07df1; /* Nuance de violet */
-              z-index: -9999;
-            "
-          ></div>
-
-          <div
-            style="
-              width: 600px;
-              border-radius: 50%;
-              position: absolute;
-              bottom: -600px;
-              right: 50px;
-              opacity: 0.5;
-              height: 600px;
-              background-color: #8b5cf6; /* Nuance de violet */
-              z-index: -9999;
-            "
-          ></div>
-        </div>
-      </section>
-
-      <!-- partie débutant -->
-      <section
-        id="content"
-        style="text-align: justify; display: none"
-        *ngIf="user.letters[0].experience ===  'debutant' "
-      >
-        <div>
-          <p style="padding-bottom: 10px">
-            Objet : candidature pour le poste de {{user.letters[0].intitule}}
-          </p>
-          <p
-            *ngIf="user.letters[0].contact"
-            style="padding-bottom: 8px; text-align: left"
-          >
-            {{user.letters[0].contact}},
-          </p>
-          <p
-            *ngIf="!user.letters[0].contact"
-            style="padding-bottom: 8px; text-align: left"
-          >
-            Madame, Monsieur,
-          </p>
-          <!-- premier paragraphe -->
-          <p>
-            Je suis actuellement à la recherche d'un emploi dans votre secteur
-            d'activité, c'est pourquoi, je me permets de vous écrire pour
-            postuler au poste de {{user.letters[0].intitule}}.
-          </p>
-          <p>
-            <!-- si pas expérience -->
-            <span *ngIf="user.gender ==='femme'">
-              Je débute mon activité professionnelle avec beaucoup
-              d'enthousiasme à l'idée de m'intégrer à une nouvelle équipe et
-              d'acquérir de nouvelles compétences. Ma capacité d'adaptation et
-              mon envie de bien faire les tâches demandées me permettront d'être
-              opérationnelle rapidement. Je souhaiterais vivement mettre ces
-              compétences à profit dans votre structure.
-            </span>
-            <span *ngIf="user.gender ==='homme'">
-              Je débute mon activité professionnelle avec beaucoup
-              d'enthousiasme à l'idée de m'intégrer à une nouvelle équipe et
-              d'acquérir de nouvelles compétences. Ma capacité d'adaptation et
-              mon envie de bien faire les tâches demandées me permettront d'être
-              opérationnel rapidement. Je souhaiterais vivement mettre ces
-              compétences à profit dans votre structure.
-            </span>
-          </p>
-
-          <!-- second paragraphe -->
-
-          <p>
-            Dès le début de notre collaboration, vous pourrez constater que je
-            suis {{user.adjs[0]}}, {{user.adjs[1]}} et {{user.adjs[2]}}, des
-            qualités essentielles dans ce métier.
-          </p>
-          <!-- conclusion -->
-          <p>
-            Je suis disponible pour m'entretenir avec vous, par téléphone ou en
-            personne afin de déterminer comment je pourrais contribuer au mieux
-            au développement de votre entreprise.
-          </p>
-          <p>
-            Je vous remercie de l'attention que vous pourrez accorder à ma
-            candidature,
-          </p>
-          <p>Sincères salutations,</p>
-
-          <p style="margin: 24px 0px; font-weight: 600">
-            {{user.prenom}} {{user.nom}}
-          </p>
-        </div>
-      </section>
-
+        font-size: 16px;
+        font-family: arial;
+        text-align: right;
+      ">
       <!-- effets -->
-      <!-- div -->
+      <div style="
+          width: 500px;
+          border: none;
+          border-radius: 50%;
+          position: absolute;
+          top: -250px;
+          left: -100px;
+          opacity: 0.5;
+          height: 500px;
+          background-color: #a07df1; /* Nuance de violet */
+          z-index: 3;
+        "></div>
 
-      <div style="margin: 0 !important">
-        <div style="position: relative">
-          <!-- <div
-          style="
-            width: 500px;
+      <div style="
+          width: 600px;
+          border: none;
+          border-radius: 50%;
+          position: absolute;
+          top: -450px;
+          opacity: 0.5;
+          height: 600px;
+          background-color: #8b5cf6; /* Nuance de violet */
+          z-index: 2;
+        "></div>
+
+      <div id="container" style="
+          padding: 0rem 3rem;
+          margin: 0 !important;
+          height: 100%;
+          position: relative;
+        ">
+        <header style="display: flex">
+          <div style="
+              font-size: 16px;
+              font-weight: 600;
+              text-align: right;
+              width: 100%;
+            ">
+            <p style="font-size: 24px">{{user.prenom}} {{user.nom}}</p>
+            <p style="padding: 6px; color: white">
+              {{user?.letters[0].intitule}}
+            </p>
+
+            <p>
+              <ion-icon name="pin"></ion-icon> {{user.adresse}}
+            </p>
+            <p>
+              <ion-icon name="phone-portrait"></ion-icon> {{user.tel}}
+            </p>
+            <p>
+              <ion-icon name="send"></ion-icon> {{user.email}}
+            </p>
+          </div>
+        </header>
+
+        <section id="contactInfos" style="text-align: left">
+          <p>{{user.letters[0].societe}}</p>
+          <p>{{user.letters[0].contact}}</p>
+          <p>{{user.letters[0].adresseSociete}}</p>
+          <p>{{user.letters[0].cpVille}}</p>
+          <p style="padding: 10px 0px; text-align: right">
+            Le {{today | date:'dd/MM/yyyy'}}
+          </p>
+        </section>
+
+        <!-- partie expert -->
+        <section id="content" style="overflow: hidden; text-align: justify"
+          *ngIf="user.letters[0].experience ===  'expert' ">
+          <div>
+            <p style="padding-bottom: 10px">
+              Objet : candidature pour le poste de {{user.letters[0].intitule}}
+            </p>
+            <p *ngIf="user.letters[0].contact" style="padding-bottom: 8px; text-align: left">
+              {{user.letters[0].contact}},
+            </p>
+            <p *ngIf="!user.letters[0].contact" style="padding-bottom: 8px; text-align: left">
+              Madame, Monsieur,
+            </p>
+            <!-- premier paragraphe -->
+            <p>
+              Je suis actuellement à la recherche d'un emploi dans votre secteur
+              d'activité, c'est pourquoi, je me permets de vous écrire pour
+              postuler au poste de {{user.letters[0].intitule}}.
+            </p>
+            <!-- second paragraphe -->
+            <p>
+              En effet, j'ai déjà pu exercer à ce poste lors d'une précédente
+              mission. Cette expérience a été très enrichissante et formatrice.
+              Je souhaiterais vivement mettre ces compétences à profit dans
+              votre structure. Dès le début de notre collaboration, vous pourrez
+              constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et
+              {{user.adjs[2]}} des qualités essentielles dans ce métier.
+            </p>
+
+            <!-- conclusion -->
+            <p>
+              Je suis disponible pour m'entretenir avec vous, par téléphone ou
+              en personne afin de déterminer comment je pourrais contribuer au
+              mieux au développement de votre entreprise.
+            </p>
+            <p>
+              Je vous remercie de l'attention que vous pourrez accorder à ma
+              candidature,
+            </p>
+            <p>Sincères salutations,</p>
+
+            <p style="margin: 24px 0rem; font-weight: 600">
+              {{user.prenom}} {{user.nom}}
+            </p>
+            <div style="border-bottom: 3px solid black"></div>
+          </div>
+        </section>
+
+        <!-- partie débutant -->
+        <section id="content" style="overflow: hidden; text-align: justify"
+          *ngIf="user.letters[0].experience ===  'debutant' ">
+          <div>
+            <p style="padding-bottom: 10px">
+              Objet : candidature pour le poste de {{user.letters[0].intitule}}
+            </p>
+            <p *ngIf="user.letters[0].contact" style="padding-bottom: 8px; text-align: left">
+              {{user.letters[0].contact}},
+            </p>
+            <p *ngIf="!user.letters[0].contact" style="padding-bottom: 8px; text-align: left">
+              Madame, Monsieur,
+            </p>
+            <!-- premier paragraphe -->
+            <p>
+              Je suis actuellement à la recherche d'un emploi dans votre secteur
+              d'activité, c'est pourquoi, je me permets de vous écrire pour
+              postuler au poste de {{user.letters[0].intitule}}.
+            </p>
+            <p>
+              <!-- si pas expérience -->
+              <span *ngIf="user.gender ==='femme'">
+                Je débute mon activité professionnelle avec beaucoup
+                d'enthousiasme à l'idée de m'intégrer à une nouvelle équipe et
+                d'acquérir de nouvelles compétences. Ma capacité d'adaptation et
+                mon envie de bien faire les tâches demandées me permettront
+                d'être opérationnelle rapidement. Je souhaiterais vivement
+                mettre ces compétences à profit dans votre structure.
+              </span>
+              <span *ngIf="user.gender ==='homme'">
+                Je débute mon activité professionnelle avec beaucoup
+                d'enthousiasme à l'idée de m'intégrer à une nouvelle équipe et
+                d'acquérir de nouvelles compétences. Ma capacité d'adaptation et
+                mon envie de bien faire les tâches demandées me permettront
+                d'être opérationnel rapidement. Je souhaiterais vivement mettre
+                ces compétences à profit dans votre structure.
+              </span>
+            </p>
+
+            <!-- second paragraphe -->
+
+            <p>
+              Dès le début de notre collaboration, vous pourrez constater que je
+              suis {{user.adjs[0]}}, {{user.adjs[1]}} et {{user.adjs[2]}}, des
+              qualités essentielles dans ce métier.
+            </p>
+            <!-- conclusion -->
+            <p>
+              Je suis disponible pour m'entretenir avec vous, par téléphone ou
+              en personne afin de déterminer comment je pourrais contribuer au
+              mieux au développement de votre entreprise.
+            </p>
+            <p>
+              Je vous remercie de l'attention que vous pourrez accorder à ma
+              candidature,
+            </p>
+            <p>Sincères salutations,</p>
+
+            <p style="margin: 24px 0px; font-weight: 600">
+              {{user.prenom}} {{user.nom}}
+            </p>
+          </div>
+        </section>
+
+        <!-- effets -->
+        <div style="
+            width: 600px;
+            border: none;
+            right: 150px;
             border-radius: 50%;
             position: absolute;
-            top: 0px;
-            right: -100px;
+            bottom: -550px;
             opacity: 0.5;
-            height: 500px;
-            background-color: #f17d81; /* Nuance de violet */
-            z-index: 8;
-          "
-        ></div> -->
-
-          <div
-            style="
-              width: 600px;
-              border-radius: 50%;
-              position: absolute;
-              bottom: -600px;
-              right: 50px;
-              opacity: 0.5;
-              height: 600px;
-              background-color: #8b5cf6; /* Nuance de violet */
-              z-index: 3;
-            "
-          ></div>
-        </div>
+            height: 600px;
+            background-color: #8b5cf6; /* Nuance de violet */
+            z-index: 2;
+          "></div>
+        <div style="
+            width: 600px;
+            border: none;
+            border-radius: 50%;
+            position: absolute;
+            right: -100px;
+            bottom: -450px;
+            opacity: 0.5;
+            height: 600px;
+            background-color: #8b5cf6; /* Nuance de violet */
+            z-index: 2;
+          "></div>
       </div>
     </div>
-  </div>
-</ion-content>
-
-<!--  -->
+  </ion-content>
+</body>

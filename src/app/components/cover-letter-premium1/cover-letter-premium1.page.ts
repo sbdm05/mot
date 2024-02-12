@@ -18,6 +18,7 @@ import { TemplateScreenshotPage } from '../template-screenshot/template-screensh
 export class CoverLetterPremium1Page implements AfterViewInit {
   @Input() user: User;
   content: string;
+  contentHTML: any;
   today: number = Date.now();
 
   constructor(
@@ -32,7 +33,12 @@ export class CoverLetterPremium1Page implements AfterViewInit {
   onGeneratePreview() {
     // 1 - on créé un PDF
     this.content = document.getElementById('main').innerHTML;
-    console.log(this.content); // ok j'ai le contenu html
+    //this.contentHTML = document.getElementById('main').innerHTML;
+    // this.contentHTML.style.padding = '0';
+    // this.contentHTML.style.margin = '0';
+
+    // this.content.style.padding = '0';
+    // this.content.style.margin = '0';
 
     // ici on vérifie encore le base64
 
@@ -85,6 +91,4 @@ export class CoverLetterPremium1Page implements AfterViewInit {
   closeModal() {
     this.modalController.dismiss();
   }
-
-
 }

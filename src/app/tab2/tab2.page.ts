@@ -1,7 +1,16 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnChanges,
+  OnInit,
+  QueryList,
+  Renderer2,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { IonAccordionGroup, IonItem, ModalController } from '@ionic/angular';
 import { CoverLetterCPage } from '../components/cover-letter-c/cover-letter-c.page';
 import { CoverLetterPremium1PageRoutingModule } from '../components/cover-letter-premium1/cover-letter-premium1-routing.module';
 import { CoverLetterPremium1Page } from '../components/cover-letter-premium1/cover-letter-premium1.page';
@@ -20,6 +29,7 @@ import { ModalStateService } from '../services/modal-state/modal-state.service';
   styleUrls: ['tab2.page.scss'],
 })
 export class Tab2Page implements OnInit, OnChanges {
+  isAccordionExpanded = true;
   public form!: FormGroup;
 
   colorBtn = 'success';
@@ -36,7 +46,9 @@ export class Tab2Page implements OnInit, OnChanges {
     private fb: FormBuilder,
     private modalCtrl: ModalController,
     private router: Router,
-    private modalStateService: ModalStateService
+    private modalStateService: ModalStateService,
+    private renderer: Renderer2,
+    private elementRef: ElementRef
   ) {
     // souscrire à l'observable()
     this.modalStateService.modalstate$.subscribe({
@@ -97,8 +109,28 @@ export class Tab2Page implements OnInit, OnChanges {
 
   ngOnChanges() {}
 
+  changeAccordionClasses() {
+    const firstAccordion =
+      this.elementRef.nativeElement.querySelector('#first');
+    const secondAccordion =
+      this.elementRef.nativeElement.querySelector('#second');
+
+    // Supprimer la classe accordion-expanded et ajouter accordion-collapsed au premier accordéon
+    this.renderer.removeClass(firstAccordion, 'accordion-expanded');
+    this.renderer.addClass(firstAccordion, 'accordion-collapsing');
+
+    this.renderer.addClass(firstAccordion, 'accordion-collapsed');
+    this.renderer.addClass(firstAccordion, 'accordion-previous');
+
+
+    // Supprimer la classe accordion-collapsed et ajouter accordion-expanded au deuxième accordéon
+    this.renderer.removeClass(secondAccordion, 'accordion-collapsed');
+    this.renderer.addClass(secondAccordion, 'accordion-expanded');
+  }
+
   saveInfos() {
     console.log(this.form.value);
+
     // const updatedUser = { ...this.form.value, ...this.user };
     //console.log(this.user);
     this.user.letters[0] = this.form.value;
@@ -110,6 +142,9 @@ export class Tab2Page implements OnInit, OnChanges {
 
       setTimeout(() => {
         this.colorBtn = 'success';
+        // ici je veux remove la classe accordion-expanded à l'element avec id first
+
+        // ici je veux ajouter la classe accordion-expanded à l'element avec id second
       }, 1000);
     });
   }
@@ -128,6 +163,7 @@ export class Tab2Page implements OnInit, OnChanges {
         setTimeout(() => {
           this.colorBtn = 'success';
           this.textBtn = 'Enregistrer';
+          this.changeAccordionClasses();
         }, 1000);
       });
   }
