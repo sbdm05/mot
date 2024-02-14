@@ -52,6 +52,18 @@ const routes: Routes = [
     path: 'template-screenshot',
     loadChildren: () => import('./components/template-screenshot/template-screenshot.module').then( m => m.TemplateScreenshotPageModule)
   },
+  {
+    path: 'cover-letter-premium2',
+    loadChildren: () => import('./components/cover-letter-premium2/cover-letter-premium2.module').then( m => m.CoverLetterPremium2PageModule)
+  },
+  {
+    path: 'cover-letter-premium3',
+    loadChildren: () => import('./components/cover-letter-premium3/cover-letter-premium3.module').then( m => m.CoverLetterPremium3PageModule)
+  },
+  {
+    path: 'cover-letter-premium4',
+    loadChildren: () => import('./components/cover-letter-premium4/cover-letter-premium4.module').then( m => m.CoverLetterPremium4PageModule)
+  },
 ];
 @NgModule({
   imports: [

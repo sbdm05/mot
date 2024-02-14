@@ -58,6 +58,18 @@ const routes = [
         path: 'template-screenshot',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_components_template-screenshot_template-screenshot_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./components/template-screenshot/template-screenshot.module */ 1888)).then(m => m.TemplateScreenshotPageModule)
     },
+    {
+        path: 'cover-letter-premium2',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium2_cover-letter-premium2_page_ts"), __webpack_require__.e("src_app_components_cover-letter-premium2_cover-letter-premium2_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium2/cover-letter-premium2.module */ 9204)).then(m => m.CoverLetterPremium2PageModule)
+    },
+    {
+        path: 'cover-letter-premium3',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium3_cover-letter-premium3_page_ts"), __webpack_require__.e("src_app_components_cover-letter-premium3_cover-letter-premium3_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium3/cover-letter-premium3.module */ 2631)).then(m => m.CoverLetterPremium3PageModule)
+    },
+    {
+        path: 'cover-letter-premium4',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_components_cover-letter-premium4_cover-letter-premium4_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium4/cover-letter-premium4.module */ 8053)).then(m => m.CoverLetterPremium4PageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -317,7 +329,7 @@ let TemplateScreenshotPage = class TemplateScreenshotPage {
         this.pdfGenerator = pdfGenerator;
     }
     ngOnInit() {
-        console.log('test', this.base64); // renvoie string
+        console.log(this.htmlBase, 'htmlBase'); // renvoie string
     }
     closeModal() {
         this.modalStateService.modalstate$.next('close');
@@ -773,7 +785,7 @@ module.exports = "<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-button
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-buttons slot=\"start\">\n      <ion-buttons (click)=\"closeModal()\" slot=\"start\">\n        <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>\n      </ion-buttons>\n    </ion-buttons>\n    <ion-title class=\"title-ios ion-text-capitalize\">Prévisualiser</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n\n\n  <div style='background-color: rgb(129, 129, 138); height: 100%;text-align: center;'>\n\n    <div id='content' style='border:1px solid black'>\n      <img src=\"data:application/pdf;base64,{{base64}}\">\n    </div>\n\n\n  </div>\n</ion-content>\n\n<ion-footer (click)=\"downloadLetter()\">\n  <ion-toolbar color=\"success\" class=\"ion-padding-horizontal\">\n    <div class=\"ion-text-center\">\n      <h4 class=\"ion-no-margin\">Télécharger la lettre</h4>\n    </div>\n  </ion-toolbar>\n</ion-footer>\n\n\n<!-- modifier pdfEmbed pour visualiser en plus petit -->\n";
+module.exports = "<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-buttons slot=\"start\">\n      <ion-buttons (click)=\"closeModal()\" slot=\"start\">\n        <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>\n      </ion-buttons>\n    </ion-buttons>\n    <ion-title class=\"title-ios ion-text-capitalize\">Prévisualiser</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n\n\n  <div style='background-color: rgb(129, 129, 138); height: 100%;text-align: center;'>\n\n    <div id='content'>\n      <img src=\"data:application/pdf;base64,{{base64}}\">\n    </div>\n\n\n  </div>\n</ion-content>\n\n<ion-footer (click)=\"downloadLetter()\">\n  <ion-toolbar color=\"success\" class=\"ion-padding-horizontal\">\n    <div class=\"ion-text-center\">\n      <h4 class=\"ion-no-margin\">Télécharger la lettre</h4>\n    </div>\n  </ion-toolbar>\n</ion-footer>\n\n\n<!-- modifier pdfEmbed pour visualiser en plus petit -->\n";
 
 /***/ })
 

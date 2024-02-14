@@ -11,15 +11,16 @@ import { User } from 'src/app/user/user';
 import { TemplateScreenshotPage } from '../template-screenshot/template-screenshot.page';
 
 @Component({
-  selector: 'app-cover-letter-premium1',
-  templateUrl: './cover-letter-premium1.page.html',
-  styleUrls: ['./cover-letter-premium1.page.scss'],
+  selector: 'app-cover-letter-premium3',
+  templateUrl: './cover-letter-premium3.page.html',
+  styleUrls: ['./cover-letter-premium3.page.scss'],
 })
-export class CoverLetterPremium1Page implements AfterViewInit {
+export class CoverLetterPremium3Page implements AfterViewInit {
   @Input() user: User;
   content: string;
   contentHTML: any;
   today: number = Date.now();
+  
 
   constructor(
     private modalController: ModalController,
@@ -65,7 +66,7 @@ export class CoverLetterPremium1Page implements AfterViewInit {
   }
 
   async openPdfPreview(base64: string) {
-    console.log(this.content, 'depuis openPdfPreview'); // string
+    console.log(base64, 'depuis openPdfPreview'); // string
 
     const coverLetter = await this.createModal(TemplateScreenshotPage, {
       base64,

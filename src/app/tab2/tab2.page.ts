@@ -22,6 +22,9 @@ import html2canvas from 'html2canvas'; // Import html2canvas library
 import { TemplateScreenshotPage } from '../components/template-screenshot/template-screenshot.page';
 import { Canvg } from 'canvg';
 import { ModalStateService } from '../services/modal-state/modal-state.service';
+import { CoverLetterPremium2Page } from '../components/cover-letter-premium2/cover-letter-premium2.page';
+import { CoverLetterPremium3Page } from '../components/cover-letter-premium3/cover-letter-premium3.page';
+import { CoverLetterPremium4Page } from '../components/cover-letter-premium4/cover-letter-premium4.page';
 
 @Component({
   selector: 'app-tab2',
@@ -185,6 +188,17 @@ export class Tab2Page implements OnInit, OnChanges {
         break;
       case 'coverLetterPremiumBubble':
         componentType = CoverLetterPremium1Page;
+        break;
+
+      case 'coverLetterPremiumWaves1':
+        componentType = CoverLetterPremium2Page;
+        break;
+      case 'coverLetterPremiumWaves2':
+        componentType = CoverLetterPremium3Page;
+        break;
+
+      case 'coverLetterPremiumPicGrey':
+        componentType = CoverLetterPremium4Page;
         break;
       // Add more cases for other component types as needed
       default:
