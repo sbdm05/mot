@@ -25,6 +25,12 @@ import { ModalStateService } from '../services/modal-state/modal-state.service';
 import { CoverLetterPremium2Page } from '../components/cover-letter-premium2/cover-letter-premium2.page';
 import { CoverLetterPremium3Page } from '../components/cover-letter-premium3/cover-letter-premium3.page';
 import { CoverLetterPremium4Page } from '../components/cover-letter-premium4/cover-letter-premium4.page';
+import {
+  Camera,
+  CameraResultType,
+  CameraSource,
+  Photo,
+} from '@capacitor/camera';
 
 @Component({
   selector: 'app-tab2',
@@ -37,6 +43,10 @@ export class Tab2Page implements OnInit, OnChanges {
 
   colorBtn = 'success';
   textBtn = 'Enregistrer';
+
+  public addPicActive = false;
+
+  public selectedPic!: any;
 
   // ici ajouter vérification de l'utilisateur
 
@@ -112,27 +122,44 @@ export class Tab2Page implements OnInit, OnChanges {
 
   ngOnChanges() {}
 
-  changeAccordionClasses() {
-    const firstAccordion =
-      this.elementRef.nativeElement.querySelector('#first');
-    const secondAccordion =
-      this.elementRef.nativeElement.querySelector('#second');
 
-    // Supprimer la classe accordion-expanded et ajouter accordion-collapsed au premier accordéon
-    this.renderer.removeClass(firstAccordion, 'accordion-expanded');
-    this.renderer.addClass(firstAccordion, 'accordion-collapsing');
+  async onSelectPic() {
+    this.form.get('picture')?.setErrors(null);
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Camera,
+    });
 
-    this.renderer.addClass(firstAccordion, 'accordion-collapsed');
-    this.renderer.addClass(firstAccordion, 'accordion-previous');
+    console.log(image, '[IMAGE ONSELECTPIC]');
 
-    // Supprimer la classe accordion-collapsed et ajouter accordion-expanded au deuxième accordéon
-    this.renderer.removeClass(secondAccordion, 'accordion-collapsed');
-    this.renderer.addClass(secondAccordion, 'accordion-expanded');
+    if (image.base64String) {
+      //console.log(image.base64String, '[IMAGE.BASE64STRING');
+
+      // check image size
+      const sizeInBytes = image.base64String.length * 0.75;
+      const maxSizeInBytes = 1048576;
+      if (sizeInBytes <= maxSizeInBytes) {
+        // pour affichage dans template HTML
+        let imageConverted;
+        // eslint-disable-next-line prefer-const
+        imageConverted = 'data:image/jpeg;base64, ' + image.base64String;
+
+        this.user.pic = imageConverted;
+        // disabled the add button
+        this.addPicActive = true;
+
+        this.form.get('picture')?.setErrors(null);
+      } else {
+        console.log('erreur dans la taille');
+        this.form.get('picture')?.setErrors({ imageSizeExceeded: true });
+      }
+    }
   }
-
   // étape 1 pour enregistrer les infos
   saveInfos() {
-    console.log(this.form.value);
+    console.log(this.user);
 
     // const updatedUser = { ...this.form.value, ...this.user };
     //console.log(this.user);
@@ -154,7 +181,7 @@ export class Tab2Page implements OnInit, OnChanges {
 
   // étape pour stocker la candidature
   onSaved() {
-    // console.log(this.user);
+    console.log(this.form.value);
 
     // call service
     this.usersService
@@ -167,7 +194,6 @@ export class Tab2Page implements OnInit, OnChanges {
         setTimeout(() => {
           this.colorBtn = 'success';
           this.textBtn = 'Enregistrer';
-          this.changeAccordionClasses();
         }, 1000);
       });
   }
@@ -265,7 +291,6 @@ export class Tab2Page implements OnInit, OnChanges {
     }
   }
 }
-
 
 // refactoriser le html pour itérer
 // ajouter l'import d'image avec '@capacitor/camera'

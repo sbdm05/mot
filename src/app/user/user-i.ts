@@ -7,5 +7,6 @@ export interface UserI {
   email: string;
   pwd: string;
   adjs: [];
+  pic: string;
   letters: [];
 }
