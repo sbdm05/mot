@@ -68,7 +68,7 @@ const routes = [
     },
     {
         path: 'cover-letter-premium4',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_components_cover-letter-premium4_cover-letter-premium4_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium4/cover-letter-premium4.module */ 8053)).then(m => m.CoverLetterPremium4PageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium4_cover-letter-premium4_page_ts"), __webpack_require__.e("src_app_components_cover-letter-premium4_cover-letter-premium4_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium4/cover-letter-premium4.module */ 8053)).then(m => m.CoverLetterPremium4PageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {

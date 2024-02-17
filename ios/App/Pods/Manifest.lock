@@ -1,21 +1,24 @@
 PODS:
-  - Capacitor (4.7.2):
+  - Capacitor (5.7.0):
     - CapacitorCordova
-  - CapacitorApp (4.0.1):
+  - CapacitorApp (5.0.7):
     - Capacitor
-  - CapacitorCordova (4.7.2)
-  - CapacitorHaptics (4.0.1):
+  - CapacitorCamera (5.0.9):
     - Capacitor
-  - CapacitorKeyboard (4.0.1):
+  - CapacitorCordova (5.7.0)
+  - CapacitorHaptics (5.0.7):
     - Capacitor
-  - CapacitorStatusBar (4.0.1):
+  - CapacitorKeyboard (5.0.8):
     - Capacitor
-  - CordovaPlugins (4.7.2):
+  - CapacitorStatusBar (5.0.7):
+    - Capacitor
+  - CordovaPlugins (5.7.0):
     - CapacitorCordova
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
+  - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
@@ -27,6 +30,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorApp:
     :path: "../../node_modules/@capacitor/app"
+  CapacitorCamera:
+    :path: "../../node_modules/@capacitor/camera"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorHaptics:
@@ -39,14 +44,15 @@ EXTERNAL SOURCES:
     :path: "../capacitor-cordova-ios-plugins"
 
 SPEC CHECKSUMS:
-  Capacitor: 7ab2eb4d7f1f76cf04ae75e55770f9916e18e1b1
-  CapacitorApp: 70ea773d069c24ab188ae7a01237b951920ffacf
-  CapacitorCordova: 8b60f0c0cb95573bee322744a7513a6c3f0d7651
-  CapacitorHaptics: 02d48e2efca06ccf3273dbb638b68b0e145f623a
-  CapacitorKeyboard: 3b49a9d517641c123fb691713f99a89d6ebf3a37
-  CapacitorStatusBar: e6cf2a9ed07f92ddae9ca101be36d08c61866b35
-  CordovaPlugins: 692b8ef3aab9c86abf7f5459bfd4aa518807ea58
+  Capacitor: fc155ee2ee45a2093d716f13cf5aa5a865e2d85a
+  CapacitorApp: 17fecd0e6cb23feafac7eb0939417389038b0979
+  CapacitorCamera: 4892c5c392f60039d853dde78bc50ba19fbd113e
+  CapacitorCordova: e825fce1a2e14e4b5730641c7e098dccf74397b7
+  CapacitorHaptics: 7c7c206f0c96a628fed073830c96d28c4b2e772e
+  CapacitorKeyboard: aec619a578235c6ce279075009a2689c2cf5c42c
+  CapacitorStatusBar: f390fbb49b82ffb754ea4b3cf71dc8b048baf3e7
+  CordovaPlugins: d47cfb4b4e9419c38d6bec418129cbd47e900071
 
-PODFILE CHECKSUM: 0381d09167db361ed446a10f049fd27bab1b40b1
+PODFILE CHECKSUM: e29cb1cc6f7c58bf3a87c8a0dc0f8eb88d0f43d2
 
 COCOAPODS: 1.14.3

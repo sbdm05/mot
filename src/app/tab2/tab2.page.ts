@@ -125,12 +125,12 @@ export class Tab2Page implements OnInit, OnChanges {
     this.renderer.addClass(firstAccordion, 'accordion-collapsed');
     this.renderer.addClass(firstAccordion, 'accordion-previous');
 
-
     // Supprimer la classe accordion-collapsed et ajouter accordion-expanded au deuxième accordéon
     this.renderer.removeClass(secondAccordion, 'accordion-collapsed');
     this.renderer.addClass(secondAccordion, 'accordion-expanded');
   }
 
+  // étape 1 pour enregistrer les infos
   saveInfos() {
     console.log(this.form.value);
 
@@ -152,6 +152,7 @@ export class Tab2Page implements OnInit, OnChanges {
     });
   }
 
+  // étape pour stocker la candidature
   onSaved() {
     // console.log(this.user);
 
@@ -215,20 +216,6 @@ export class Tab2Page implements OnInit, OnChanges {
     this.modalInstance = coverLetter;
   }
 
-  // async createModal(
-  //   component,
-  //   componentProps?,
-  //   cssClass?
-  // ): Promise<HTMLIonModalElement> {
-  //   const modal = await this.modalCtrl.create({
-  //     component,
-  //     cssClass,
-  //     componentProps,
-  //     backdropDismiss: true,
-  //   });
-  //   return modal;
-  // }
-
   async createModal(
     component,
     componentProps?,
@@ -278,3 +265,11 @@ export class Tab2Page implements OnInit, OnChanges {
     }
   }
 }
+
+
+// refactoriser le html pour itérer
+// ajouter l'import d'image avec '@capacitor/camera'
+// ajouter generation d'un nouveau texte
+// ajouter un model pour le form
+// ajouter présentation/onboarding avec swipper.js
+// ajouter createdAt
