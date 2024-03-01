@@ -36,8 +36,11 @@ export class TemplateScreenshotPage implements OnInit {
   }
 
   closeModal() {
+    console.log('test depuis closeModal');
     this.modalStateService.modalstate$.next('close');
     this.modalController.dismiss();
+
+    //this.router.navigate(['/tabs/tab2']);
   }
 
   downloadLetter() {
@@ -77,3 +80,4 @@ export class TemplateScreenshotPage implements OnInit {
     const blobPDF = doc.output('bloburl');
   }
 }
+//test

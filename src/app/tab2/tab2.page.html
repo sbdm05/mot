@@ -41,14 +41,11 @@
 
             <ion-input formControlName="contact" placeholder="Madame Durand"></ion-input>
           </ion-item>
-
+<!-- 
           <ion-item>
-            <div>
-              <ion-button (click)='onSelectPic()' [disabled]='addPicActive' ngDefaultControl>Sélectionner une image dans
-                votre
-                album</ion-button>
-              <!-- <div *ngIf="form.get('picture')?.hasError('imageSizeExceeded')">Ce champ doit être complété</div> -->
-              <!-- <div *ngIf="form.controls['picture'].errors?.['imageSizeExceeded']">
+            <div style='display: flex; flex-direction: column'>
+              <ion-button (click)='onSelectPic()' [disabled]='addPicActive' ngDefaultControl>Sélectionner une photo de profil</ion-button>
+              <div *ngIf="picSizeExceedeed">
                 <div class='error'>
                   <p>
                     Désolé, l'image est trop lourde.
@@ -56,11 +53,23 @@
                   <p>Veuillez choisir une autre image.</p>
                 </div>
 
-              </div> -->
-
+              </div>
             </div>
+          </ion-item> -->
 
-          </ion-item>
+
+          <!-- <ion-grid *ngIf='imageConverted'>
+            <ion-row>
+              <ion-col size="6">
+                <img [src]="imageConverted">
+                <ion-button (click)='onDeletePic()' color="danger">Supprimer</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid> -->
+
+
+
+
           <ion-item>
             <ion-label position="floating">Adresse (requis)</ion-label>
             <ion-input formControlName="adresseSociete"></ion-input>
@@ -70,7 +79,7 @@
             <ion-input formControlName="cpVille"></ion-input>
           </ion-item>
 
-          <ion-button [color]="colorBtn" expand="block" type="submit" [disabled]="form.invalid">Etape 1 - Enregistrer
+          <ion-button [color]="colorBtn" expand="block" type="submit" [disabled]="form.invalid">{{textBtn}}
           </ion-button>
         </form>
       </div>
@@ -215,14 +224,7 @@
         </ion-card>
       </div>
     </ion-accordion>
-    <!-- <ion-accordion value="third">
-            <ion-item slot="header" color="light">
-                <ion-label>Etape 3 - Choisir le contenu</ion-label>
-            </ion-item>
-            <div class="ion-padding" slot="content">
-                Choisir le contenu
-            </div>
-        </ion-accordion> -->
+
     <ion-accordion value="third">
       <ion-item slot="header" color="light">
         <ion-label>Etape 3 - Sauvegarder votre candidature</ion-label>

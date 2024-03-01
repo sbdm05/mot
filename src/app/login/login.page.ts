@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UsersService } from '../services/users.service';
 import { User } from '../user/user';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     public router: Router,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private cdr: ChangeDetectorRef
   ) {
     const token = localStorage.getItem('token');
     console.log(token);
@@ -34,6 +36,7 @@ export class LoginPage implements OnInit {
           // console.log(data.user, 'data');
           this.user = data.user;
           // console.log(this.user, 'user');
+          this.cdr.detectChanges();
           this.router.navigate(['tabs', 'tab1']);
         });
       } catch (error) {

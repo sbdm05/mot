@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppRoutingModule": () => (/* binding */ AppRoutingModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 124);
 
@@ -24,7 +24,7 @@ const routes = [
     },
     {
         path: 'form',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "default-src_app_form_form_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./form/form.module */ 9659)).then((m) => m.FormPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_users_service_ts-node_modules_capacitor_camera_dist_esm_index_js"), __webpack_require__.e("default-src_app_form_form_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./form/form.module */ 9659)).then((m) => m.FormPageModule),
     },
     {
         path: 'login',
@@ -44,31 +44,31 @@ const routes = [
     },
     {
         path: 'cover-letter-simple',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_components_cover-letter-simple_cover-letter-simple_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-simple/cover-letter-simple.module */ 5425)).then(m => m.CoverLetterSimplePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_components_cover-letter-simple_cover-letter-simple_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-simple/cover-letter-simple.module */ 5425)).then((m) => m.CoverLetterSimplePageModule),
     },
     {
         path: 'cover-letter-c',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_components_cover-letter-c_cover-letter-c_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-c/cover-letter-c.module */ 123)).then(m => m.CoverLetterCPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_components_cover-letter-c_cover-letter-c_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-c/cover-letter-c.module */ 123)).then((m) => m.CoverLetterCPageModule),
     },
     {
         path: 'cover-letter-premium1',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium1_cover-letter-premium1_page_ts"), __webpack_require__.e("src_app_components_cover-letter-premium1_cover-letter-premium1_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium1/cover-letter-premium1.module */ 8849)).then(m => m.CoverLetterPremium1PageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium1_cover-letter-premium1_page_ts"), __webpack_require__.e("src_app_components_cover-letter-premium1_cover-letter-premium1_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium1/cover-letter-premium1.module */ 8849)).then((m) => m.CoverLetterPremium1PageModule),
     },
     {
         path: 'template-screenshot',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_components_template-screenshot_template-screenshot_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./components/template-screenshot/template-screenshot.module */ 1888)).then(m => m.TemplateScreenshotPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_components_template-screenshot_template-screenshot_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./components/template-screenshot/template-screenshot.module */ 1888)).then((m) => m.TemplateScreenshotPageModule),
     },
     {
         path: 'cover-letter-premium2',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium2_cover-letter-premium2_page_ts"), __webpack_require__.e("src_app_components_cover-letter-premium2_cover-letter-premium2_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium2/cover-letter-premium2.module */ 9204)).then(m => m.CoverLetterPremium2PageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium2_cover-letter-premium2_page_ts"), __webpack_require__.e("src_app_components_cover-letter-premium2_cover-letter-premium2_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium2/cover-letter-premium2.module */ 9204)).then((m) => m.CoverLetterPremium2PageModule),
     },
     {
         path: 'cover-letter-premium3',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium3_cover-letter-premium3_page_ts"), __webpack_require__.e("src_app_components_cover-letter-premium3_cover-letter-premium3_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium3/cover-letter-premium3.module */ 2631)).then(m => m.CoverLetterPremium3PageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium3_cover-letter-premium3_page_ts"), __webpack_require__.e("src_app_components_cover-letter-premium3_cover-letter-premium3_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium3/cover-letter-premium3.module */ 2631)).then((m) => m.CoverLetterPremium3PageModule),
     },
     {
         path: 'cover-letter-premium4',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium4_cover-letter-premium4_page_ts"), __webpack_require__.e("src_app_components_cover-letter-premium4_cover-letter-premium4_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium4/cover-letter-premium4.module */ 8053)).then(m => m.CoverLetterPremium4PageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium4_cover-letter-premium4_page_ts"), __webpack_require__.e("src_app_components_cover-letter-premium4_cover-letter-premium4_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium4/cover-letter-premium4.module */ 8053)).then((m) => m.CoverLetterPremium4PageModule),
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component.html?ngResource */ 3383);
 /* harmony import */ var _app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.scss?ngResource */ 9259);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
@@ -132,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser */ 4497);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ 8987);
@@ -179,7 +179,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CoverLetterComponent": () => (/* binding */ CoverLetterComponent)
 /* harmony export */ });
 /* harmony import */ var _Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _cover_letter_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cover-letter.component.html?ngResource */ 3802);
 /* harmony import */ var _cover_letter_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cover-letter.component.scss?ngResource */ 6109);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
@@ -303,7 +303,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TemplateScreenshotPage": () => (/* binding */ TemplateScreenshotPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _template_screenshot_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./template-screenshot.page.html?ngResource */ 5999);
 /* harmony import */ var _template_screenshot_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./template-screenshot.page.scss?ngResource */ 7798);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 2560);
@@ -332,8 +332,10 @@ let TemplateScreenshotPage = class TemplateScreenshotPage {
         console.log(this.htmlBase, 'htmlBase'); // renvoie string
     }
     closeModal() {
+        console.log('test depuis closeModal');
         this.modalStateService.modalstate$.next('close');
         this.modalController.dismiss();
+        //this.router.navigate(['/tabs/tab2']);
     }
     downloadLetter() {
         const content = document.getElementById('content').innerHTML;
@@ -384,6 +386,7 @@ TemplateScreenshotPage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
     })
 ], TemplateScreenshotPage);
 
+//test
 
 
 /***/ }),
@@ -399,7 +402,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ModalStateService": () => (/* binding */ ModalStateService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 2218);
 
@@ -543,12 +546,12 @@ var map = {
 	],
 	"./ion-datetime-button.entry.js": [
 		7950,
-		"default-node_modules_ionic_core_dist_esm_parse-17d9d367_js-node_modules_ionic_core_dist_esm_t-a480aa",
+		"default-node_modules_ionic_core_dist_esm_data-caf38df0_js-node_modules_ionic_core_dist_esm_th-d3ab8e",
 		"node_modules_ionic_core_dist_esm_ion-datetime-button_entry_js"
 	],
 	"./ion-datetime_3.entry.js": [
 		9689,
-		"default-node_modules_ionic_core_dist_esm_parse-17d9d367_js-node_modules_ionic_core_dist_esm_t-a480aa",
+		"default-node_modules_ionic_core_dist_esm_data-caf38df0_js-node_modules_ionic_core_dist_esm_th-d3ab8e",
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-datetime_3_entry_js"
 	],
@@ -568,6 +571,7 @@ var map = {
 	],
 	"./ion-input.entry.js": [
 		3288,
+		"common",
 		"node_modules_ionic_core_dist_esm_ion-input_entry_js"
 	],
 	"./ion-item-option_3.entry.js": [
@@ -774,7 +778,7 @@ module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-ap
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-buttons (click)=\"closeModal()\" slot=\"start\">\n      <ion-button slot=\"icon\">\n        <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title class=\"title-ios ion-text-capitalize\">Modèle 1</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <div id='main' style='font-family: arial;font-size:16px; margin:50px'>\n\n    <div id=\"container\" style='padding: 3rem 5rem;'>\n      <header style='display: flex; text-align: left; '>\n        <div style='flex:1;  padding: 15px; background-color: #2f74b7; color: white; font-size:18px; font-weight: 600'>\n\n          <p>{{user.prenom}} {{user.nom}}</p>\n          <p>{{user?.letters[0].intitule}}</p>\n\n        </div>\n        <div style='flex:1;  padding: 15px; background-color:white;'>\n          <!-- ici icône -->\n          <p>\n            <ion-icon name=\"navigate-circle-outline\"></ion-icon> {{user.adresse}}\n          </p>\n          <p>\n            <ion-icon name=\"phone-portrait\"></ion-icon> {{user.tel}}\n          </p>\n          <p>\n            <ion-icon name=\"send\"></ion-icon> {{user.email}}\n          </p>\n\n\n        </div>\n      </header>\n\n      <section id='contactInfos' style='text-align: right; line-height: 12px;'>\n        <p>{{user.letters[0].societe}}</p>\n        <p>{{user.letters[0].contact}}</p>\n        <p>{{user.letters[0].adresseSociete}}</p>\n        <p>{{user.letters[0].cpVille}}</p>\n      </section>\n\n      <!-- partie expert -->\n      <section id='content' style='text-align: justify;' *ngIf=\"user.letters[0].experience ===  'expert' \">\n        <p style='padding-bottom:35px; text-align: right;'>Le {{today | date:'dd/MM/yyyy'}}</p>\n        <p style='padding-bottom:10px'>Objet : candidature pour le poste de {{user.letters[0].intitule}}</p>\n        <p *ngIf='user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          {{user.letters[0].contact}},\n        </p>\n        <p *ngIf='!user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          Madame, Monsieur,\n        </p>\n        <!-- premier paragraphe -->\n        <p>\n          Je suis actuellement à la recherche d'un emploi dans votre secteur d'activité, c'est pourquoi, je me permets\n          de vous\n          écrire pour postuler au poste de {{user.letters[0].intitule}}.\n        </p>\n        <p>\n          En effet, j'ai déjà pu exercer à ce poste lors d'une précédente mission. Cette expérience a été très\n          enrichissante\n          et\n          formatrice. Je souhaiterais vivement mettre ces compétences à profit dans votre structure. Dès le début de\n          notre\n          collaboration, vous pourrez constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et {{user.adjs[2]}}, des\n          qualités essentielles dans ce métier. </p>\n        <!-- conclusion -->\n        <p>Je suis disponible pour m'entretenir avec vous, par téléphone ou en personne afin de déterminer comment je\n          pourrais\n          contribuer au mieux au développement de votre entreprise. </p>\n        <p>Je vous remercie de l'attention que vous pourrez accorder à ma candidature,</p>\n        <p>Sincères salutations,</p>\n\n\n        <p>{{user.prenom}} {{user.nom}}</p>\n      </section>\n\n\n      <!-- partie débutant -->\n      <section id='content' style='text-align: justify;' *ngIf=\"user.letters[0].experience ===  'debutant' \">\n        <p style='padding-bottom:35px; text-align: right;'>Le {{today | date:'dd/MM/yyyy'}}</p>\n        <p style='padding-bottom:10px'>Objet : candidature pour le poste de {{user.letters[0].intitule}}</p>\n        <p *ngIf='user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          {{user.letters[0].contact}},\n        </p>\n        <p *ngIf='!user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          Madame, Monsieur,\n        </p>\n        <!-- premier paragraphe -->\n        <p>\n          Je suis actuellement à la recherche d'un emploi dans votre secteur d'activité, c'est pourquoi, je me permets\n          de vous\n          écrire pour postuler au poste de {{user.letters[0].intitule}}.</p>\n        <p>\n          <!-- si pas expérience -->\n          <span *ngIf=\"user.gender ==='femme'\">\n            Je débute mon activité professionnelle avec beaucoup d'enthousiasme à l'idée de m'intégrer à une nouvelle\n            équipe\n            et d'acquérir de nouvelles compétences. Ma capacité d'adaptation et mon envie de bien faire les tâches\n            demandées\n            me permettront d'être opérationnelle rapidement. Je souhaiterais vivement mettre ces compétences à profit\n            dans\n            votre structure.\n          </span>\n          <span *ngIf=\"user.gender ==='homme'\">\n            Je débute mon activité professionnelle avec beaucoup d'enthousiasme à l'idée de m'intégrer à une nouvelle\n            équipe\n            et\n            d'acquérir de nouvelles compétences. Ma capacité d'adaptation et mon envie de bien faire les tâches\n            demandées me\n            permettront d'être opérationnel rapidement. Je souhaiterais vivement mettre ces compétences à profit dans\n            votre\n            structure.\n          </span>\n        </p>\n\n        <!-- second paragraphe -->\n\n        <p>Dès le début de notre collaboration, vous pourrez constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et\n          {{user.adjs[2]}}, des qualités essentielles dans ce métier. </p>\n        <!-- conclusion -->\n        <p>Je suis disponible pour m'entretenir avec vous, par téléphone ou en personne afin de déterminer comment je\n          pourrais\n          contribuer au mieux au développement de votre entreprise. </p>\n        <p>Je vous remercie de l'attention que vous pourrez accorder à ma candidature,</p>\n        <p style='padding: 20px 0px'>Sincères salutations,</p>\n\n        <p>{{user.prenom}} {{user.nom}}</p>\n      </section>\n    </div>\n\n\n\n  </div>\n\n\n";
+module.exports = "<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-buttons (click)=\"closeModal()\" slot=\"start\">\n      <ion-button slot=\"icon\">\n        <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title class=\"title-ios ion-text-capitalize\">Modèle 1</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-button (click)=\"closeModal()\">\n    <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>Revenir à l'écran d'accueil\n  </ion-button>\n  <div id='main' style='font-family: arial;font-size:16px; margin:50px; visibility: hidden;'>\n\n    <div id=\"container\" style='padding: 3rem 5rem;'>\n      <header style='display: flex; text-align: left; '>\n        <div style='flex:1;  padding: 15px; background-color: #2f74b7; color: white; font-size:18px; font-weight: 600'>\n\n          <p>{{user.prenom}} {{user.nom}}</p>\n          <p>{{user?.letters[0].intitule}}</p>\n\n        </div>\n        <div style='flex:1;  padding: 15px; background-color:white;'>\n          <!-- ici icône -->\n          <p>\n            <ion-icon name=\"navigate-circle-outline\"></ion-icon> {{user.adresse}}\n          </p>\n          <p>\n            <ion-icon name=\"phone-portrait\"></ion-icon> {{user.tel}}\n          </p>\n          <p>\n            <ion-icon name=\"send\"></ion-icon> {{user.email}}\n          </p>\n\n\n        </div>\n      </header>\n\n      <section id='contactInfos' style='text-align: right; line-height: 12px;'>\n        <p>{{user.letters[0].societe}}</p>\n        <p>{{user.letters[0].contact}}</p>\n        <p>{{user.letters[0].adresseSociete}}</p>\n        <p>{{user.letters[0].cpVille}}</p>\n      </section>\n\n      <!-- partie expert -->\n      <section id='content' style='text-align: justify;' *ngIf=\"user.letters[0].experience ===  'expert' \">\n        <p style='padding-bottom:35px; text-align: right;'>Le {{today | date:'dd/MM/yyyy'}}</p>\n        <p style='padding-bottom:10px'>Objet : candidature pour le poste de {{user.letters[0].intitule}}</p>\n        <p *ngIf='user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          {{user.letters[0].contact}},\n        </p>\n        <p *ngIf='!user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          Madame, Monsieur,\n        </p>\n        <!-- premier paragraphe -->\n        <p>\n          Je suis actuellement à la recherche d'un emploi dans votre secteur d'activité, c'est pourquoi, je me permets\n          de vous\n          écrire pour postuler au poste de {{user.letters[0].intitule}}.\n        </p>\n        <p>\n          En effet, j'ai déjà pu exercer à ce poste lors d'une précédente mission. Cette expérience a été très\n          enrichissante\n          et\n          formatrice. Je souhaiterais vivement mettre ces compétences à profit dans votre structure. Dès le début de\n          notre\n          collaboration, vous pourrez constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et {{user.adjs[2]}}, des\n          qualités essentielles dans ce métier. </p>\n        <!-- conclusion -->\n        <p>Je suis disponible pour m'entretenir avec vous, par téléphone ou en personne afin de déterminer comment je\n          pourrais\n          contribuer au mieux au développement de votre entreprise. </p>\n        <p>Je vous remercie de l'attention que vous pourrez accorder à ma candidature,</p>\n        <p>Sincères salutations,</p>\n\n\n        <p>{{user.prenom}} {{user.nom}}</p>\n      </section>\n\n\n      <!-- partie débutant -->\n      <section id='content' style='text-align: justify;' *ngIf=\"user.letters[0].experience ===  'debutant' \">\n        <p style='padding-bottom:35px; text-align: right;'>Le {{today | date:'dd/MM/yyyy'}}</p>\n        <p style='padding-bottom:10px'>Objet : candidature pour le poste de {{user.letters[0].intitule}}</p>\n        <p *ngIf='user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          {{user.letters[0].contact}},\n        </p>\n        <p *ngIf='!user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          Madame, Monsieur,\n        </p>\n        <!-- premier paragraphe -->\n        <p>\n          Je suis actuellement à la recherche d'un emploi dans votre secteur d'activité, c'est pourquoi, je me permets\n          de vous\n          écrire pour postuler au poste de {{user.letters[0].intitule}}.</p>\n        <p>\n          <!-- si pas expérience -->\n          <span *ngIf=\"user.gender ==='femme'\">\n            Je débute mon activité professionnelle avec beaucoup d'enthousiasme à l'idée de m'intégrer à une nouvelle\n            équipe\n            et d'acquérir de nouvelles compétences. Ma capacité d'adaptation et mon envie de bien faire les tâches\n            demandées\n            me permettront d'être opérationnelle rapidement. Je souhaiterais vivement mettre ces compétences à profit\n            dans\n            votre structure.\n          </span>\n          <span *ngIf=\"user.gender ==='homme'\">\n            Je débute mon activité professionnelle avec beaucoup d'enthousiasme à l'idée de m'intégrer à une nouvelle\n            équipe\n            et\n            d'acquérir de nouvelles compétences. Ma capacité d'adaptation et mon envie de bien faire les tâches\n            demandées me\n            permettront d'être opérationnel rapidement. Je souhaiterais vivement mettre ces compétences à profit dans\n            votre\n            structure.\n          </span>\n        </p>\n\n        <!-- second paragraphe -->\n\n        <p>Dès le début de notre collaboration, vous pourrez constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et\n          {{user.adjs[2]}}, des qualités essentielles dans ce métier. </p>\n        <!-- conclusion -->\n        <p>Je suis disponible pour m'entretenir avec vous, par téléphone ou en personne afin de déterminer comment je\n          pourrais\n          contribuer au mieux au développement de votre entreprise. </p>\n        <p>Je vous remercie de l'attention que vous pourrez accorder à ma candidature,</p>\n        <p style='padding: 20px 0px'>Sincères salutations,</p>\n\n        <p>{{user.prenom}} {{user.nom}}</p>\n      </section>\n    </div>\n\n\n\n  </div>\n";
 
 /***/ }),
 

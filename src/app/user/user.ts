@@ -8,7 +8,6 @@ export class User {
   email: string;
   pwd: string;
   adjs: [string, string, string];
-  pic: string;
   letters: [
     {
       intitule: string;
@@ -40,10 +39,3 @@ export class User {
   }
 }
 
-// adjs: [
-//     {
-//       adj1: string;
-//       adj2: string;
-//       adj3: string;
-//     }
-//   ];

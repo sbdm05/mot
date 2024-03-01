@@ -10,6 +10,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { UsersService } from '../services/users.service';
 import { User } from '../user/user';
+import {
+  Camera,
+  CameraResultType,
+  CameraSource,
+  Photo,
+} from '@capacitor/camera';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-form',
@@ -27,6 +34,13 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
   obj!: User;
 
   isModified = false;
+
+  // props pour gérer la photo
+  public addPicActive = false;
+
+  public selectedPic!: any;
+  public imageConverted;
+  public picSizeExceedeed = false;
 
   qualitesFemme = [
     'autonome',
@@ -61,13 +75,23 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
 
   token!: string;
 
-  constructor(private fb: FormBuilder, private usersService: UsersService) {
+  constructor(
+    private fb: FormBuilder,
+    private usersService: UsersService,
+    private cdr: ChangeDetectorRef
+  ) {
     this.token = localStorage.getItem('token');
     console.log(this.user);
+
+    // est-ce que la photo de profil existe ?
+    this.selectedPic = localStorage.getItem('pic');
+    if (this.selectedPic) {
+      this.imageConverted = this.selectedPic;
+    }
   }
 
   ngOnInit() {
-    console.log(this.user);
+    console.log(this.user, 'user depuis form');
     // console.log(this.form.value);
     this.form = this.fb.group({
       gender: [this.user?.gender],
@@ -81,12 +105,14 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
           Validators.maxLength(10),
         ]),
       ],
+
       email: [this.user?.email],
       adjs: [
         this.user?.adjs,
         Validators.compose([Validators.minLength(3), Validators.maxLength(3)]),
       ],
     });
+    console.log(this.form.value);
   }
 
   ngOnChanges() {
@@ -113,14 +139,68 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
   }
 
   selectGender(i) {
-    //console.log(i.target.value, 'gender');
+    console.log(i.target.value, 'gender');
     this.user.gender = i.target.value;
+    console.log(this.user);
   }
 
   selectAdj(i) {
     //console.log(i.target.value, 'adjs');
     this.adjs = i.target.value;
   }
+
+  async onSelectPic() {
+    this.picSizeExceedeed = false;
+
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Photos,
+    });
+
+    // console.log(image, '[IMAGE ONSELECTPIC]');
+
+    if (image.base64String) {
+      console.log(image.base64String, '[IMAGE.BASE64STRING');
+
+      // check image size
+      const sizeInBytes = image.base64String.length * 0.75;
+      const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
+      if (sizeInBytes <= maxSizeInBytes) {
+        // pour affichage dans template HTML
+
+        // eslint-disable-next-line prefer-const
+        this.imageConverted = 'data:image/jpeg;base64, ' + image.base64String;
+        console.log(this.imageConverted);
+        // this.imageConverted =
+        //   'https://upload.wikimedia.org/wikipedia/commons/2/24/LEGO_logo.svg';
+
+        //this.user.pic = this.imageConverted;
+        this.addPicActive = true;
+         this.cdr.detectChanges();
+
+        // on store l'image dans le localStorage
+        localStorage.setItem('pic', this.imageConverted);
+
+        // disabled the add button
+      } else {
+        console.log('erreur dans la taille');
+        this.picSizeExceedeed = true;
+      }
+    }
+  }
+
+  onDeletePic() {
+    localStorage.removeItem('pic');
+    console.log('deleted');
+
+    this.imageConverted = null;
+    this.addPicActive = false;
+     this.cdr.detectChanges();
+  }
+
+  
   onSubmit() {
     //console.log(this.form.status);
 

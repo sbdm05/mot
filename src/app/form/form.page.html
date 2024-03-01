@@ -1,66 +1,99 @@
 <ion-content>
 
-    <form [formGroup]="form" *ngIf='user'>
 
-        <!-- select gender -->
-        <ion-list>
-            <ion-item>
-                <ion-select placeholder="Je suis" formControlName='gender' (ionChange)="selectGender($event)" required>
-                    <ion-select-option value="homme">Homme</ion-select-option>
-                    <ion-select-option value="femme">Femme</ion-select-option>
-                </ion-select>
-            </ion-item>
-        </ion-list>
+  <form [formGroup]="form" *ngIf='user'>
 
-        <!-- prenom -->
-        <ion-item>
-            <ion-label position="floating">Prénom</ion-label>
-            <ion-input required formControlName='prenom'></ion-input>
-        </ion-item>
+    <!-- select gender -->
+    <ion-list>
+      <ion-item>
+        <ion-select placeholder="Je suis" formControlName='gender' (ionChange)="selectGender($event)" required>
+          <ion-select-option value="homme">Homme</ion-select-option>
+          <ion-select-option value="femme">Femme</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
 
-        <!-- nom -->
-        <ion-item>
-            <ion-label position="floating">Nom</ion-label>
-            <ion-input required formControlName='nom'></ion-input>
-        </ion-item>
+    <!-- prenom -->
+    <ion-item>
+      <ion-label position="floating">Prénom</ion-label>
+      <ion-input required formControlName='prenom'></ion-input>
+    </ion-item>
 
-        <!-- tel -->
-        <ion-item>
-            <ion-label position="floating">Téléphone</ion-label>
-            <ion-input required formControlName='tel'></ion-input>
-        </ion-item>
+    <!-- nom -->
+    <ion-item>
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input required formControlName='nom'></ion-input>
+    </ion-item>
 
-        <!-- adresse -->
-        <ion-item>
-            <ion-label position="floating">Adresse complète</ion-label>
-            <ion-input required formControlName='adresse'></ion-input>
-        </ion-item>
+    <!-- tel -->
+    <ion-item>
+      <ion-label position="floating">Téléphone</ion-label>
+      <ion-input required formControlName='tel'></ion-input>
+    </ion-item>
 
-        <!-- email -->
-        <ion-item>
-            <ion-label position="floating">E-mail</ion-label>
-            <ion-input required formControlName='email'></ion-input>
-        </ion-item>
+    <!-- adresse -->
+    <ion-item>
+      <ion-label position="floating">Adresse complète</ion-label>
+      <ion-input required formControlName='adresse'></ion-input>
+    </ion-item>
 
-        <!-- pick adjectives -->
-        <ion-list *ngIf="user.gender === 'femme'">
-            <ion-item>
-                <ion-select formControlName='adjs' placeholder="Choisir 3 qualités" [multiple]="true" required (ionChange)="selectAdj($event)">
-                    <ion-select-option *ngFor='let i of qualitesFemme' value="{{i}}">{{i}}</ion-select-option>
-                </ion-select>
-            </ion-item>
-        </ion-list>
-        <ion-list *ngIf="user.gender === 'homme'">
-            <ion-item>
-                <ion-select placeholder="Choisir 3 qualités" [multiple]="true" (ionChange)="selectAdj($event)" formControlName='adjs' required>
-                    <ion-select-option *ngFor='let i of qualitesHomme' value="{{i}}">{{i}}</ion-select-option>
-                </ion-select>
-            </ion-item>
-        </ion-list>
+    <!-- email -->
+    <ion-item>
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input required formControlName='email'></ion-input>
+    </ion-item>
 
-        <ion-button *ngIf='!isModified' expand="block" (click)='onSubmit()' [disabled]='form.invalid' [color]='colorBtn'>Enregistrer</ion-button>
-        <ion-button *ngIf='isModified' [disabled]='form.invalid' color='danger' expand="block" (click)='onSubmit()'>Mettre à jour</ion-button>
+    <!-- pick adjectives -->
+    <ion-list *ngIf="user.gender === 'femme'">
+      <ion-item>
+        <ion-select formControlName='adjs' placeholder="Choisir 3 qualités" [multiple]="true" required
+          (ionChange)="selectAdj($event)">
+          <ion-select-option *ngFor='let i of qualitesFemme' value="{{i}}">{{i}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="user.gender === 'homme'">
+      <ion-item>
+        <ion-select placeholder="Choisir 3 qualités" [multiple]="true" (ionChange)="selectAdj($event)"
+          formControlName='adjs' required>
+          <ion-select-option *ngFor='let i of qualitesHomme' value="{{i}}">{{i}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
 
-    </form>
+    <ion-item>
+      <div style='display: flex; flex-direction: column'>
+        <ion-button (click)='onSelectPic()' [disabled]='addPicActive' ngDefaultControl>Sélectionner une photo de profil
+        </ion-button>
+        <div *ngIf="picSizeExceedeed">
+          <div class='error'>
+            <p>
+              Désolé, l'image est trop lourde.
+            </p>
+            <p>Veuillez choisir une autre image.</p>
+          </div>
+
+        </div>
+      </div>
+    </ion-item>
+
+
+    <ion-grid *ngIf='imageConverted'>
+      <ion-row>
+        <ion-col size="6">
+          <img [src]="imageConverted">
+          <ion-button (click)='onDeletePic()' color="danger">Supprimer</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <ion-button expand="block" (click)='onSubmit()' [disabled]='form.invalid' [color]='colorBtn'>
+      Enregistrer</ion-button>
+    <!-- <ion-button *ngIf='isModified' [disabled]='form.invalid' color='danger' expand="block" (click)='onSubmit()'>Mettre à
+      jour</ion-button> -->
+
+  </form>
 
 </ion-content>
+`

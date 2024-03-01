@@ -11,7 +11,10 @@
 
 
 <ion-content>
-  <div id='main' style='font-family: arial;font-size:16px; margin:50px'>
+  <ion-button (click)="closeModal()">
+    <ion-icon class="icon" name="arrow-back-outline"></ion-icon>Revenir à l'écran d'accueil
+  </ion-button>
+  <div id='main' style='font-family: arial;font-size:16px; margin:50px; visibility: hidden;'>
 
     <div id="container" style='padding: 3rem 5rem;'>
       <header style='display: flex; text-align: left; '>
@@ -136,5 +139,3 @@
 
 
   </div>
-
-

@@ -21,6 +21,7 @@ export class Tab3Page {
           //console.log(data.user, 'data');
           if (data) {
             this.user = data.user;
+            this.router.navigate(['tabs', 'tab3']);
             console.log(this.user, 'user');
             const { savedLetters } = data.user;
             if (savedLetters) {

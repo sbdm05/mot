@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FormPageRoutingModule": () => (/* binding */ FormPageRoutingModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 124);
 /* harmony import */ var _form_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form.page */ 208);
@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FormPageModule": () => (/* binding */ FormPageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 4666);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 2508);
@@ -92,12 +92,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FormPage": () => (/* binding */ FormPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _form_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form.page.html?ngResource */ 1562);
-/* harmony import */ var _form_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form.page.scss?ngResource */ 2838);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ 2508);
-/* harmony import */ var _services_users_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/users.service */ 4961);
+/* harmony import */ var _Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 2321);
+/* harmony import */ var _form_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form.page.html?ngResource */ 1562);
+/* harmony import */ var _form_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./form.page.scss?ngResource */ 2838);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var _services_users_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/users.service */ 4961);
+/* harmony import */ var _capacitor_camera__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @capacitor/camera */ 4241);
+
+
+
 
 
 
@@ -105,318 +110,160 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let FormPage = class FormPage {
-    constructor(fb, usersService) {
-        this.fb = fb;
-        this.usersService = usersService;
-        this.colorBtn = 'success';
-        this.adjs = [];
+  constructor(fb, usersService, cdr) {
+    this.fb = fb;
+    this.usersService = usersService;
+    this.cdr = cdr;
+    this.colorBtn = 'success';
+    this.adjs = [];
+    this.isModified = false; // props pour gérer la photo
+
+    this.addPicActive = false;
+    this.picSizeExceedeed = false;
+    this.qualitesFemme = ['autonome', 'dynamique', 'opérationnelle', 'réactive', 'fiable', 'ponctuelle', 'consciencieuse', 'discrète', 'enthousiaste', 'imaginative', 'créative', 'méthodique', 'patiente'];
+    this.qualitesHomme = ['autonome', 'dynamique', 'opérationnel', 'réactif', 'fiable', 'ponctuel', 'consciencieux', 'discret', 'enthousiaste', 'imaginatif', 'créatif', 'méthodique', 'patient'];
+    this.token = localStorage.getItem('token');
+    console.log(this.user); // est-ce que la photo de profil existe ?
+
+    this.selectedPic = localStorage.getItem('pic');
+
+    if (this.selectedPic) {
+      this.imageConverted = this.selectedPic;
+    }
+  }
+
+  ngOnInit() {
+    console.log(this.user, 'user depuis form'); // console.log(this.form.value);
+
+    this.form = this.fb.group({
+      gender: [this.user?.gender],
+      prenom: [this.user?.prenom],
+      nom: [this.user?.nom],
+      adresse: [this.user?.adresse],
+      tel: [this.user?.tel, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.compose([_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.minLength(10), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.maxLength(10)])],
+      email: [this.user?.email],
+      adjs: [this.user?.adjs, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.compose([_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.minLength(3), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.maxLength(3)])]
+    });
+    console.log(this.form.value);
+  }
+
+  ngOnChanges() {
+    // console.log('test', this.user);
+    console.log(this.user, 'depuis ngOnChanges');
+    this.form = this.fb.group({
+      gender: [this.user?.gender],
+      prenom: [this.user?.prenom],
+      nom: [this.user?.nom],
+      adresse: [this.user?.adresse],
+      tel: [this.user?.tel, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.compose([_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.minLength(10), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.maxLength(10)])],
+      email: [this.user?.email],
+      adjs: [this.user?.adjs, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.compose([_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.minLength(3), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.maxLength(3)])]
+    });
+  }
+
+  selectGender(i) {
+    console.log(i.target.value, 'gender');
+    this.user.gender = i.target.value;
+    console.log(this.user);
+  }
+
+  selectAdj(i) {
+    //console.log(i.target.value, 'adjs');
+    this.adjs = i.target.value;
+  }
+
+  onSelectPic() {
+    var _this = this;
+
+    return (0,_Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      _this.picSizeExceedeed = false;
+      const image = yield _capacitor_camera__WEBPACK_IMPORTED_MODULE_4__.Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: _capacitor_camera__WEBPACK_IMPORTED_MODULE_4__.CameraResultType.Base64,
+        source: _capacitor_camera__WEBPACK_IMPORTED_MODULE_4__.CameraSource.Photos
+      }); // console.log(image, '[IMAGE ONSELECTPIC]');
+
+      if (image.base64String) {
+        console.log(image.base64String, '[IMAGE.BASE64STRING'); // check image size
+
+        const sizeInBytes = image.base64String.length * 0.75;
+        const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
+
+        if (sizeInBytes <= maxSizeInBytes) {
+          // pour affichage dans template HTML
+          // eslint-disable-next-line prefer-const
+          _this.imageConverted = 'data:image/jpeg;base64, ' + image.base64String;
+          console.log(_this.imageConverted); // this.imageConverted =
+          //   'https://upload.wikimedia.org/wikipedia/commons/2/24/LEGO_logo.svg';
+          //this.user.pic = this.imageConverted;
+
+          _this.addPicActive = true;
+
+          _this.cdr.detectChanges(); // on store l'image dans le localStorage
+
+
+          localStorage.setItem('pic', _this.imageConverted); // disabled the add button
+        } else {
+          console.log('erreur dans la taille');
+          _this.picSizeExceedeed = true;
+        }
+      }
+    })();
+  }
+
+  onDeletePic() {
+    localStorage.removeItem('pic');
+    console.log('deleted');
+    this.imageConverted = null;
+    this.addPicActive = false;
+    this.cdr.detectChanges();
+  }
+
+  onSubmit() {
+    //console.log(this.form.status);
+    if (this.form.status === 'VALID') {
+      console.log(this.token, 'token');
+      this.usersService.updateUser(this.form.value, this.token).subscribe(data => {
+        //console.log('after update', data);
+        //console.log('submit ok');
+        //console.log(this.form.value);
+        //this.usersService.refreshCollection(data);
+        this.colorBtn = 'warning';
+        setTimeout(() => {
+          this.colorBtn = 'success';
+        }, 1000);
         this.isModified = false;
-        this.qualitesFemme = [
-            'autonome',
-            'dynamique',
-            'opérationnelle',
-            'réactive',
-            'fiable',
-            'ponctuelle',
-            'consciencieuse',
-            'discrète',
-            'enthousiaste',
-            'imaginative',
-            'créative',
-            'méthodique',
-            'patiente',
-        ];
-        this.qualitesHomme = [
-            'autonome',
-            'dynamique',
-            'opérationnel',
-            'réactif',
-            'fiable',
-            'ponctuel',
-            'consciencieux',
-            'discret',
-            'enthousiaste',
-            'imaginatif',
-            'créatif',
-            'méthodique',
-            'patient',
-        ];
-        this.token = localStorage.getItem('token');
-        console.log(this.user);
+      }); //localStorage.setItem('infos', JSON.stringify(this.form.value));
+    } else {
+      console.log('erreur'); //this.error='Veuillez compléter le formulaire'
     }
-    ngOnInit() {
-        console.log(this.user);
-        // console.log(this.form.value);
-        this.form = this.fb.group({
-            gender: [this.user?.gender],
-            prenom: [this.user?.prenom],
-            nom: [this.user?.nom],
-            adresse: [this.user?.adresse],
-            tel: [
-                this.user?.tel,
-                _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.compose([
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.minLength(10),
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.maxLength(10),
-                ]),
-            ],
-            email: [this.user?.email],
-            adjs: [
-                this.user?.adjs,
-                _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.compose([_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.minLength(3), _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.maxLength(3)]),
-            ],
-        });
-    }
-    ngOnChanges() {
-        // console.log('test', this.user);
-        console.log(this.user, 'depuis ngOnChanges');
-        this.form = this.fb.group({
-            gender: [this.user?.gender],
-            prenom: [this.user?.prenom],
-            nom: [this.user?.nom],
-            adresse: [this.user?.adresse],
-            tel: [
-                this.user?.tel,
-                _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.compose([
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.minLength(10),
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.maxLength(10),
-                ]),
-            ],
-            email: [this.user?.email],
-            adjs: [
-                this.user?.adjs,
-                _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.compose([_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.minLength(3), _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.maxLength(3)]),
-            ],
-        });
-    }
-    selectGender(i) {
-        //console.log(i.target.value, 'gender');
-        this.user.gender = i.target.value;
-    }
-    selectAdj(i) {
-        //console.log(i.target.value, 'adjs');
-        this.adjs = i.target.value;
-    }
-    onSubmit() {
-        //console.log(this.form.status);
-        if (this.form.status === 'VALID') {
-            console.log(this.token, 'token');
-            this.usersService
-                .updateUser(this.form.value, this.token)
-                .subscribe((data) => {
-                //console.log('after update', data);
-                //console.log('submit ok');
-                //console.log(this.form.value);
-                //this.usersService.refreshCollection(data);
-                this.colorBtn = 'warning';
-                setTimeout(() => {
-                    this.colorBtn = 'success';
-                }, 1000);
-                this.isModified = false;
-            });
-            //localStorage.setItem('infos', JSON.stringify(this.form.value));
-        }
-        else {
-            console.log('erreur');
-            //this.error='Veuillez compléter le formulaire'
-        }
-    }
-    ngOnDestroy() {
-        this.form.reset();
-    }
-};
-FormPage.ctorParameters = () => [
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormBuilder },
-    { type: _services_users_service__WEBPACK_IMPORTED_MODULE_2__.UsersService }
-];
-FormPage.propDecorators = {
-    user: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }]
-};
-FormPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
-        selector: 'app-form',
-        template: _form_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
-        styles: [_form_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], FormPage);
-
-
-
-/***/ }),
-
-/***/ 4961:
-/*!*******************************************!*\
-  !*** ./src/app/services/users.service.ts ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "UsersService": () => (/* binding */ UsersService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 8987);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 4505);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ 8759);
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 2340);
-
-
-
-
-
-
-let UsersService = class UsersService {
-  constructor(http) {
-    this.http = http;
-    this.urlApi = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlApi; // eslint-disable-next-line @typescript-eslint/member-ordering
-    //token!: number;
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-
-    this.refreshCollection$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__.BehaviorSubject('');
-  } // attention sans le typage, on ne récupère pas la valeur dans le subscribe !!!!
-
-
-  onSignUp(user) {
-    console.log(user, 'user');
-    return this.http.post(`${this.urlApi}/api/v1/letters`, user);
   }
 
-  onLogin(user) {
-    // const token = localStorage.getItem('token');
-    // let headers_object = new HttpHeaders().set(
-    //   'Authorization',
-    //   'Bearer ' + token
-    // );
-    console.log(user, 'user');
-    return this.http.post(`${this.urlApi}/api/v1/letters/login`, user); // ).pipe(
-    //   catchError(async (err) => console.log(err))
-    // );
-    // return this.http.post<User>(
-    // )
-  } // je commente cette fonction pour des tests
-  // getUser(token): Observable<any> {
-  //   const headers = new HttpHeaders()
-  //     .set('content-type', 'application/json')
-  //     .set('Access-Control-Allow-Origin', '*')
-  //     .set('Authorization', 'Bearer ' + token);
-  //   return this.http.get('http://localhost:4000/api/v1/letters/user', {
-  //     headers,
-  //   });
-  // }
-  // getUser(token) {
-  //   const headers = new HttpHeaders()
-  //     .set('content-type', 'application/json')
-  //     .set('Access-Control-Allow-Origin', '*')
-  //     .set('Authorization', 'Bearer ' + token);
-  //   this.token = token;
-  //   this.refreshCollection(token, headers);
-  //   return this.refreshCollection$;
-  // }
-
-
-  refreshCollection(token) {
-    // console.log('depuis refreshcollection');
-    const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpHeaders().set('content-type', 'application/json').set('Access-Control-Allow-Origin', '*').set('Authorization', 'Bearer ' + token);
-    this.http.get(`${this.urlApi}/api/v1/letters/user`, {
-      headers
-    }).subscribe(data => {
-      this.refreshCollection$.next(data);
-      console.log(data, 'depuis refreshcollection');
-    });
-    return;
-  } // eslint-disable-next-line @typescript-eslint/member-ordering
-
-
-  collection(token) {
-    console.log(token, 'toekn depuis collection');
-    this.refreshCollection(token);
-    return this.refreshCollection$;
-  } // je comment cette fonction pour tester avec le behavior chaud
-
-
-  updateUser(user, token) {
-    return this.http.patch(`${this.urlApi}/api/v1/letters/user`, user).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.tap)(() => {
-      this.refreshCollection(token);
-    }));
-  } // refreshCollection(data): void {
-  //   console.log('depuis refreshcollection', data);
-  //   return this.refreshCollection$.next(data);
-  // }
-  // tentative avec refresh collection
-  // updateUser(user): Observable<any> {
-  //   return this.http
-  //     .patch('http://localhost:4000/api/v1/letters/user', user)
-  //     .pipe(
-  //       tap(() => {
-  //         this.refreshCollection(this.token);
-  //       })
-  //     );
-  // }
-  // saveInfos(infos): Observable<any>{
-  //   console.log(infos, 'depuis')
-  //    return this.http.patch('http://localhost:4000/api/v1/letters/create-application', infos);
-  // }
-
-
-  createApplication(user) {
-    console.log(user, 'depuis');
-    return this.http.patch(`${this.urlApi}/api/v1/letters/create-application`, user);
-  }
-
-  savedApplication(user, newValue, token) {
-    //console.log('data depuis saved application');
-    const data = Object.assign({});
-    data.user = user;
-    data.newValue = newValue; //console.log(data);
-
-    return this.http.patch(`${this.urlApi}/api/v1/letters/saved-application`, data).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.tap)(() => {
-      this.refreshCollection(token);
-    }));
-  }
-
-  deleteApplication(user, letter, token) {
-    const data = Object.assign({});
-    data.user = user;
-    data.toRemove = letter;
-    return this.http.patch(`${this.urlApi}/api/v1/letters/delete-application`, data).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.tap)(() => {
-      this.refreshCollection(token);
-    }));
-  }
-
-  forgotPassword(email) {
-    console.log(email, 'depuis service');
-    return this.http.post(`${this.urlApi}/api/v1/letters/forgot-password`, {
-      email
-    });
-  }
-
-  resetPassword(obj) {
-    console.log('depuis service', obj);
-    return this.http.post(`${this.urlApi}/api/v1/letters/reset-password/`, obj);
-  }
-
-  saveNewPassword(obj) {
-    console.log(obj);
-    return this.http.post(`${this.urlApi}/api/v1/letters/save-new-password`, obj);
-  }
-
-  deleteUser(user) {
-    const {
-      _id
-    } = user;
-    console.log(_id);
-    return this.http.delete(`${this.urlApi}/api/v1/letters/${_id}`);
+  ngOnDestroy() {
+    this.form.reset();
   }
 
 };
 
-UsersService.ctorParameters = () => [{
-  type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient
+FormPage.ctorParameters = () => [{
+  type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormBuilder
+}, {
+  type: _services_users_service__WEBPACK_IMPORTED_MODULE_3__.UsersService
+}, {
+  type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.ChangeDetectorRef
 }];
 
-UsersService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Injectable)({
-  providedIn: 'root'
-})], UsersService);
+FormPage.propDecorators = {
+  user: [{
+    type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
+  }]
+};
+FormPage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+  selector: 'app-form',
+  template: _form_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_form_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], FormPage);
 
 
 /***/ }),
@@ -437,7 +284,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-content>\n\n    <form [formGroup]=\"form\" *ngIf='user'>\n\n        <!-- select gender -->\n        <ion-list>\n            <ion-item>\n                <ion-select placeholder=\"Je suis\" formControlName='gender' (ionChange)=\"selectGender($event)\" required>\n                    <ion-select-option value=\"homme\">Homme</ion-select-option>\n                    <ion-select-option value=\"femme\">Femme</ion-select-option>\n                </ion-select>\n            </ion-item>\n        </ion-list>\n\n        <!-- prenom -->\n        <ion-item>\n            <ion-label position=\"floating\">Prénom</ion-label>\n            <ion-input required formControlName='prenom'></ion-input>\n        </ion-item>\n\n        <!-- nom -->\n        <ion-item>\n            <ion-label position=\"floating\">Nom</ion-label>\n            <ion-input required formControlName='nom'></ion-input>\n        </ion-item>\n\n        <!-- tel -->\n        <ion-item>\n            <ion-label position=\"floating\">Téléphone</ion-label>\n            <ion-input required formControlName='tel'></ion-input>\n        </ion-item>\n\n        <!-- adresse -->\n        <ion-item>\n            <ion-label position=\"floating\">Adresse complète</ion-label>\n            <ion-input required formControlName='adresse'></ion-input>\n        </ion-item>\n\n        <!-- email -->\n        <ion-item>\n            <ion-label position=\"floating\">E-mail</ion-label>\n            <ion-input required formControlName='email'></ion-input>\n        </ion-item>\n\n        <!-- pick adjectives -->\n        <ion-list *ngIf=\"user.gender === 'femme'\">\n            <ion-item>\n                <ion-select formControlName='adjs' placeholder=\"Choisir 3 qualités\" [multiple]=\"true\" required (ionChange)=\"selectAdj($event)\">\n                    <ion-select-option *ngFor='let i of qualitesFemme' value=\"{{i}}\">{{i}}</ion-select-option>\n                </ion-select>\n            </ion-item>\n        </ion-list>\n        <ion-list *ngIf=\"user.gender === 'homme'\">\n            <ion-item>\n                <ion-select placeholder=\"Choisir 3 qualités\" [multiple]=\"true\" (ionChange)=\"selectAdj($event)\" formControlName='adjs' required>\n                    <ion-select-option *ngFor='let i of qualitesHomme' value=\"{{i}}\">{{i}}</ion-select-option>\n                </ion-select>\n            </ion-item>\n        </ion-list>\n\n        <ion-button *ngIf='!isModified' expand=\"block\" (click)='onSubmit()' [disabled]='form.invalid' [color]='colorBtn'>Enregistrer</ion-button>\n        <ion-button *ngIf='isModified' [disabled]='form.invalid' color='danger' expand=\"block\" (click)='onSubmit()'>Mettre à jour</ion-button>\n\n    </form>\n\n</ion-content>\n";
+module.exports = "<ion-content>\n\n\n  <form [formGroup]=\"form\" *ngIf='user'>\n\n    <!-- select gender -->\n    <ion-list>\n      <ion-item>\n        <ion-select placeholder=\"Je suis\" formControlName='gender' (ionChange)=\"selectGender($event)\" required>\n          <ion-select-option value=\"homme\">Homme</ion-select-option>\n          <ion-select-option value=\"femme\">Femme</ion-select-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n\n    <!-- prenom -->\n    <ion-item>\n      <ion-label position=\"floating\">Prénom</ion-label>\n      <ion-input required formControlName='prenom'></ion-input>\n    </ion-item>\n\n    <!-- nom -->\n    <ion-item>\n      <ion-label position=\"floating\">Nom</ion-label>\n      <ion-input required formControlName='nom'></ion-input>\n    </ion-item>\n\n    <!-- tel -->\n    <ion-item>\n      <ion-label position=\"floating\">Téléphone</ion-label>\n      <ion-input required formControlName='tel'></ion-input>\n    </ion-item>\n\n    <!-- adresse -->\n    <ion-item>\n      <ion-label position=\"floating\">Adresse complète</ion-label>\n      <ion-input required formControlName='adresse'></ion-input>\n    </ion-item>\n\n    <!-- email -->\n    <ion-item>\n      <ion-label position=\"floating\">E-mail</ion-label>\n      <ion-input required formControlName='email'></ion-input>\n    </ion-item>\n\n    <!-- pick adjectives -->\n    <ion-list *ngIf=\"user.gender === 'femme'\">\n      <ion-item>\n        <ion-select formControlName='adjs' placeholder=\"Choisir 3 qualités\" [multiple]=\"true\" required\n          (ionChange)=\"selectAdj($event)\">\n          <ion-select-option *ngFor='let i of qualitesFemme' value=\"{{i}}\">{{i}}</ion-select-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n    <ion-list *ngIf=\"user.gender === 'homme'\">\n      <ion-item>\n        <ion-select placeholder=\"Choisir 3 qualités\" [multiple]=\"true\" (ionChange)=\"selectAdj($event)\"\n          formControlName='adjs' required>\n          <ion-select-option *ngFor='let i of qualitesHomme' value=\"{{i}}\">{{i}}</ion-select-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n\n    <ion-item>\n      <div style='display: flex; flex-direction: column'>\n        <ion-button (click)='onSelectPic()' [disabled]='addPicActive' ngDefaultControl>Sélectionner une photo de profil\n        </ion-button>\n        <div *ngIf=\"picSizeExceedeed\">\n          <div class='error'>\n            <p>\n              Désolé, l'image est trop lourde.\n            </p>\n            <p>Veuillez choisir une autre image.</p>\n          </div>\n\n        </div>\n      </div>\n    </ion-item>\n\n\n    <ion-grid *ngIf='imageConverted'>\n      <ion-row>\n        <ion-col size=\"6\">\n          <img [src]=\"imageConverted\">\n          <ion-button (click)='onDeletePic()' color=\"danger\">Supprimer</ion-button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n\n\n    <ion-button expand=\"block\" (click)='onSubmit()' [disabled]='form.invalid' [color]='colorBtn'>\n      Enregistrer</ion-button>\n    <!-- <ion-button *ngIf='isModified' [disabled]='form.invalid' color='danger' expand=\"block\" (click)='onSubmit()'>Mettre à\n      jour</ion-button> -->\n\n  </form>\n\n</ion-content>\n`\n";
 
 /***/ })
 

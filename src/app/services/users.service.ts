@@ -65,6 +65,7 @@ export class UsersService {
 
   refreshCollection(token): Observable<any> {
     // console.log('depuis refreshcollection');
+    console.log(token, 'token depuis refreshcollection');
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Access-Control-Allow-Origin', '*')

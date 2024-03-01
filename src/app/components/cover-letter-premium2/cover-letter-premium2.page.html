@@ -1,43 +1,32 @@
-<!-- <ion-header>
-  <ion-toolbar color="shade">
-    <ion-buttons (click)="closeModal()" slot="start">
-      <ion-button slot="icon">
-        <ion-icon class="icon" name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title class="title-ios ion-text-capitalize"
-      >Modèle Premium 1</ion-title
-    >
-  </ion-toolbar>
-</ion-header> -->
-
-<!-- <meta name="viewport" content="width=device-width, initial-scale=0" /> -->
-
-<!-- documentation : besoin d'exprimer margin en mm (pas px, ni vide) -->
-<!-- <html style="
-    min-width: 210mm;
-    max-height: 297mm !important;
-    overflow: hidden;
-    margin: 0mm !important;
-    height: 100%;
-  ">
--->
-<!-- test -->
-
 <body style="
     max-height: 100%;
     overflow: hidden;
      margin: 0mm !important;
     padding: 0mm !important;
   ">
-  <ion-content id="main">
-    <style>
-      body {
-        margin: 0 !important;
-      }
-    </style>
 
-    <div style='
+  <ion-header>
+    <ion-toolbar color="shade">
+      <ion-buttons (click)="closeModal()" slot="start">
+        <ion-button slot="icon">
+          <ion-icon class="icon" name="arrow-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title class="title-ios ion-text-capitalize">Modèle Premium Waves</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-button (click)="closeModal()">
+      <ion-icon class="icon" name="arrow-back-outline"></ion-icon>Revenir à l'écran d'accueil
+    </ion-button>
+    <div id="main" style='visibility: hidden;'>
+      <style>
+        body {
+          margin: 0 !important;
+        }
+      </style>
+
+      <div style='
             min-width: 100%; /* 210mm converted to pixels */
         max-width: 793px; /* 210mm converted to pixels */
         min-height: 100%; /* 291mm converted to pixels */
@@ -50,199 +39,217 @@
         font-size: 16px;
         font-family: arial;
         text-align: right;'>
-      <div style='position:absolute; width: 100%;top: -400px;'>
-        <svg width="100%" height="100%" id="svg" viewBox="0 0 1440 490" xmlns="http://www.w3.org/2000/svg"
-          class="transition duration-300 ease-in-out delay-150">
-          <path
-            d="M 0,500 L 0,275 C 99.67857142857142,315.0178571428571 199.35714285714283,355.0357142857143 327,334 C 454.64285714285717,312.9642857142857 610.25,230.875 733,177 C 855.75,123.125 945.6428571428571,97.46428571428572 1058,81 C 1170.357142857143,64.53571428571428 1305.1785714285716,57.26785714285714 1440,50 L 1440,500 L 0,500 Z"
-            stroke="none" stroke-width="0" fill="#ff6900" fill-opacity="0.53"
-            class="transition-all duration-300 ease-in-out delay-150 path-0" transform="rotate(-180 720 250)"></path>
-          <path
-            d="M 0,500 L 0,441 C 128.14285714285714,471.55357142857144 256.2857142857143,502.10714285714283 378,473 C 499.7142857142857,443.89285714285717 614.9999999999999,355.12500000000006 723,312 C 831.0000000000001,268.87499999999994 931.7142857142858,271.3928571428571 1050,263 C 1168.2857142857142,254.60714285714286 1304.142857142857,235.30357142857144 1440,216 L 1440,500 L 0,500 Z"
-            stroke="none" stroke-width="0" fill="#ff6900" fill-opacity="1"
-            class="transition-all duration-300 ease-in-out delay-150 path-1" transform="rotate(-180 720 250)"></path>
-        </svg>
-      </div>
+        <div style='position:absolute; width: 100%;top: -400px;'>
+          <svg width="100%" height="100%" id="svg" viewBox="0 0 1440 490" xmlns="http://www.w3.org/2000/svg"
+            class="transition duration-300 ease-in-out delay-150">
+            <path
+              d="M 0,500 L 0,275 C 99.67857142857142,315.0178571428571 199.35714285714283,355.0357142857143 327,334 C 454.64285714285717,312.9642857142857 610.25,230.875 733,177 C 855.75,123.125 945.6428571428571,97.46428571428572 1058,81 C 1170.357142857143,64.53571428571428 1305.1785714285716,57.26785714285714 1440,50 L 1440,500 L 0,500 Z"
+              stroke="none" stroke-width="0" fill="#ff6900" fill-opacity="0.53"
+              class="transition-all duration-300 ease-in-out delay-150 path-0" transform="rotate(-180 720 250)"></path>
+            <path
+              d="M 0,500 L 0,441 C 128.14285714285714,471.55357142857144 256.2857142857143,502.10714285714283 378,473 C 499.7142857142857,443.89285714285717 614.9999999999999,355.12500000000006 723,312 C 831.0000000000001,268.87499999999994 931.7142857142858,271.3928571428571 1050,263 C 1168.2857142857142,254.60714285714286 1304.142857142857,235.30357142857144 1440,216 L 1440,500 L 0,500 Z"
+              stroke="none" stroke-width="0" fill="#ff6900" fill-opacity="1"
+              class="transition-all duration-300 ease-in-out delay-150 path-1" transform="rotate(-180 720 250)"></path>
+          </svg>
+        </div>
 
-      <!-- itop : 0 -->
+        <!-- itop : 0 -->
 
-      <div id="container" style="
+        <div id="container" style="
           padding: 0rem 3rem;
           margin: 0 !important;
           height: 100%;
           position: relative;
         ">
-        <header style="display: flex">
-          <div style="
+          <header style="display: flex">
+            <div style='z-index: 9999;'>
+              <div *ngIf='pic' style="
+                                                    overflow: hidden;
+                                                    width: 200px;
+                                                    height: 200px;
+                                                    border-radius: 50%;
+                                                    border: 15px solid rgb(219, 219, 219);
+                                                    display: flex;
+                                                    justify-content: center;
+                                                    align-items: center;
+                                                    margin-top: 20px;
+
+                                                  ">
+                <img style="width: 100%; height: 100%; object-fit: cover" [src]="pic" />
+              </div>
+            </div>
+            <div style="
               font-size: 16px;
               font-weight: 600;
               text-align: right;
               width: 100%;
             ">
-            <p style="font-size: 24px">{{user.prenom}} {{user.nom}}</p>
-            <p style="padding: 6px; ">
-              {{user?.letters[0].intitule}}
-            </p>
+              <p style="font-size: 24px">{{user.prenom}} {{user.nom}}</p>
+              <p style="padding: 6px; ">
+                {{user?.letters[0].intitule}}
+              </p>
 
-            <p>
-              <ion-icon name="pin"></ion-icon> {{user.adresse}}
-            </p>
-            <p>
-              <ion-icon name="phone-portrait"></ion-icon> {{user.tel}}
-            </p>
-            <p>
-              <ion-icon name="send"></ion-icon> {{user.email}}
-            </p>
-          </div>
-        </header>
+              <p>
+                <ion-icon name="pin"></ion-icon> {{user.adresse}}
+              </p>
+              <p>
+                <ion-icon name="phone-portrait"></ion-icon> {{user.tel}}
+              </p>
+              <p>
+                <ion-icon name="send"></ion-icon> {{user.email}}
+              </p>
+            </div>
+          </header>
 
-        <section id="contactInfos" style="text-align: left">
-          <p>{{user.letters[0].societe}}</p>
-          <p>{{user.letters[0].contact}}</p>
-          <p>{{user.letters[0].adresseSociete}}</p>
-          <p>{{user.letters[0].cpVille}}</p>
-          <p style="padding: 10px 0px; text-align: right">
-            Le {{today | date:'dd/MM/yyyy'}}
-          </p>
-        </section>
+          <section id="contactInfos" style="text-align: left">
+            <p>{{user.letters[0].societe}}</p>
+            <p>{{user.letters[0].contact}}</p>
+            <p>{{user.letters[0].adresseSociete}}</p>
+            <p>{{user.letters[0].cpVille}}</p>
+            <p style="text-align: right">
+              Le {{today | date:'dd/MM/yyyy'}}
+            </p>
+          </section>
 
-        <!-- partie expert -->
-        <section id="content" style="overflow: hidden; text-align: justify;"
-          *ngIf="user.letters[0].experience ===  'expert' ">
+          <!-- partie expert -->
+          <section id="content" style="overflow: hidden; text-align: justify;"
+            *ngIf="user.letters[0].experience ===  'expert' ">
+            <div>
+              <p style="padding-bottom: 10px">
+                Objet : candidature pour le poste de {{user.letters[0].intitule}}
+              </p>
+              <p *ngIf="user.letters[0].contact" style="padding-bottom: 8px; text-align: left">
+                {{user.letters[0].contact}},
+              </p>
+              <p *ngIf="!user.letters[0].contact" style="padding-bottom: 8px; text-align: left">
+                Madame, Monsieur,
+              </p>
+              <!-- premier paragraphe -->
+              <p>
+                Je suis actuellement à la recherche d'un emploi dans votre secteur
+                d'activité, c'est pourquoi, je me permets de vous écrire pour
+                postuler au poste de {{user.letters[0].intitule}}.
+              </p>
+              <!-- second paragraphe -->
+              <p>
+                En effet, j'ai déjà pu exercer à ce poste lors d'une précédente
+                mission. Cette expérience a été très enrichissante et formatrice.
+                Je souhaiterais vivement mettre ces compétences à profit dans
+                votre structure. Dès le début de notre collaboration, vous pourrez
+                constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et
+                {{user.adjs[2]}} des qualités essentielles dans ce métier.
+              </p>
+
+              <!-- conclusion -->
+              <p>
+                Je suis disponible pour m'entretenir avec vous, par téléphone ou
+                en personne afin de déterminer comment je pourrais contribuer au
+                mieux au développement de votre entreprise.
+              </p>
+              <p>
+                Je vous remercie de l'attention que vous pourrez accorder à ma
+                candidature,
+              </p>
+              <p>Sincères salutations,</p>
+
+              <p style="margin: 24px 0rem; font-weight: 600">
+                {{user.prenom}} {{user.nom}}
+              </p>
+              <!-- <div style="border-bottom: 3px solid black"></div> -->
+            </div>
+          </section>
+
+          <!-- partie débutant -->
+          <section id="content" style="overflow: hidden; text-align: justify;"
+            *ngIf="user.letters[0].experience ===  'debutant' ">
+            <div>
+              <p style="padding-bottom: 10px">
+                Objet : candidature pour le poste de {{user.letters[0].intitule}}
+              </p>
+              <p *ngIf="user.letters[0].contact" style="padding-bottom: 8px; text-align: left">
+                {{user.letters[0].contact}},
+              </p>
+              <p *ngIf="!user.letters[0].contact" style="padding-bottom: 8px; text-align: left">
+                Madame, Monsieur,
+              </p>
+              <!-- premier paragraphe -->
+              <p>
+                Je suis actuellement à la recherche d'un emploi dans votre secteur
+                d'activité, c'est pourquoi, je me permets de vous écrire pour
+                postuler au poste de {{user.letters[0].intitule}}.
+              </p>
+              <p>
+                <!-- si pas expérience -->
+                <span *ngIf="user.gender ==='femme'">
+                  Je débute mon activité professionnelle avec beaucoup
+                  d'enthousiasme à l'idée de m'intégrer à une nouvelle équipe et
+                  d'acquérir de nouvelles compétences. Ma capacité d'adaptation et
+                  mon envie de bien faire les tâches demandées me permettront
+                  d'être opérationnelle rapidement. Je souhaiterais vivement
+                  mettre ces compétences à profit dans votre structure.
+                </span>
+                <span *ngIf="user.gender ==='homme'">
+                  Je débute mon activité professionnelle avec beaucoup
+                  d'enthousiasme à l'idée de m'intégrer à une nouvelle équipe et
+                  d'acquérir de nouvelles compétences. Ma capacité d'adaptation et
+                  mon envie de bien faire les tâches demandées me permettront
+                  d'être opérationnel rapidement. Je souhaiterais vivement mettre
+                  ces compétences à profit dans votre structure.
+                </span>
+              </p>
+
+              <!-- second paragraphe -->
+
+              <p>
+                Dès le début de notre collaboration, vous pourrez constater que je
+                suis {{user.adjs[0]}}, {{user.adjs[1]}} et {{user.adjs[2]}}, des
+                qualités essentielles dans ce métier.
+              </p>
+              <!-- conclusion -->
+              <p>
+                Je suis disponible pour m'entretenir avec vous, par téléphone ou
+                en personne afin de déterminer comment je pourrais contribuer au
+                mieux au développement de votre entreprise.
+              </p>
+              <p>
+                Je vous remercie de l'attention que vous pourrez accorder à ma
+                candidature,
+              </p>
+              <p>Sincères salutations,</p>
+
+              <!-- <p style="margin: 24px 0px; font-weight: 600"> -->
+              <p style="margin: 24px 0px; font-weight: 600">
+                {{user.prenom}} {{user.nom}}
+              </p>
+            </div>
+          </section>
+
+          <!-- effets -->
           <div>
-            <p style="padding-bottom: 10px">
-              Objet : candidature pour le poste de {{user.letters[0].intitule}}
-            </p>
-            <p *ngIf="user.letters[0].contact" style="padding-bottom: 8px; text-align: left">
-              {{user.letters[0].contact}},
-            </p>
-            <p *ngIf="!user.letters[0].contact" style="padding-bottom: 8px; text-align: left">
-              Madame, Monsieur,
-            </p>
-            <!-- premier paragraphe -->
-            <p>
-              Je suis actuellement à la recherche d'un emploi dans votre secteur
-              d'activité, c'est pourquoi, je me permets de vous écrire pour
-              postuler au poste de {{user.letters[0].intitule}}.
-            </p>
-            <!-- second paragraphe -->
-            <p>
-              En effet, j'ai déjà pu exercer à ce poste lors d'une précédente
-              mission. Cette expérience a été très enrichissante et formatrice.
-              Je souhaiterais vivement mettre ces compétences à profit dans
-              votre structure. Dès le début de notre collaboration, vous pourrez
-              constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et
-              {{user.adjs[2]}} des qualités essentielles dans ce métier.
-            </p>
-
-            <!-- conclusion -->
-            <p>
-              Je suis disponible pour m'entretenir avec vous, par téléphone ou
-              en personne afin de déterminer comment je pourrais contribuer au
-              mieux au développement de votre entreprise.
-            </p>
-            <p>
-              Je vous remercie de l'attention que vous pourrez accorder à ma
-              candidature,
-            </p>
-            <p>Sincères salutations,</p>
-
-            <p style="margin: 24px 0rem; font-weight: 600">
-              {{user.prenom}} {{user.nom}}
-            </p>
-            <!-- <div style="border-bottom: 3px solid black"></div> -->
-          </div>
-        </section>
-
-        <!-- partie débutant -->
-        <section id="content" style="overflow: hidden; text-align: justify;"
-          *ngIf="user.letters[0].experience ===  'debutant' ">
-          <div>
-            <p style="padding-bottom: 10px">
-              Objet : candidature pour le poste de {{user.letters[0].intitule}}
-            </p>
-            <p *ngIf="user.letters[0].contact" style="padding-bottom: 8px; text-align: left">
-              {{user.letters[0].contact}},
-            </p>
-            <p *ngIf="!user.letters[0].contact" style="padding-bottom: 8px; text-align: left">
-              Madame, Monsieur,
-            </p>
-            <!-- premier paragraphe -->
-            <p>
-              Je suis actuellement à la recherche d'un emploi dans votre secteur
-              d'activité, c'est pourquoi, je me permets de vous écrire pour
-              postuler au poste de {{user.letters[0].intitule}}.
-            </p>
-            <p>
-              <!-- si pas expérience -->
-              <span *ngIf="user.gender ==='femme'">
-                Je débute mon activité professionnelle avec beaucoup
-                d'enthousiasme à l'idée de m'intégrer à une nouvelle équipe et
-                d'acquérir de nouvelles compétences. Ma capacité d'adaptation et
-                mon envie de bien faire les tâches demandées me permettront
-                d'être opérationnelle rapidement. Je souhaiterais vivement
-                mettre ces compétences à profit dans votre structure.
-              </span>
-              <span *ngIf="user.gender ==='homme'">
-                Je débute mon activité professionnelle avec beaucoup
-                d'enthousiasme à l'idée de m'intégrer à une nouvelle équipe et
-                d'acquérir de nouvelles compétences. Ma capacité d'adaptation et
-                mon envie de bien faire les tâches demandées me permettront
-                d'être opérationnel rapidement. Je souhaiterais vivement mettre
-                ces compétences à profit dans votre structure.
-              </span>
-            </p>
-
-            <!-- second paragraphe -->
-
-            <p>
-              Dès le début de notre collaboration, vous pourrez constater que je
-              suis {{user.adjs[0]}}, {{user.adjs[1]}} et {{user.adjs[2]}}, des
-              qualités essentielles dans ce métier.
-            </p>
-            <!-- conclusion -->
-            <p>
-              Je suis disponible pour m'entretenir avec vous, par téléphone ou
-              en personne afin de déterminer comment je pourrais contribuer au
-              mieux au développement de votre entreprise.
-            </p>
-            <p>
-              Je vous remercie de l'attention que vous pourrez accorder à ma
-              candidature,
-            </p>
-            <p>Sincères salutations,</p>
-
-            <!-- <p style="margin: 24px 0px; font-weight: 600"> -->
-            <p style="margin: 24px 0px; font-weight: 600">
-              {{user.prenom}} {{user.nom}}
-            </p>
-          </div>
-        </section>
-
-        <!-- effets -->
-        <div>
-          <div style='position: absolute;
+            <div style='position: absolute;
         width: 200%;
         left: -111px;
         bottom: -400px;
         '>
-            <svg width="100%" height="100%" id="svg" viewBox="0 0 1440 490" xmlns="http://www.w3.org/2000/svg"
-              class="transition duration-300 ease-in-out delay-150">
-              <path
-                d="M 0,500 L 0,275 C 203.86666666666667,276.6 407.73333333333335,278.20000000000005 550,254 C 692.2666666666667,229.79999999999998 772.9333333333334,179.79999999999998 911,154 C 1049.0666666666666,128.20000000000002 1244.5333333333333,126.60000000000001 1440,125 L 1440,500 L 0,500 Z"
-                stroke="none" stroke-width="0" fill="#ff6900" fill-opacity="0.53"
-                class="transition-all duration-300 ease-in-out delay-150 path-0"></path>
-              <path
-                d="M 0,500 L 0,441 C 178.2666666666667,472.20000000000005 356.5333333333334,503.40000000000003 531,489 C 705.4666666666666,474.59999999999997 876.1333333333334,414.59999999999997 1027,374 C 1177.8666666666666,333.40000000000003 1308.9333333333334,312.20000000000005 1440,291 L 1440,500 L 0,500 Z"
-                stroke="none" stroke-width="0" fill="#ff6900" fill-opacity="1"
-                class="transition-all duration-300 ease-in-out delay-150 path-1"></path>
-            </svg>
+              <svg width="100%" height="100%" id="svg" viewBox="0 0 1440 490" xmlns="http://www.w3.org/2000/svg"
+                class="transition duration-300 ease-in-out delay-150">
+                <path
+                  d="M 0,500 L 0,275 C 203.86666666666667,276.6 407.73333333333335,278.20000000000005 550,254 C 692.2666666666667,229.79999999999998 772.9333333333334,179.79999999999998 911,154 C 1049.0666666666666,128.20000000000002 1244.5333333333333,126.60000000000001 1440,125 L 1440,500 L 0,500 Z"
+                  stroke="none" stroke-width="0" fill="#ff6900" fill-opacity="0.53"
+                  class="transition-all duration-300 ease-in-out delay-150 path-0"></path>
+                <path
+                  d="M 0,500 L 0,441 C 178.2666666666667,472.20000000000005 356.5333333333334,503.40000000000003 531,489 C 705.4666666666666,474.59999999999997 876.1333333333334,414.59999999999997 1027,374 C 1177.8666666666666,333.40000000000003 1308.9333333333334,312.20000000000005 1440,291 L 1440,500 L 0,500 Z"
+                  stroke="none" stroke-width="0" fill="#ff6900" fill-opacity="1"
+                  class="transition-all duration-300 ease-in-out delay-150 path-1"></path>
+              </svg>
+            </div>
           </div>
+
         </div>
 
       </div>
-
     </div>
+
 
   </ion-content>
 </body>

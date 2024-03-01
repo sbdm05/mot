@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PasswordService": () => (/* binding */ PasswordService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2560);
 
 
@@ -66,7 +66,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "UsersService": () => (/* binding */ UsersService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 8987);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 4505);
@@ -129,6 +129,7 @@ let UsersService = class UsersService {
 
   refreshCollection(token) {
     // console.log('depuis refreshcollection');
+    console.log(token, 'token depuis refreshcollection');
     const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpHeaders().set('content-type', 'application/json').set('Access-Control-Allow-Origin', '*').set('Authorization', 'Bearer ' + token);
     this.http.get(`${this.urlApi}/api/v1/letters/user`, {
       headers
@@ -244,7 +245,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SignupPageRoutingModule": () => (/* binding */ SignupPageRoutingModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 124);
 /* harmony import */ var _signup_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./signup.page */ 771);
@@ -281,7 +282,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SignupPageModule": () => (/* binding */ SignupPageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 4666);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 2508);
@@ -324,10 +325,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SignupPage": () => (/* binding */ SignupPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _signup_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./signup.page.html?ngResource */ 1998);
 /* harmony import */ var _signup_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./signup.page.scss?ngResource */ 2444);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 2508);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 124);
 /* harmony import */ var _services_password_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/password.service */ 4688);
@@ -342,12 +343,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let SignupPage = class SignupPage {
-    constructor(fb, router, usersService, passwordService) {
+    constructor(fb, router, usersService, passwordService, cdr) {
         this.fb = fb;
         this.router = router;
         this.usersService = usersService;
         this.passwordService = passwordService;
+        this.cdr = cdr;
         this.user = new _user_user__WEBPACK_IMPORTED_MODULE_4__.User();
         console.log('test depuis le constructor');
         const token = localStorage.getItem('token');
@@ -356,10 +359,11 @@ let SignupPage = class SignupPage {
             try {
                 this.usersService.collection(token).subscribe((data) => {
                     // console.log(data.user, 'data');
-                    //this.user = data.user;
+                    // this.user = data.user;
                     console.log(data, 'user');
                     if (data) {
                         this.user = data.user;
+                        this.cdr.detectChanges();
                         this.router.navigate(['tabs', 'tab1']);
                     }
                     else {
@@ -373,6 +377,9 @@ let SignupPage = class SignupPage {
             catch (error) {
                 console.log(error, 'error');
             }
+        }
+        if (this.user) {
+            this.router.navigate(['tabs', 'tab1']);
         }
     }
     ngOnInit() {
@@ -419,10 +426,11 @@ SignupPage.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormBuilder },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
     { type: _services_users_service__WEBPACK_IMPORTED_MODULE_3__.UsersService },
-    { type: _services_password_service__WEBPACK_IMPORTED_MODULE_2__.PasswordService }
+    { type: _services_password_service__WEBPACK_IMPORTED_MODULE_2__.PasswordService },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_7__.ChangeDetectorRef }
 ];
-SignupPage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+SignupPage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-signup',
         template: _signup_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_signup_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]

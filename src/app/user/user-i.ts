@@ -1,3 +1,5 @@
+
+
 export interface UserI {
   gender: string;
   prenom: string;
@@ -7,6 +9,5 @@ export interface UserI {
   email: string;
   pwd: string;
   adjs: [];
-  pic: string;
   letters: [];
 }

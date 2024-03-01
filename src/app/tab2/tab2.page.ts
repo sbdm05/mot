@@ -47,6 +47,8 @@ export class Tab2Page implements OnInit, OnChanges {
   public addPicActive = false;
 
   public selectedPic!: any;
+  public imageConverted;
+  public picSizeExceedeed = false;
 
   // ici ajouter vérification de l'utilisateur
 
@@ -58,20 +60,17 @@ export class Tab2Page implements OnInit, OnChanges {
     private usersService: UsersService,
     private fb: FormBuilder,
     private modalCtrl: ModalController,
-    private router: Router,
-    private modalStateService: ModalStateService,
-    private renderer: Renderer2,
-    private elementRef: ElementRef
+    private router: Router
   ) {
     // souscrire à l'observable()
-    this.modalStateService.modalstate$.subscribe({
-      next: (data) => {
-        console.log(data);
+    // this.modalStateService.modalstate$.subscribe({
+    //   next: (data) => {
+    //     console.log(data);
 
-        this.closeModal();
-        //this.router.navigate(['/tabs/tab2']);
-      },
-    });
+    //     this.closeModal();
+    //     //this.router.navigate(['/tabs/tab2']);
+    //   },
+    // });
     // check token
     this.token = localStorage.getItem('token');
     //console.log(token, 'token');
@@ -86,6 +85,7 @@ export class Tab2Page implements OnInit, OnChanges {
           const { user } = data;
 
           this.user = user;
+          this.router.navigate(['tabs', 'tab2']);
           //console.log(this.user, 'depuis tab2');
 
           this.form = this.fb.group({
@@ -116,46 +116,65 @@ export class Tab2Page implements OnInit, OnChanges {
     } else {
       this.router.navigate(['/']);
     }
+
+    // est-ce que la photo de profil existe ?
+    this.selectedPic = localStorage.getItem('pic');
+    if (this.selectedPic) {
+      this.imageConverted = this.selectedPic;
+    }
   }
 
   ngOnInit() {}
 
   ngOnChanges() {}
 
-
   async onSelectPic() {
-    this.form.get('picture')?.setErrors(null);
+    this.picSizeExceedeed = false;
+
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Base64,
-      source: CameraSource.Camera,
+      source: CameraSource.Photos,
     });
 
-    console.log(image, '[IMAGE ONSELECTPIC]');
+    // console.log(image, '[IMAGE ONSELECTPIC]');
 
     if (image.base64String) {
-      //console.log(image.base64String, '[IMAGE.BASE64STRING');
+      console.log(image.base64String, '[IMAGE.BASE64STRING');
 
       // check image size
       const sizeInBytes = image.base64String.length * 0.75;
-      const maxSizeInBytes = 1048576;
+      const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
       if (sizeInBytes <= maxSizeInBytes) {
         // pour affichage dans template HTML
-        let imageConverted;
-        // eslint-disable-next-line prefer-const
-        imageConverted = 'data:image/jpeg;base64, ' + image.base64String;
 
-        this.user.pic = imageConverted;
+        // eslint-disable-next-line prefer-const
+        this.imageConverted = 'data:image/jpeg;base64, ' + image.base64String;
+        
+
+        //const buffer = this.base64ToBuffer(image.base64String);
+
+        //this.user.pic = this.imageConverted;
+
+        // on store l'image dans le localStorage
+        localStorage.setItem('pic', this.imageConverted);
+
         // disabled the add button
         this.addPicActive = true;
-
-        this.form.get('picture')?.setErrors(null);
       } else {
         console.log('erreur dans la taille');
-        this.form.get('picture')?.setErrors({ imageSizeExceeded: true });
+        this.picSizeExceedeed = true;
       }
     }
+  }
+
+  onDeletePic() {
+    localStorage.removeItem('pic');
+    console.log('deleted');
+
+    this.imageConverted = null;
+    this.addPicActive = false;
   }
   // étape 1 pour enregistrer les infos
   saveInfos() {
@@ -169,12 +188,11 @@ export class Tab2Page implements OnInit, OnChanges {
     // call service
     this.usersService.createApplication(this.user).subscribe((data) => {
       this.colorBtn = 'warning';
+      this.textBtn = 'Enregistrement en cours';
 
       setTimeout(() => {
         this.colorBtn = 'success';
-        // ici je veux remove la classe accordion-expanded à l'element avec id first
-
-        // ici je veux ajouter la classe accordion-expanded à l'element avec id second
+        this.textBtn = 'Enregistrer';
       }, 1000);
     });
   }
@@ -236,6 +254,7 @@ export class Tab2Page implements OnInit, OnChanges {
     // attention l'objet envoyé (ici user) doit correspondre à l'objet dans @Input()
     const coverLetter = await this.createModal(componentType, {
       user,
+      pic: this.imageConverted,
     });
     await coverLetter.present();
     // Store the modal instance
@@ -256,30 +275,6 @@ export class Tab2Page implements OnInit, OnChanges {
     console.log(componentProps); // exists
 
     await modal.present();
-
-    // Wait for the modal to be displayed before taking a screenshot
-    //await new Promise((resolve) => setTimeout(resolve, 500)); // Adjust the delay as needed
-
-    // Get the modal content by its class or ID
-    //const modalContent = document.querySelector('#main') as HTMLElement; // Adjust the selector as needed
-
-    // Take a screenshot of the modal content using html2canvas
-    // const canvas = await html2canvas(modalContent);
-    // console.log(canvas);
-    // const imageDataUrl = canvas.toDataURL('image/jpeg');
-    // console.log(imageDataUrl);
-
-    // const imageModal = await this.modalCtrl.create({
-    //   component: TemplateScreenshotPage, // Replace YourImageComponent with the component that will display the image
-    //   componentProps: {
-    //     imageDataUrl,
-    //   },
-    // });
-
-    //await modal.dismiss();
-    //await imageModal.present();
-
-    //return imageModal;
 
     return modal;
   }

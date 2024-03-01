@@ -20,6 +20,7 @@ import { TemplateScreenshotPage } from '../template-screenshot/template-screensh
 })
 export class CoverLetterPremium4Page implements AfterViewInit {
   @Input() user: User;
+  @Input() pic: string;
   content: string;
   contentHTML: any;
   today: number = Date.now();
@@ -27,7 +28,9 @@ export class CoverLetterPremium4Page implements AfterViewInit {
   constructor(
     private modalController: ModalController,
     private pdfGenerator: PDFGenerator
-  ) {}
+  ) {
+
+  }
 
   ngAfterViewInit() {
     this.onGeneratePreview();

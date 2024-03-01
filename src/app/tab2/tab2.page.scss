@@ -8,3 +8,9 @@ ion-label{
     text-overflow: ellipsis!important;
     line-height: 3rem;
 }
+.ion-color-light{
+  --ion-color-base: #ffb802 !important;
+}
+ion-select{
+  white-space: break-spaces;
+}

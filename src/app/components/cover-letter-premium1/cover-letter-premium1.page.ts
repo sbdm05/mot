@@ -17,6 +17,7 @@ import { TemplateScreenshotPage } from '../template-screenshot/template-screensh
 })
 export class CoverLetterPremium1Page implements AfterViewInit {
   @Input() user: User;
+  @Input() pic: string;
   content: string;
   contentHTML: any;
   today: number = Date.now();

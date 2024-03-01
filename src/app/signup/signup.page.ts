@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PasswordService } from '../services/password.service';
 import { UsersService } from '../services/users.service';
 import { User } from '../user/user';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +22,8 @@ export class SignupPage implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private usersService: UsersService,
-    private passwordService: PasswordService
+    private passwordService: PasswordService,
+    private cdr: ChangeDetectorRef
   ) {
     console.log('test depuis le constructor');
     const token = localStorage.getItem('token');
@@ -31,10 +33,11 @@ export class SignupPage implements OnInit {
         this.usersService.collection(token).subscribe(
           (data) => {
             // console.log(data.user, 'data');
-            //this.user = data.user;
+            // this.user = data.user;
             console.log(data, 'user');
             if (data) {
               this.user = data.user;
+              this.cdr.detectChanges();
               this.router.navigate(['tabs', 'tab1']);
             } else {
               console.log('pas de data');
@@ -49,6 +52,9 @@ export class SignupPage implements OnInit {
       } catch (error) {
         console.log(error, 'error');
       }
+    }
+    if (this.user) {
+      this.router.navigate(['tabs', 'tab1']);
     }
   }
 
