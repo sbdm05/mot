@@ -119,6 +119,7 @@ let LoginPage = class LoginPage {
                 this.usersService.collection(token).subscribe((data) => {
                     // console.log(data.user, 'data');
                     this.user = data.user;
+                    this.usersService.setUserData(this.user);
                     // console.log(this.user, 'user');
                     this.cdr.detectChanges();
                     this.router.navigate(['tabs', 'tab1']);
@@ -139,17 +140,9 @@ let LoginPage = class LoginPage {
         const user = this.form.value;
         this.errorMessage = '';
         console.log('ok', user);
-        this.usersService.onLogin(user).subscribe(
-        // (data) => {
-        // if (data) {
-        //   console.log(data, 'return');
-        //   localStorage.setItem('token', data.token);
-        //   this.router.navigate(['tabs/tab1']);
-        // } else {
-        //   console.log('not working');
-        // }
-        (data) => {
+        this.usersService.onLogin(user).subscribe((data) => {
             console.log(data);
+            this.usersService.setUserData(user);
             localStorage.setItem('token', data.token);
             this.router.navigate(['tabs', 'tab1']);
             this.form.reset();
@@ -157,21 +150,6 @@ let LoginPage = class LoginPage {
             console.log(err.error.msg, 'err');
             this.errorMessage = err.error.msg;
         }, () => console.log('done'));
-        // this.usersService.onLogin(user).subscribe({
-        //   next(data) {
-        //     console.log(data, 'return');
-        //     localStorage.setItem('token', data.token);
-        //     this.router.navigate(['tabs', 'tab1']);
-        //   },
-        //   // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-        //   error(e) {
-        //     console.log(e, 'erreur');
-        //   },
-        //   // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-        //   complete() {
-        //     console.log('done');
-        //   },
-        // });
     }
 };
 LoginPage.ctorParameters = () => [
@@ -188,185 +166,6 @@ LoginPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
     })
 ], LoginPage);
 
-
-
-/***/ }),
-
-/***/ 4961:
-/*!*******************************************!*\
-  !*** ./src/app/services/users.service.ts ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "UsersService": () => (/* binding */ UsersService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 2321);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 8987);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 4505);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ 8759);
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 2340);
-
-
-
-
-
-
-let UsersService = class UsersService {
-  constructor(http) {
-    this.http = http;
-    this.urlApi = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlApi; // eslint-disable-next-line @typescript-eslint/member-ordering
-    //token!: number;
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-
-    this.refreshCollection$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__.BehaviorSubject('');
-  } // attention sans le typage, on ne récupère pas la valeur dans le subscribe !!!!
-
-
-  onSignUp(user) {
-    console.log(user, 'user');
-    return this.http.post(`${this.urlApi}/api/v1/letters`, user);
-  }
-
-  onLogin(user) {
-    // const token = localStorage.getItem('token');
-    // let headers_object = new HttpHeaders().set(
-    //   'Authorization',
-    //   'Bearer ' + token
-    // );
-    console.log(user, 'user');
-    return this.http.post(`${this.urlApi}/api/v1/letters/login`, user); // ).pipe(
-    //   catchError(async (err) => console.log(err))
-    // );
-    // return this.http.post<User>(
-    // )
-  } // je commente cette fonction pour des tests
-  // getUser(token): Observable<any> {
-  //   const headers = new HttpHeaders()
-  //     .set('content-type', 'application/json')
-  //     .set('Access-Control-Allow-Origin', '*')
-  //     .set('Authorization', 'Bearer ' + token);
-  //   return this.http.get('http://localhost:4000/api/v1/letters/user', {
-  //     headers,
-  //   });
-  // }
-  // getUser(token) {
-  //   const headers = new HttpHeaders()
-  //     .set('content-type', 'application/json')
-  //     .set('Access-Control-Allow-Origin', '*')
-  //     .set('Authorization', 'Bearer ' + token);
-  //   this.token = token;
-  //   this.refreshCollection(token, headers);
-  //   return this.refreshCollection$;
-  // }
-
-
-  refreshCollection(token) {
-    // console.log('depuis refreshcollection');
-    console.log(token, 'token depuis refreshcollection');
-    const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpHeaders().set('content-type', 'application/json').set('Access-Control-Allow-Origin', '*').set('Authorization', 'Bearer ' + token);
-    this.http.get(`${this.urlApi}/api/v1/letters/user`, {
-      headers
-    }).subscribe(data => {
-      this.refreshCollection$.next(data);
-      console.log(data, 'depuis refreshcollection');
-    });
-    return;
-  } // eslint-disable-next-line @typescript-eslint/member-ordering
-
-
-  collection(token) {
-    console.log(token, 'toekn depuis collection');
-    this.refreshCollection(token);
-    return this.refreshCollection$;
-  } // je comment cette fonction pour tester avec le behavior chaud
-
-
-  updateUser(user, token) {
-    return this.http.patch(`${this.urlApi}/api/v1/letters/user`, user).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.tap)(() => {
-      this.refreshCollection(token);
-    }));
-  } // refreshCollection(data): void {
-  //   console.log('depuis refreshcollection', data);
-  //   return this.refreshCollection$.next(data);
-  // }
-  // tentative avec refresh collection
-  // updateUser(user): Observable<any> {
-  //   return this.http
-  //     .patch('http://localhost:4000/api/v1/letters/user', user)
-  //     .pipe(
-  //       tap(() => {
-  //         this.refreshCollection(this.token);
-  //       })
-  //     );
-  // }
-  // saveInfos(infos): Observable<any>{
-  //   console.log(infos, 'depuis')
-  //    return this.http.patch('http://localhost:4000/api/v1/letters/create-application', infos);
-  // }
-
-
-  createApplication(user) {
-    console.log(user, 'depuis');
-    return this.http.patch(`${this.urlApi}/api/v1/letters/create-application`, user);
-  }
-
-  savedApplication(user, newValue, token) {
-    //console.log('data depuis saved application');
-    const data = Object.assign({});
-    data.user = user;
-    data.newValue = newValue; //console.log(data);
-
-    return this.http.patch(`${this.urlApi}/api/v1/letters/saved-application`, data).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.tap)(() => {
-      this.refreshCollection(token);
-    }));
-  }
-
-  deleteApplication(user, letter, token) {
-    const data = Object.assign({});
-    data.user = user;
-    data.toRemove = letter;
-    return this.http.patch(`${this.urlApi}/api/v1/letters/delete-application`, data).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.tap)(() => {
-      this.refreshCollection(token);
-    }));
-  }
-
-  forgotPassword(email) {
-    console.log(email, 'depuis service');
-    return this.http.post(`${this.urlApi}/api/v1/letters/forgot-password`, {
-      email
-    });
-  }
-
-  resetPassword(obj) {
-    console.log('depuis service', obj);
-    return this.http.post(`${this.urlApi}/api/v1/letters/reset-password/`, obj);
-  }
-
-  saveNewPassword(obj) {
-    console.log(obj);
-    return this.http.post(`${this.urlApi}/api/v1/letters/save-new-password`, obj);
-  }
-
-  deleteUser(user) {
-    const {
-      _id
-    } = user;
-    console.log(_id);
-    return this.http.delete(`${this.urlApi}/api/v1/letters/${_id}`);
-  }
-
-};
-
-UsersService.ctorParameters = () => [{
-  type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient
-}];
-
-UsersService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Injectable)({
-  providedIn: 'root'
-})], UsersService);
 
 
 /***/ }),

@@ -20,15 +20,15 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: '',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_tabs_tabs_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./tabs/tabs.module */ 5564)).then((m) => m.TabsPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_tabs_tabs_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./tabs/tabs.module */ 5564)).then((m) => m.TabsPageModule),
     },
     {
         path: 'form',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_users_service_ts-node_modules_capacitor_camera_dist_esm_index_js"), __webpack_require__.e("default-src_app_form_form_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./form/form.module */ 9659)).then((m) => m.FormPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_capacitor_core_dist_index_js"), __webpack_require__.e("default-src_app_form_form_module_ts"), __webpack_require__.e("common")]).then(__webpack_require__.bind(__webpack_require__, /*! ./form/form.module */ 9659)).then((m) => m.FormPageModule),
     },
     {
         path: 'login',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_login_login_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 107)).then((m) => m.LoginPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 107)).then((m) => m.LoginPageModule),
     },
     {
         path: 'signup',
@@ -36,11 +36,11 @@ const routes = [
     },
     {
         path: 'reset-password/:id/:token',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_reset-password_reset-password_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./reset-password/reset-password.module */ 4371)).then((m) => m.ResetPasswordPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_reset-password_reset-password_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./reset-password/reset-password.module */ 4371)).then((m) => m.ResetPasswordPageModule),
     },
     {
         path: 'forgot-password',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_forgot-password_forgot-password_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./forgot-password/forgot-password.module */ 7157)).then((m) => m.ForgotPasswordPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_forgot-password_forgot-password_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./forgot-password/forgot-password.module */ 7157)).then((m) => m.ForgotPasswordPageModule),
     },
     {
         path: 'cover-letter-simple',
@@ -69,6 +69,10 @@ const routes = [
     {
         path: 'cover-letter-premium4',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium4_cover-letter-premium4_page_ts"), __webpack_require__.e("src_app_components_cover-letter-premium4_cover-letter-premium4_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/cover-letter-premium4/cover-letter-premium4.module */ 8053)).then((m) => m.CoverLetterPremium4PageModule),
+    },
+    {
+        path: 'add-sub-block',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_capacitor_core_dist_index_js"), __webpack_require__.e("default-src_app_components_add-sub-block_add-sub-block_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/add-sub-block/add-sub-block.module */ 421)).then(m => m.AddSubBlockPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -441,6 +445,7 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     urlApi: 'https://mes-lettres.vercel.app',
+    glassfyKey: '9a9f77f67c904a32a0ef4ef48d14d79f',
 };
 /*
  * For easier debugging in development mode, you can import the following file

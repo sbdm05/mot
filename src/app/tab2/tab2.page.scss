@@ -9,8 +9,15 @@ ion-label{
     line-height: 3rem;
 }
 .ion-color-light{
-  --ion-color-base: #ffb802 !important;
+  --ion-color-base: #ababab !important;
 }
 ion-select{
   white-space: break-spaces;
+}
+
+.inactive-part {
+  opacity: 0.5;
+  /* Réduit l'opacité pour rendre l'élément gris et atténuer son apparence */
+  pointer-events: none;
+  /* Désactive les interactions de pointer (clics, survols, etc.) avec l'élément */
 }

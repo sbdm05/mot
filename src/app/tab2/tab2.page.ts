@@ -31,6 +31,7 @@ import {
   CameraSource,
   Photo,
 } from '@capacitor/camera';
+import { PurchaseService } from '../services/purchase/purchase.service';
 
 @Component({
   selector: 'app-tab2',
@@ -50,6 +51,8 @@ export class Tab2Page implements OnInit, OnChanges {
   public imageConverted;
   public picSizeExceedeed = false;
 
+  public purchaseState = this.purchaseService.purchaseState;
+
   // ici ajouter vérification de l'utilisateur
 
   public user!: User;
@@ -60,71 +63,126 @@ export class Tab2Page implements OnInit, OnChanges {
     private usersService: UsersService,
     private fb: FormBuilder,
     private modalCtrl: ModalController,
-    private router: Router
+    private router: Router,
+    private purchaseService: PurchaseService
   ) {
-    // souscrire à l'observable()
-    // this.modalStateService.modalstate$.subscribe({
-    //   next: (data) => {
-    //     console.log(data);
-
-    //     this.closeModal();
-    //     //this.router.navigate(['/tabs/tab2']);
-    //   },
-    // });
-    // check token
-    this.token = localStorage.getItem('token');
-    //console.log(token, 'token');
-    // 1 - je vérifie l'identite du user
-    if (this.token) {
-      try {
-        //console.log('test');
-
-        // ici je commente this.usersService.getUser(token).subscribe((data) => { et je remplace avec refreshCollecton
-        this.usersService.collection(this.token).subscribe((data) => {
-          //console.log(data.user, 'data');
-          const { user } = data;
-
-          this.user = user;
-          this.router.navigate(['tabs', 'tab2']);
-          //console.log(this.user, 'depuis tab2');
-
-          this.form = this.fb.group({
-            intitule: [
-              this.user?.letters[0]?.intitule || '',
-              Validators.required,
-            ],
-            experience: [
-              this.user?.letters[0]?.experience || '',
-              Validators.required,
-            ],
-            societe: [
-              this.user?.letters[0]?.societe || '',
-              Validators.required,
-            ],
-            contact: [this.user?.letters[0]?.contact || 'Madame'],
-            adresseSociete: [
-              this.user?.letters[0]?.adresseSociete || '',
-              Validators.required,
-            ],
-            cpVille: [
-              this.user?.letters[0]?.cpVille || '',
-              Validators.required,
-            ],
-          });
-        });
-      } catch (error) {}
-    } else {
-      this.router.navigate(['/']);
-    }
-
     // est-ce que la photo de profil existe ?
-    this.selectedPic = localStorage.getItem('pic');
+    this.selectedPic = sessionStorage.getItem('pic');
     if (this.selectedPic) {
+      console.log(this.selectedPic, 'yes');
+
       this.imageConverted = this.selectedPic;
+    } else {
+      console.log(this.selectedPic, 'nopic');
+
+      this.imageConverted = null;
     }
   }
 
-  ngOnInit() {}
+  xalertMissingInfo(user) {
+    console.log(user);
+
+    if (user.adjs.length === 0) {
+      console.log('pas de adjs');
+    } else {
+      console.log('adjs ok');
+    }
+  }
+
+  // ngOnInit() {
+  //   // check token
+  //   this.token = localStorage.getItem('token');
+  //   //console.log(token, 'token');
+  //   // 1 - je vérifie l'identite du user
+  //   if (this.token) {
+  //     try {
+  //       //console.log('test');
+
+  //       // ici je commente this.usersService.getUser(token).subscribe((data) => { et je remplace avec refreshCollecton
+  //       this.usersService.collection(this.token).subscribe((data) => {
+  //         //console.log(data.user, 'data');
+  //         const { user } = data;
+  //         console.log(user, 'user');
+  //         if (user) {
+  //           this.alertMissingInfo(user);
+  //         }
+
+  //         this.user = user;
+  //         this.router.navigate(['tabs', 'tab2']);
+  //         //console.log(this.user, 'depuis tab2');
+
+  //         this.form = this.fb.group({
+  //           intitule: [
+  //             this.user?.letters[0]?.intitule || '',
+  //             Validators.required,
+  //           ],
+  //           experience: [
+  //             this.user?.letters[0]?.experience || '',
+  //             Validators.required,
+  //           ],
+  //           societe: [
+  //             this.user?.letters[0]?.societe || '',
+  //             Validators.required,
+  //           ],
+  //           contact: [this.user?.letters[0]?.contact || 'Madame'],
+  //           adresseSociete: [
+  //             this.user?.letters[0]?.adresseSociete || '',
+  //             Validators.required,
+  //           ],
+  //           cpVille: [
+  //             this.user?.letters[0]?.cpVille || '',
+  //             Validators.required,
+  //           ],
+  //         });
+  //       });
+  //     } catch (error) {}
+  //   } else {
+  //     this.router.navigate(['/']);
+  //   }
+  // }
+
+  ionViewDidEnter() {
+    console.log('test enter');
+    this.selectedPic = sessionStorage.getItem('pic');
+    if (this.selectedPic) {
+      console.log(this.selectedPic, 'yes');
+
+      this.imageConverted = this.selectedPic;
+    } else {
+      this.imageConverted = null;
+    }
+  }
+
+  //tettfdsf  //test
+
+  ngOnInit(): void {
+    this.usersService.userData$.subscribe((data) => {
+      if (data) {
+        console.log(data, 'data depuis tab2'); // Accéder aux données stockées dans le BehaviorSubject
+        //const { user } = data;
+        this.user = data;
+        console.log(this.user, 'userrrr');
+
+        this.form = this.fb.group({
+          intitule: [
+            this.user?.letters[0]?.intitule || '',
+            Validators.required,
+          ],
+          experience: [
+            this.user?.letters[0]?.experience || '',
+            Validators.required,
+          ],
+          societe: [this.user?.letters[0]?.societe || '', Validators.required],
+          contact: [this.user?.letters[0]?.contact || 'Madame'],
+          adresseSociete: [
+            this.user?.letters[0]?.adresseSociete || '',
+            Validators.required,
+          ],
+          cpVille: [this.user?.letters[0]?.cpVille || '', Validators.required],
+        });
+      }
+    });
+  }
 
   ngOnChanges() {}
 
@@ -151,14 +209,13 @@ export class Tab2Page implements OnInit, OnChanges {
 
         // eslint-disable-next-line prefer-const
         this.imageConverted = 'data:image/jpeg;base64, ' + image.base64String;
-        
 
         //const buffer = this.base64ToBuffer(image.base64String);
 
         //this.user.pic = this.imageConverted;
 
         // on store l'image dans le localStorage
-        localStorage.setItem('pic', this.imageConverted);
+        sessionStorage.setItem('pic', this.imageConverted);
 
         // disabled the add button
         this.addPicActive = true;
@@ -170,7 +227,7 @@ export class Tab2Page implements OnInit, OnChanges {
   }
 
   onDeletePic() {
-    localStorage.removeItem('pic');
+    sessionStorage.removeItem('pic');
     console.log('deleted');
 
     this.imageConverted = null;

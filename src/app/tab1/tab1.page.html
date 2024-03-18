@@ -5,11 +5,11 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-button color="warning" expand="block" (click)=' onLogout() '>Me déconnecter</ion-button>
+    <ion-button color="warning" expand="block" (click)='onLogout()'>Me déconnecter</ion-button>
 
-    <!-- modal -->
+
     <ion-button color="danger" id="open-modal" expand="block">Supprimer mon compte</ion-button>
-    <!-- <p>test{{ message }}</p> -->
+
     <ion-modal trigger="open-modal">
       <ng-template>
         <ion-header>
@@ -63,9 +63,32 @@
   </ion-header> -->
 
     <!-- Vérifier le token -->
+    <!--  -->
 
-      <app-form [user]='user' *ngIf='user'></app-form>
+    <!-- <ion-list>
+      <div *ngFor='let offeringGroup of offerings | async'>
+        <ion-item-divider>
+          <ion-label>{{offeringGroup.offeringId}}</ion-label>
+        </ion-item-divider>
 
+        <ion-item *ngFor='let sku of offeringGroup.skus'>
+          <ion-label>
+            {{sku.product.title}}
+          </ion-label>
+          <ion-button slot='end' (click)='onPurchase(sku)'>
+            {{sku.product.price | currency: sku.product.currencyCode}}
+          </ion-button>
+        </ion-item>
+      </div>
+    </ion-list> -->
+    <!-- <app-add-sub-block></app-add-sub-block> -->
+
+
+    <!-- <ion-card *ngIf='(purchaseState| async).pro'>Vous avez souscrit à la version premium</ion-card>
+    <ion-card *ngIf='!(purchaseState| async).pro'>Vous utilisez la version gratuite de MotivPro</ion-card> -->
+
+
+    <app-form [user]='user' *ngIf='user'></app-form>
 
     <!-- <div *ngIf='!user'>pas de user</div> -->
 

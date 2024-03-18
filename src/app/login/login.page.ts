@@ -35,6 +35,7 @@ export class LoginPage implements OnInit {
         this.usersService.collection(token).subscribe((data) => {
           // console.log(data.user, 'data');
           this.user = data.user;
+          this.usersService.setUserData(this.user);
           // console.log(this.user, 'user');
           this.cdr.detectChanges();
           this.router.navigate(['tabs', 'tab1']);
@@ -57,17 +58,9 @@ export class LoginPage implements OnInit {
     this.errorMessage = '';
     console.log('ok', user);
     this.usersService.onLogin(user).subscribe(
-      // (data) => {
-      // if (data) {
-      //   console.log(data, 'return');
-      //   localStorage.setItem('token', data.token);
-      //   this.router.navigate(['tabs/tab1']);
-      // } else {
-      //   console.log('not working');
-      // }
-
       (data) => {
         console.log(data);
+        this.usersService.setUserData(user);
         localStorage.setItem('token', data.token);
         this.router.navigate(['tabs', 'tab1']);
         this.form.reset();
@@ -78,20 +71,5 @@ export class LoginPage implements OnInit {
       },
       () => console.log('done')
     );
-    // this.usersService.onLogin(user).subscribe({
-    //   next(data) {
-    //     console.log(data, 'return');
-    //     localStorage.setItem('token', data.token);
-    //     this.router.navigate(['tabs', 'tab1']);
-    //   },
-    //   // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-    //   error(e) {
-    //     console.log(e, 'erreur');
-    //   },
-    //   // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-    //   complete() {
-    //     console.log('done');
-    //   },
-    // });
   }
 }

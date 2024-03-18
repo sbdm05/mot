@@ -11,13 +11,24 @@ import { User } from '../user/user';
 export class UsersService {
   private urlApi = environment.urlApi;
 
+  private userDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
+    null
+  );
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  public userData$: Observable<any> = this.userDataSubject.asObservable();
+
+  private refreshCollection$: BehaviorSubject<any> = new BehaviorSubject<any>(
+    ''
+  );
+
   constructor(private http: HttpClient) {}
   // eslint-disable-next-line @typescript-eslint/member-ordering
   //token!: number;
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  private refreshCollection$: BehaviorSubject<any> = new BehaviorSubject<any>(
-    ''
-  );
+
+  public setUserData(data: any): void {
+    this.userDataSubject.next(data);
+  }
 
   // attention sans le typage, on ne récupère pas la valeur dans le subscribe !!!!
   onSignUp(user): Observable<any> {
@@ -75,9 +86,11 @@ export class UsersService {
       .get(`${this.urlApi}/api/v1/letters/user`, {
         headers,
       })
-      .subscribe((data) => {
-        this.refreshCollection$.next(data);
-        console.log(data, 'depuis refreshcollection');
+      .subscribe((data: any) => {
+        this.refreshCollection$.next(data.user);
+        const { user } = data;
+        console.log(user, 'depuis refreshcollection');
+        this.setUserData(user);
       });
     return;
   }
@@ -180,6 +193,8 @@ export class UsersService {
   deleteUser(user: User): Observable<User> {
     const { _id } = user;
     console.log(_id);
+    localStorage.removeItem('token');
+    this.setUserData(null);
 
     return this.http.delete<User>(`${this.urlApi}/api/v1/letters/${_id}`);
   }

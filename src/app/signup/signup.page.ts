@@ -37,6 +37,7 @@ export class SignupPage implements OnInit {
             console.log(data, 'user');
             if (data) {
               this.user = data.user;
+              this.usersService.setUserData(this.user);
               this.cdr.detectChanges();
               this.router.navigate(['tabs', 'tab1']);
             } else {

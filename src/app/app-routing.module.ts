@@ -85,6 +85,10 @@ const routes: Routes = [
         './components/cover-letter-premium4/cover-letter-premium4.module'
       ).then((m) => m.CoverLetterPremium4PageModule),
   },
+  {
+    path: 'add-sub-block',
+    loadChildren: () => import('./components/add-sub-block/add-sub-block.module').then( m => m.AddSubBlockPageModule)
+  },
 ];
 @NgModule({
   imports: [

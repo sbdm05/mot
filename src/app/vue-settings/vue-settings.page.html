@@ -6,34 +6,184 @@
 
 <ion-content>
 
-  <ion-card>
+
+
+  <ion-card *ngIf='(purchaseState| async)?.pro' color="success">
     <ion-card-header>
-      <ion-card-title>Réglages</ion-card-title>
-      <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+      <ion-card-title style="padding-bottom: 10px;">Vous avez un accès premium</ion-card-title>
+      <ion-card-subtitle style="padding-bottom: 10px;">Disponible jusqu'au {{ (purchaseState | async).expirationDate }}
+      </ion-card-subtitle>
+      <ion-card-subtitle style="padding-bottom: 10px;">Votre numéro d'identifiant unique : {{ (purchaseState |
+        async).subscriberId }}
+      </ion-card-subtitle>
+
     </ion-card-header>
-    <ion-card-content>
+
+    <ion-card-content color='warning'>
+
+      <ion-card-subtitle style="padding: 10px; background-color: 'orange'; ">N'oubliez pas d'ajouter
+        votre numéro
+        d'identifiant dans votre
+        message.
+      </ion-card-subtitle>
+
+
       <ion-list>
 
         <ion-item href='https://ohmycode.io/support-app-meslettres/'>
 
+          <ion-icon style="padding: 10px;" name="settings-outline"></ion-icon>
 
-          <ion-icon name="settings-outline"></ion-icon>
+          <ion-label style="padding: 10px;">Signaler un problème technique</ion-label>
 
-          <ion-label>Signaler un problème technique</ion-label>
         </ion-item>
+
         <ion-item href='https://ohmycode.io/boite-a-idees/'>
 
 
-          <ion-icon name="bulb-outline"></ion-icon>
+          <ion-icon style="padding: 10px;" name="bulb-outline"></ion-icon>
 
 
 
-          <ion-label>Proposer un sujet ou faire une suggestion ?</ion-label>
+          <ion-label style="padding: 10px;">Proposer un sujet ou faire une suggestion ?</ion-label>
 
         </ion-item>
 
       </ion-list>
     </ion-card-content>
+
+
+
   </ion-card>
+
+  <ng-container *ngIf='!(purchaseState| async)?.pro'>
+    <!-- <app-add-sub-block></app-add-sub-block> -->
+
+
+
+
+    <ion-card>
+      <ion-card-content>
+        <ion-list>
+          <div class='questions'>
+            <h1>Vous bénéficiez de la version Premium</h1>
+            <ion-item>
+
+
+              <!-- <ion-icon style="padding: 10px;" name="settings-outline"></ion-icon> -->
+
+              <ion-label style="padding: 10px;">Pourquoi utiliser la version Premium ?</ion-label>
+
+            </ion-item>
+
+            <video width="100%" controls>
+              <source src="https://ohmycode.io/wp-content/uploads/2024/03/motiv-pro-clip1.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la lecture de vidéos.
+            </video>
+
+            <div style='text-align: justify;'>
+              <h2>Une lettre de motivation bien rédigée et captivante est bien plus qu'une
+                simple formalité. Elle est la
+                porte d'entrée
+                vers une opportunité professionnelle. </h2>
+              <h2>Une lettre de motivation soignée démontre votre engagement envers le
+                poste
+                et l'entreprise. <b>Elle offre
+                  une chance de
+                  montrer votre personnalité</b>, vos valeurs et votre passion d'une manière unique. En captivant
+                l'attention du
+                lecteur dès
+                le départ, une lettre exceptionnelle vous différencie des autres candidats et vous permet de vous
+                démarquer. C'est exactement ce que permet la version Premium.</h2>
+            </div>
+
+          </div>
+
+          <div class='questions'>
+            <ion-item>
+
+
+              <!-- <ion-icon style="padding: 10px;" name="settings-outline"></ion-icon> -->
+
+              <ion-label style="padding: 10px;">Est-ce que mon abonnement sera limité ?</ion-label>
+
+            </ion-item>
+            <div style='text-align: justify;'>
+              <h2>Votre abonnement de 6 mois est absolument illimité. Vous pouvez créer autant de lettres que vous le
+                souhaitez. </h2>
+
+            </div>
+
+          </div>
+
+          <div class='questions'>
+            <ion-item>
+
+
+              <!-- <ion-icon style="padding: 10px;" name="settings-outline"></ion-icon> -->
+
+              <ion-label style="padding: 10px;">Est-ce que je peux obtenir de l'aide technique ?</ion-label>
+
+            </ion-item>
+            <div style='text-align: justify;'>
+              <h2>Absolument. Vous avez à disposition un formulaire. N'oubliez pas de renseigner le numéro unique
+                d'utilisation et nous vous aiderons dans les meilleurs délais. </h2>
+
+            </div>
+
+          </div>
+
+          <div class='questions'>
+            <ion-item>
+
+
+              <!-- <ion-icon style="padding: 10px;" name="settings-outline"></ion-icon> -->
+
+              <ion-label style="padding: 10px;">Est-ce que vous ajoutez de nouveaux modèles régulièrement ?</ion-label>
+
+            </ion-item>
+            <div style='text-align: justify;'>
+              <h2>Toutes les semaines, vous aurez à accès à de nouveaux modèles, toujours en illimité ! </h2>
+
+            </div>
+
+          </div>
+
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card color="tertiary">
+      <ion-card-header>
+        <ion-card-title>Nous contacter</ion-card-title>
+        <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+
+          <ion-item href='https://ohmycode.io/support-app-meslettres/'>
+
+
+            <ion-icon style="padding: 10px;" name="settings-outline"></ion-icon>
+
+            <ion-label style="padding: 10px;">Signaler un problème technique</ion-label>
+          </ion-item>
+          <ion-item href='https://ohmycode.io/boite-a-idees/'>
+
+
+            <ion-icon style="padding: 10px;" name="bulb-outline"></ion-icon>
+
+
+
+            <ion-label style="padding: 10px;">Proposer un sujet ou faire une suggestion ?</ion-label>
+
+          </ion-item>
+
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+
 
 </ion-content>

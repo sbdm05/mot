@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { User } from '../user/user';
@@ -8,25 +8,51 @@ import { User } from '../user/user';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
 })
-export class Tab3Page {
+export class Tab3Page implements OnInit {
   public user!: User;
   public savedLetters!: [];
   token!: any;
-  constructor(private usersService: UsersService, private router: Router) {
+  constructor(
+    private usersService: UsersService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {
     // check token
     this.token = localStorage.getItem('token');
+    // if (this.token) {
+    //   try {
+    //     this.usersService.collection(this.token).subscribe((data) => {
+    //       //console.log(data.user, 'data');
+    //       if (data) {
+    //         this.user = data.user;
+    //         this.router.navigate(['tabs', 'tab3']);
+    //         console.log(this.user, 'user');
+    //         const { savedLetters } = data.user;
+    //         if (savedLetters) {
+    //           this.savedLetters = savedLetters;
+    //           console.log(this.savedLetters);
+    //         }
+    //       }
+    //     });
+    //     console.log('test');
+    //   } catch (error) {}
+    // } else {
+    //   this.router.navigate(['/']);
+    // }
+  }
+
+  ngOnInit() {
     if (this.token) {
       try {
-        this.usersService.collection(this.token).subscribe((data) => {
+        this.usersService.userData$.subscribe((data) => {
           //console.log(data.user, 'data');
           if (data) {
-            this.user = data.user;
-            this.router.navigate(['tabs', 'tab3']);
-            console.log(this.user, 'user');
-            const { savedLetters } = data.user;
-            if (savedLetters) {
-              this.savedLetters = savedLetters;
+            this.user = data;
+
+            if (data.savedLetters) {
+              this.savedLetters = data.savedLetters;
               console.log(this.savedLetters);
+              //this.cdr.detectChanges();
             }
           }
         });
@@ -36,7 +62,6 @@ export class Tab3Page {
       this.router.navigate(['/']);
     }
   }
-
   onDelete(user, letter) {
     console.log(user, letter);
     // call service
@@ -53,5 +78,9 @@ export class Tab3Page {
     console.log(this.token);
     localStorage.removeItem('token');
     this.router.navigate(['/signup']);
+  }
+
+  onDestroy() {
+    //this.user = new User();
   }
 }

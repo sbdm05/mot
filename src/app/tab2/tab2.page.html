@@ -10,6 +10,22 @@
 </ion-header>
 
 <ion-content>
+  <!-- <app-add-sub-block></app-add-sub-block> -->
+
+
+  <!-- <ion-card color="danger" *ngIf="!(user?.adjs && user?.adjs.length > 0)">
+    <ion-card-header>
+      <ion-card-title>Besoin de compléter vos qualités</ion-card-title>
+      <ion-card-subtitle>N'oubliez pas de choisir trois qualités. Le champ à compléter se trouve en-dessous du champ
+        e-mail. </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <a routerLink='../tab1' style='color:white'>Retournez dans l'onglet Mes Infos</a>
+
+    </ion-card-content>
+  </ion-card> -->
+
   <ion-accordion-group [value]="['first']" (ionChange)="saveInfos()">
     <ion-accordion value="first" id='first'>
       <ion-item slot="header" color="light">
@@ -41,31 +57,6 @@
 
             <ion-input formControlName="contact" placeholder="Madame Durand"></ion-input>
           </ion-item>
-<!-- 
-          <ion-item>
-            <div style='display: flex; flex-direction: column'>
-              <ion-button (click)='onSelectPic()' [disabled]='addPicActive' ngDefaultControl>Sélectionner une photo de profil</ion-button>
-              <div *ngIf="picSizeExceedeed">
-                <div class='error'>
-                  <p>
-                    Désolé, l'image est trop lourde.
-                  </p>
-                  <p>Veuillez choisir une autre image.</p>
-                </div>
-
-              </div>
-            </div>
-          </ion-item> -->
-
-
-          <!-- <ion-grid *ngIf='imageConverted'>
-            <ion-row>
-              <ion-col size="6">
-                <img [src]="imageConverted">
-                <ion-button (click)='onDeletePic()' color="danger">Supprimer</ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid> -->
 
 
 
@@ -147,81 +138,98 @@
           </ion-row>
         </ion-card>
 
-        <!-- lettre 4 premium bubble purple-->
-        <ion-card class="ion-no-padding">
-          <ion-row class="ion-align-items-center">
-            <ion-col size="6" class="ion-padding">
-              <ion-row>
-                <ion-col class="bold">
-                  <h5 class="ion-no-margin">Modèle Premium Bubble</h5>
-                  <img src="../../assets/lettres-apercus/cover-letter-premium-bubble.png" />
-                </ion-col>
-              </ion-row>
-            </ion-col>
-            <ion-col size="6">
-              <ion-button color="success" (click)="openModal('coverLetterPremiumBubble')">
-                Prévisualiser
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-card>
 
-        <!-- lettre 5 premium waves orange -->
-        <ion-card class="ion-no-padding">
-          <ion-row class="ion-align-items-center">
-            <ion-col size="6" class="ion-padding">
-              <ion-row>
-                <ion-col class="bold">
-                  <h5 class="ion-no-margin">Modèle Premium Waves</h5>
-                  <img src="../../assets/lettres-apercus/cover-letter-premium-waves-1.png" />
-                </ion-col>
-              </ion-row>
-            </ion-col>
-            <ion-col size="6">
-              <ion-button color="success" (click)="openModal('coverLetterPremiumWaves1')">
-                Prévisualiser
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-card>
 
-        <!-- lettre 6 premium waves yellow -->
-        <ion-card class="ion-no-padding">
-          <ion-row class="ion-align-items-center">
-            <ion-col size="6" class="ion-padding">
-              <ion-row>
-                <ion-col class="bold">
-                  <h5 class="ion-no-margin">Modèle Premium Waves Yellish</h5>
-                  <img src="../../assets/lettres-apercus/cover-letter-premium-waves-yellish.png" />
-                </ion-col>
-              </ion-row>
-            </ion-col>
-            <ion-col size="6">
-              <ion-button color="success" (click)="openModal('coverLetterPremiumWaves2')">
-                Prévisualiser
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-card>
+        <!-- ici code quand monétisation en cours -->
+        <!-- <h2 *ngIf='!(purchaseState| async)?.pro'>Accédez à plus de modèles en devenant Premium</h2>
+        <div [ngClass]="{'inactive-part': !(purchaseState| async)?.pro}"> -->
 
-        <!-- lettre 6 premium blue mountains -->
-        <ion-card class="ion-no-padding">
-          <ion-row class="ion-align-items-center">
-            <ion-col size="6" class="ion-padding">
-              <ion-row>
-                <ion-col class="bold">
-                  <h5 class="ion-no-margin">Modèle Premium Pic Grey</h5>
-                  <img src="../../assets/lettres-apercus/cover-letter-premium-pic-grey.jpg" />
-                </ion-col>
-              </ion-row>
-            </ion-col>
-            <ion-col size="6">
-              <ion-button color="success" (click)="openModal('coverLetterPremiumPicGrey')">
-                Prévisualiser
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-card>
+        <div>
+          <ion-card>
+            <ion-item color='success'>
+              <ion-icon name="diamond-outline" style='padding: 10px;'></ion-icon>
+              <h1>Modèles Lettres Premium</h1>
+            </ion-item>
+
+          </ion-card>
+          <!-- lettre 4 premium bubble purple-->
+          <ion-card class="ion-no-padding">
+            <ion-row class="ion-align-items-center">
+              <ion-col size="6" class="ion-padding">
+                <ion-row>
+                  <ion-col class="bold">
+                    <h5 class="ion-no-margin">Modèle Premium Bubble</h5>
+                    <img src="../../assets/lettres-apercus/cover-letter-premium-bubble.png" />
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button color="success" (click)="openModal('coverLetterPremiumBubble')">
+                  Prévisualiser
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+
+          <!-- lettre 5 premium waves orange -->
+          <ion-card class="ion-no-padding">
+            <ion-row class="ion-align-items-center">
+              <ion-col size="6" class="ion-padding">
+                <ion-row>
+                  <ion-col class="bold">
+                    <h5 class="ion-no-margin">Modèle Premium Waves</h5>
+                    <img src="../../assets/lettres-apercus/cover-letter-premium-waves-1.png" />
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button color="success" (click)="openModal('coverLetterPremiumWaves1')">
+                  Prévisualiser
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+
+          <!-- lettre 6 premium waves yellow -->
+          <ion-card class="ion-no-padding">
+            <ion-row class="ion-align-items-center">
+              <ion-col size="6" class="ion-padding">
+                <ion-row>
+                  <ion-col class="bold">
+                    <h5 class="ion-no-margin">Modèle Premium Waves Yellish</h5>
+                    <img src="../../assets/lettres-apercus/cover-letter-premium-waves-yellish.png" />
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button color="success" (click)="openModal('coverLetterPremiumWaves2')">
+                  Prévisualiser
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+
+          <!-- lettre 6 premium blue mountains -->
+          <ion-card class="ion-no-padding">
+            <ion-row class="ion-align-items-center">
+              <ion-col size="6" class="ion-padding">
+                <ion-row>
+                  <ion-col class="bold">
+                    <h5 class="ion-no-margin">Modèle Premium Pic Grey</h5>
+                    <img src="../../assets/lettres-apercus/cover-letter-premium-pic-grey.jpg" />
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button color="success" (click)="openModal('coverLetterPremiumPicGrey')">
+                  Prévisualiser
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </div>
+
+
       </div>
     </ion-accordion>
 

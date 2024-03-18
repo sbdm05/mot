@@ -1,0 +1,66 @@
+<div *ngIf='(purchaseState| async).pro'>
+  <!-- <ion-list>
+    <div *ngFor='let offeringGroup of offerings | async'>
+      <ion-item-divider>
+      <ion-label>{{offeringGroup.offeringId}}</ion-label>
+    </ion-item-divider>
+
+      <ion-item *ngFor='let sku of offeringGroup.skus' color="warning">
+        <ion-label>
+          {{sku.product.title}}
+        </ion-label>
+        <ion-button slot='end' (click)='onPurchase(sku)'>
+          {{sku.product.price | currency: sku.product.currencyCode}}
+        </ion-button>
+      </ion-item>
+    </div>
+  </ion-list> -->
+
+  <ion-card color="success">
+    <ion-card-header>
+      <ion-card-title>Accès premium</ion-card-title>
+      <ion-card-subtitle>Disponible jusqu'au {{ (purchaseState | async).expirationDate }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      Vous avez accès à toutes les lettres en illimité.
+
+    </ion-card-content>
+  </ion-card>
+</div>
+
+
+<div *ngIf='!(purchaseState| async).pro'>
+
+  <ion-list>
+    <div *ngFor='let offeringGroup of offerings | async'>
+      <!-- <ion-item-divider>
+          <ion-label>{{offeringGroup.offeringId}}</ion-label>
+        </ion-item-divider> -->
+
+      <ion-item *ngFor='let sku of offeringGroup.skus' color="warning">
+        <ion-label>
+          {{sku.product.title}}
+        </ion-label>
+        <ion-button slot='end' (click)='onPurchase(sku)'>
+          {{sku.product.price | currency: sku.product.currencyCode}}
+        </ion-button>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <ion-card color="warning">
+    <ion-card-header>
+      <ion-card-title>Accès gratuit</ion-card-title>
+      <ion-card-subtitle>Votre accès est restreint</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>Devenez Premium pour débloquer toutes les lettres.</p>
+      <a routerLink='../reglages'>Pourquoi obtenir un accès Premium ?</a>
+    </ion-card-content>
+  </ion-card>
+</div>
+
+
+<!-- test -->

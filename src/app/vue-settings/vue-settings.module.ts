@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { VueSettingsPageRoutingModule } from './vue-settings-routing.module';
 
 import { VueSettingsPage } from './vue-settings.page';
+import { AddSubBlockPageModule } from '../components/add-sub-block/add-sub-block.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VueSettingsPageRoutingModule
+    VueSettingsPageRoutingModule,
+    AddSubBlockPageModule,
   ],
-  declarations: [VueSettingsPage]
+  declarations: [VueSettingsPage],
 })
 export class VueSettingsPageModule {}

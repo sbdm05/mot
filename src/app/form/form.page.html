@@ -61,32 +61,6 @@
       </ion-item>
     </ion-list>
 
-    <ion-item>
-      <div style='display: flex; flex-direction: column'>
-        <ion-button (click)='onSelectPic()' [disabled]='addPicActive' ngDefaultControl>Sélectionner une photo de profil
-        </ion-button>
-        <div *ngIf="picSizeExceedeed">
-          <div class='error'>
-            <p>
-              Désolé, l'image est trop lourde.
-            </p>
-            <p>Veuillez choisir une autre image.</p>
-          </div>
-
-        </div>
-      </div>
-    </ion-item>
-
-
-    <ion-grid *ngIf='imageConverted'>
-      <ion-row>
-        <ion-col size="6">
-          <img [src]="imageConverted">
-          <ion-button (click)='onDeletePic()' color="danger">Supprimer</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
 
     <ion-button expand="block" (click)='onSubmit()' [disabled]='form.invalid' [color]='colorBtn'>
       Enregistrer</ion-button>
@@ -95,5 +69,34 @@
 
   </form>
 
+
+
+
+
+
+  <ion-item>
+    <div style='display: flex; flex-direction: column'>
+      <ion-button (click)='onSelectPic()' [disabled]='addPicActive'>Sélectionner une photo de profil
+      </ion-button>
+      <div *ngIf="picSizeExceedeed">
+        <div class='error'>
+          <p>
+            Désolé, l'image est trop lourde.
+          </p>
+          <p>Veuillez choisir une autre image.</p>
+        </div>
+
+      </div>
+    </div>
+  </ion-item>
+
+
+  <ion-grid *ngIf='imageConverted'>
+    <ion-row>
+      <ion-col size="6">
+        <img [src]="imageConverted">
+        <ion-button (click)='onDeletePic()' color="danger">Supprimer</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
-`

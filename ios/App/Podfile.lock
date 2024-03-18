@@ -10,10 +10,17 @@ PODS:
     - Capacitor
   - CapacitorKeyboard (5.0.8):
     - Capacitor
+  - CapacitorPluginGlassfy (3.3.3):
+    - Capacitor
+    - Glassfy (= 1.4.0)
+    - GlassfyGlue (= 1.4.5)
   - CapacitorStatusBar (5.0.7):
     - Capacitor
   - CordovaPlugins (5.7.0):
     - CapacitorCordova
+  - Glassfy (1.4.0)
+  - GlassfyGlue (1.4.5):
+    - Glassfy (= 1.4.0)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -22,8 +29,14 @@ DEPENDENCIES:
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
+  - CapacitorPluginGlassfy (from `../../node_modules/capacitor-plugin-glassfy`)
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
   - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
+
+SPEC REPOS:
+  trunk:
+    - Glassfy
+    - GlassfyGlue
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -38,6 +51,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/haptics"
   CapacitorKeyboard:
     :path: "../../node_modules/@capacitor/keyboard"
+  CapacitorPluginGlassfy:
+    :path: "../../node_modules/capacitor-plugin-glassfy"
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
   CordovaPlugins:
@@ -50,9 +65,12 @@ SPEC CHECKSUMS:
   CapacitorCordova: e825fce1a2e14e4b5730641c7e098dccf74397b7
   CapacitorHaptics: 7c7c206f0c96a628fed073830c96d28c4b2e772e
   CapacitorKeyboard: aec619a578235c6ce279075009a2689c2cf5c42c
+  CapacitorPluginGlassfy: bcaed954eaf100c32691a8a542ed08061ad3dcd8
   CapacitorStatusBar: f390fbb49b82ffb754ea4b3cf71dc8b048baf3e7
   CordovaPlugins: d47cfb4b4e9419c38d6bec418129cbd47e900071
+  Glassfy: 6c13edc242715212cfd01a0a12c8553f2f06cfcb
+  GlassfyGlue: 828c39792238a84c07d27a71c9eb4819b0b1dfa9
 
-PODFILE CHECKSUM: e29cb1cc6f7c58bf3a87c8a0dc0f8eb88d0f43d2
+PODFILE CHECKSUM: d1ab3b3514be9ba023918cb947316d710bf0c18b
 
 COCOAPODS: 1.14.3

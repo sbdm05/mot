@@ -80,7 +80,7 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
     private usersService: UsersService,
     private cdr: ChangeDetectorRef
   ) {
-    this.token = localStorage.getItem('token');
+    //this.token = localStorage.getItem('token');
     console.log(this.user);
 
     // est-ce que la photo de profil existe ?
@@ -116,8 +116,9 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    // console.log('test', this.user);
+    console.log('ngonchanges', this.user);
     console.log(this.user, 'depuis ngOnChanges');
+    //this.cdr.detectChanges();
     this.form = this.fb.group({
       gender: [this.user?.gender],
       prenom: [this.user?.prenom],
@@ -136,6 +137,7 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
         Validators.compose([Validators.minLength(3), Validators.maxLength(3)]),
       ],
     });
+    this.cdr.detectChanges();
   }
 
   selectGender(i) {
@@ -150,6 +152,8 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
   }
 
   async onSelectPic() {
+    console.log('onselectpic');
+
     this.picSizeExceedeed = false;
 
     const image = await Camera.getPhoto({
@@ -178,10 +182,10 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
 
         //this.user.pic = this.imageConverted;
         this.addPicActive = true;
-         this.cdr.detectChanges();
+        //this.cdr.detectChanges();
 
-        // on store l'image dans le localStorage
-        localStorage.setItem('pic', this.imageConverted);
+        // on store l'image dans le sessionStorage
+        sessionStorage.setItem('pic', this.imageConverted);
 
         // disabled the add button
       } else {
@@ -192,17 +196,16 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
   }
 
   onDeletePic() {
-    localStorage.removeItem('pic');
+    sessionStorage.removeItem('pic');
     console.log('deleted');
 
     this.imageConverted = null;
     this.addPicActive = false;
-     this.cdr.detectChanges();
+    this.cdr.detectChanges();
   }
 
-  
   onSubmit() {
-    //console.log(this.form.status);
+    console.log('onsubmit');
 
     if (this.form.status === 'VALID') {
       console.log(this.token, 'token');
@@ -228,6 +231,8 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.form.reset();
+    //this.form.reset();
   }
 }
+// test
+// restets

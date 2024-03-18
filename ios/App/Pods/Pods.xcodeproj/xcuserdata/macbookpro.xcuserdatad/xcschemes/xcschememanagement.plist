@@ -34,12 +34,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CapacitorPluginGlassfy.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>CapacitorStatusBar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>CordovaPlugins.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Glassfy.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GlassfyGlue.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

@@ -32,6 +32,7 @@
     "@ionic/cordova-builders": "^7.0.0",
     "bcrypt": "^5.0.1",
     "canvg": "^4.0.1",
+    "capacitor-plugin-glassfy": "^3.3.3",
     "cocoapods": "^0.0.0",
     "cordova-browser": "6.0.0",
     "cordova-ios": "6.2.0",

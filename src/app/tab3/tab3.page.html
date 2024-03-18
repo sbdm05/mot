@@ -8,43 +8,41 @@
 
 <ion-content [fullscreen]="true">
 
-    <ng-container *ngIf="savedLetters?.length> 0; then content else noContent"></ng-container>
-    <ng-template #content>
-      <ion-list *ngIf='user'>
-          <ion-item-sliding *ngFor="let letter of user.savedLetters, index as index">
-              <ion-item>
-                <ion-card class='card-historique'>
-                  <p>Vous avez créé une nouvelle candidature le {{letter.date}}</p>
-                  <ion-label><span>Entreprise :</span> {{letter.newValue.societe}}</ion-label>
-                  <ion-label><span>Lieu :</span> {{letter.newValue.adresseSociete}} - {{letter.newValue.cpVille}}</ion-label>
-                  <ion-label><span>Contact :</span> {{letter.newValue.contact}}</ion-label>
+  <ng-container *ngIf="savedLetters?.length> 0; then content else noContent"></ng-container>
+  <ng-template #content>
+    <ion-list *ngIf='user'>
+      <ion-item-sliding *ngFor="let letter of user.savedLetters, index as index">
+        <ion-item>
+          <ion-card class='card-historique'>
+            <p>Vous avez créé une nouvelle candidature le {{letter.date}}</p>
+            <ion-label><span>Entreprise :</span> {{letter.newValue.societe}}</ion-label>
+            <ion-label><span>Lieu :</span> {{letter.newValue.adresseSociete}} - {{letter.newValue.cpVille}}</ion-label>
+            <ion-label><span>Contact :</span> {{letter.newValue.contact}}</ion-label>
 
 
-                  <ion-label><span>Poste :</span> {{letter.newValue.intitule}}</ion-label>
+            <ion-label><span>Poste :</span> {{letter.newValue.intitule}}</ion-label>
 
-                </ion-card>
+          </ion-card>
 
-              </ion-item>
+        </ion-item>
 
-              <ion-item-options>
-                  <ion-item-option color="danger" (click)='onDelete(user, letter)'>Supprimer</ion-item-option>
-              </ion-item-options>
-          </ion-item-sliding>
-      </ion-list>
-    </ng-template>
+        <ion-item-options>
+          <ion-item-option color="danger" (click)='onDelete(user, letter)'>Supprimer</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ng-template>
 
-    <ng-template #noContent>
+  <ng-template #noContent>
 
-      <ion-card>
-        <ion-card-title>Aucun historique</ion-card-title>
-        <ion-card-content>Pour créer une lettre, rendez-vous dans l'onglet Créer une lettre.</ion-card-content>
+    <ion-card>
+      <ion-card-title>Aucun historique</ion-card-title>
+      <ion-card-content>Pour créer une lettre, rendez-vous dans l'onglet Créer une lettre.</ion-card-content>
 
-      </ion-card>
-    </ng-template>
+    </ion-card>
+  </ng-template>
 
 
 
 
 </ion-content>
-
-

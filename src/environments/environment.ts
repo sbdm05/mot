@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   urlApi: 'https://mes-lettres.vercel.app',
+  glassfyKey: '9a9f77f67c904a32a0ef4ef48d14d79f',
 };
 
 /*

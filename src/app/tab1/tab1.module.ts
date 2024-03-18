@@ -7,6 +7,8 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { FormPageModule } from '../form/form.module';
+import { AddSubBlockPage } from '../components/add-sub-block/add-sub-block.page';
+import { AddSubBlockPageModule } from '../components/add-sub-block/add-sub-block.module';
 
 @NgModule({
   imports: [
@@ -15,8 +17,9 @@ import { FormPageModule } from '../form/form.module';
     FormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
-    FormPageModule
+    FormPageModule,
+    AddSubBlockPageModule,
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page],
 })
 export class Tab1PageModule {}
