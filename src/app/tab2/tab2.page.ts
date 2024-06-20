@@ -43,7 +43,7 @@ export class Tab2Page implements OnInit, OnChanges {
   public form!: FormGroup;
 
   colorBtn = 'success';
-  textBtn = 'Enregistrer';
+  textBtn = 'Suivant';
 
   public addPicActive = false;
 
@@ -156,6 +156,11 @@ export class Tab2Page implements OnInit, OnChanges {
   //tettfdsf  //test
 
   ngOnInit(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.token = token;
+    }
+
     this.usersService.userData$.subscribe((data) => {
       if (data) {
         console.log(data, 'data depuis tab2'); // Accéder aux données stockées dans le BehaviorSubject
@@ -233,7 +238,7 @@ export class Tab2Page implements OnInit, OnChanges {
     this.imageConverted = null;
     this.addPicActive = false;
   }
-  // étape 1 pour enregistrer les infos
+  // étape 1 pour enregistrer les infos de l'entreprise
   saveInfos() {
     console.log(this.user);
 
@@ -248,13 +253,14 @@ export class Tab2Page implements OnInit, OnChanges {
       this.textBtn = 'Enregistrement en cours';
 
       setTimeout(() => {
-        this.colorBtn = 'success';
-        this.textBtn = 'Enregistrer';
+        // this.colorBtn = 'success';
+        // this.textBtn = 'Enregistrer';
+        this.onSaved();
       }, 1000);
     });
   }
 
-  // étape pour stocker la candidature
+  // étape pour stocker la candidature dans l'historique
   onSaved() {
     console.log(this.form.value);
 
@@ -268,7 +274,8 @@ export class Tab2Page implements OnInit, OnChanges {
         this.textBtn = 'Enregistrement en cours';
         setTimeout(() => {
           this.colorBtn = 'success';
-          this.textBtn = 'Enregistrer';
+          this.textBtn = 'Enregistré';
+          this.router.navigate(['tabs', 'tab-template-letters']);
         }, 1000);
       });
   }
@@ -340,6 +347,13 @@ export class Tab2Page implements OnInit, OnChanges {
     if (this.modalInstance) {
       await this.modalInstance.dismiss();
       this.modalInstance = null; // Reset modal instance after dismissal
+    }
+  }
+
+  scrollToSection() {
+    const element = document.getElementById('btn');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   }
 }

@@ -17,6 +17,7 @@ import {
   Photo,
 } from '@capacitor/camera';
 import { ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -78,13 +79,14 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private usersService: UsersService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {
     //this.token = localStorage.getItem('token');
     console.log(this.user);
 
     // est-ce que la photo de profil existe ?
-    this.selectedPic = localStorage.getItem('pic');
+    this.selectedPic = sessionStorage.getItem('pic');
     if (this.selectedPic) {
       this.imageConverted = this.selectedPic;
     }
@@ -92,12 +94,23 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     console.log(this.user, 'user depuis form');
+
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.token = token;
+    }
     // console.log(this.form.value);
     this.form = this.fb.group({
       gender: [this.user?.gender],
-      prenom: [this.user?.prenom],
-      nom: [this.user?.nom],
-      adresse: [this.user?.adresse],
+      prenom: [
+        this.user?.prenom,
+        [Validators.required, Validators.maxLength(40)],
+      ],
+      nom: [this.user?.nom, [Validators.required, Validators.maxLength(40)]],
+      adresse: [
+        this.user?.adresse,
+        [Validators.required, Validators.maxLength(100)],
+      ],
       tel: [
         this.user?.tel,
         Validators.compose([
@@ -212,13 +225,14 @@ export class FormPage implements OnInit, OnChanges, OnDestroy {
       this.usersService
         .updateUser(this.form.value, this.token)
         .subscribe((data) => {
-          //console.log('after update', data);
+          console.log('after update', data);
           //console.log('submit ok');
           //console.log(this.form.value);
           //this.usersService.refreshCollection(data);
           this.colorBtn = 'warning';
           setTimeout(() => {
             this.colorBtn = 'success';
+            this.router.navigate(['tabs', 'tab2']);
           }, 1000);
           this.isModified = false;
         });

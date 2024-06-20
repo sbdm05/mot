@@ -5,6 +5,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
+    <ion-button color="success" expand="block" (click)='onDashboard()'>Mes Candidatures</ion-button>
     <ion-button color="warning" expand="block" (click)='onLogout()'>Me déconnecter</ion-button>
 
 
@@ -48,7 +49,7 @@
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>
-        Mes infos
+        Vos infos
       </ion-title>
 
 
@@ -89,6 +90,8 @@
 
 
     <app-form [user]='user' *ngIf='user'></app-form>
+
+
 
     <!-- <div *ngIf='!user'>pas de user</div> -->
 

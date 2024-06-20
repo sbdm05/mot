@@ -78,9 +78,9 @@ export class UsersService {
     // console.log('depuis refreshcollection');
     console.log(token, 'token depuis refreshcollection');
     const headers = new HttpHeaders()
-      .set('content-type', 'application/json')
+      .set('Content-Type', 'application/json')
       .set('Access-Control-Allow-Origin', '*')
-      .set('Authorization', 'Bearer ' + token);
+      .set('Authorization', `Bearer ${token}`);
 
     this.http
       .get(`${this.urlApi}/api/v1/letters/user`, {
@@ -104,6 +104,8 @@ export class UsersService {
 
   // je comment cette fonction pour tester avec le behavior chaud
   updateUser(user, token): Observable<any> {
+    console.log(token, 'token');
+
     return this.http.patch(`${this.urlApi}/api/v1/letters/user`, user).pipe(
       tap(() => {
         this.refreshCollection(token);

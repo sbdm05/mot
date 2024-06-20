@@ -16,19 +16,23 @@ const routes: Routes = [
       },
       {
         path: 'tab2',
-        canActivate: [AuthGuard],
         loadChildren: () =>
           import('../tab2/tab2.module').then((m) => m.Tab2PageModule),
       },
       {
+        path: 'tab-template-letters',
+        loadChildren: () =>
+          import('../vue-template-letters/vue-template-letters.module').then(
+            (m) => m.VueTemplateLettersPageModule
+          ),
+      },
+      {
         path: 'tab3',
-        canActivate: [AuthGuard],
         loadChildren: () =>
           import('../tab3/tab3.module').then((m) => m.Tab3PageModule),
       },
       {
         path: 'reglages',
-        canActivate: [AuthGuard],
         loadChildren: () =>
           import('../vue-settings/vue-settings.module').then(
             (m) => m.VueSettingsPageModule

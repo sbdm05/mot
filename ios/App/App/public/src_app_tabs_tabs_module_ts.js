@@ -94,17 +94,18 @@ const routes = [
             },
             {
                 path: 'tab2',
-                canActivate: [_services_guard_auth_guard__WEBPACK_IMPORTED_MODULE_0__.AuthGuard],
                 loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_capacitor_core_dist_index_js"), __webpack_require__.e("default-src_app_components_add-sub-block_add-sub-block_module_ts"), __webpack_require__.e("default-src_app_components_cover-letter-premium3_cover-letter-premium3_page_ts"), __webpack_require__.e("default-src_app_components_cover-letter-premium2_cover-letter-premium2_page_ts"), __webpack_require__.e("default-src_app_components_cover-letter-premium1_cover-letter-premium1_page_ts"), __webpack_require__.e("default-src_app_components_cover-letter-premium4_cover-letter-premium4_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_tab2_tab2_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../tab2/tab2.module */ 4608)).then((m) => m.Tab2PageModule),
             },
             {
+                path: 'tab-template-letters',
+                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_components_cover-letter-premium3_cover-letter-premium3_page_ts"), __webpack_require__.e("default-src_app_components_cover-letter-premium2_cover-letter-premium2_page_ts"), __webpack_require__.e("default-src_app_components_cover-letter-premium1_cover-letter-premium1_page_ts"), __webpack_require__.e("default-src_app_components_cover-letter-premium4_cover-letter-premium4_page_ts"), __webpack_require__.e("default-src_app_vue-template-letters_vue-template-letters_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../vue-template-letters/vue-template-letters.module */ 2426)).then((m) => m.VueTemplateLettersPageModule),
+            },
+            {
                 path: 'tab3',
-                canActivate: [_services_guard_auth_guard__WEBPACK_IMPORTED_MODULE_0__.AuthGuard],
                 loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_tab3_tab3_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../tab3/tab3.module */ 3746)).then((m) => m.Tab3PageModule),
             },
             {
                 path: 'reglages',
-                canActivate: [_services_guard_auth_guard__WEBPACK_IMPORTED_MODULE_0__.AuthGuard],
                 loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_capacitor_core_dist_index_js"), __webpack_require__.e("default-src_app_components_add-sub-block_add-sub-block_module_ts"), __webpack_require__.e("src_app_vue-settings_vue-settings_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../vue-settings/vue-settings.module */ 2794)).then((m) => m.VueSettingsPageModule),
             },
             {
@@ -224,7 +225,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\">\n    <ion-tab-button tab=\"tab1\">\n      <ion-icon name=\"person-circle-outline\"></ion-icon>\n      <ion-label>1 - Mes infos</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab2\">\n      <ion-icon name=\"create-outline\"></ion-icon>\n      <ion-label>2 - Créer une lettre</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab3\">\n      <ion-icon name=\"list-outline\"></ion-icon>\n      <ion-label>3 - Historique</ion-label>\n    </ion-tab-button>\n        <ion-tab-button tab=\"reglages\">\n          <ion-icon name=\"settings-outline\"></ion-icon>\n          <ion-label>Réglages</ion-label>\n        </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n";
+module.exports = "<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\">\n    <ion-tab-button tab=\"tab1\">\n      <ion-icon name=\"add-outline\"></ion-icon>\n      <ion-label>Lettres</ion-label>\n    </ion-tab-button>\n\n    <!-- <ion-tab-button tab=\"tab3\">\n      <ion-icon name=\"list-outline\"></ion-icon>\n      <ion-label>Historique</ion-label>\n    </ion-tab-button> -->\n    <ion-tab-button tab=\"reglages\">\n      <ion-icon name=\"settings-outline\"></ion-icon>\n      <ion-label>Réglages</ion-label>\n    </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n";
 
 /***/ })
 

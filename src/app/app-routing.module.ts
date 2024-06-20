@@ -87,7 +87,18 @@ const routes: Routes = [
   },
   {
     path: 'add-sub-block',
-    loadChildren: () => import('./components/add-sub-block/add-sub-block.module').then( m => m.AddSubBlockPageModule)
+    loadChildren: () =>
+      import('./components/add-sub-block/add-sub-block.module').then(
+        (m) => m.AddSubBlockPageModule
+      ),
+  },
+  {
+    path: 'vue-template-letters',
+    loadChildren: () => import('./vue-template-letters/vue-template-letters.module').then( m => m.VueTemplateLettersPageModule)
+  },
+  {
+    path: 'vue-save-for-dashboard',
+    loadChildren: () => import('./vue-save-for-dashboard/vue-save-for-dashboard.module').then( m => m.VueSaveForDashboardPageModule)
   },
 ];
 @NgModule({

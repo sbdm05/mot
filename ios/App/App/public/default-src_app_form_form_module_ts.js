@@ -93,13 +93,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FormPage": () => (/* binding */ FormPage)
 /* harmony export */ });
 /* harmony import */ var _Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 2321);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 2321);
 /* harmony import */ var _form_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form.page.html?ngResource */ 1562);
 /* harmony import */ var _form_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./form.page.scss?ngResource */ 2838);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 2508);
 /* harmony import */ var _services_users_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/users.service */ 4961);
 /* harmony import */ var _capacitor_camera__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @capacitor/camera */ 4241);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 124);
+
 
 
 
@@ -110,10 +112,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let FormPage = class FormPage {
-  constructor(fb, usersService, cdr) {
+  constructor(fb, usersService, cdr, router) {
     this.fb = fb;
     this.usersService = usersService;
     this.cdr = cdr;
+    this.router = router;
     this.colorBtn = 'success';
     this.adjs = [];
     this.isModified = false; // props pour gérer la photo
@@ -125,7 +128,7 @@ let FormPage = class FormPage {
 
     console.log(this.user); // est-ce que la photo de profil existe ?
 
-    this.selectedPic = localStorage.getItem('pic');
+    this.selectedPic = sessionStorage.getItem('pic');
 
     if (this.selectedPic) {
       this.imageConverted = this.selectedPic;
@@ -133,7 +136,13 @@ let FormPage = class FormPage {
   }
 
   ngOnInit() {
-    console.log(this.user, 'user depuis form'); // console.log(this.form.value);
+    console.log(this.user, 'user depuis form');
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      this.token = token;
+    } // console.log(this.form.value);
+
 
     this.form = this.fb.group({
       gender: [this.user?.gender],
@@ -202,9 +211,9 @@ let FormPage = class FormPage {
           //this.user.pic = this.imageConverted;
 
           _this.addPicActive = true; //this.cdr.detectChanges();
-          // on store l'image dans le localStorage
+          // on store l'image dans le sessionStorage
 
-          localStorage.setItem('pic', _this.imageConverted); // disabled the add button
+          sessionStorage.setItem('pic', _this.imageConverted); // disabled the add button
         } else {
           console.log('erreur dans la taille');
           _this.picSizeExceedeed = true;
@@ -214,7 +223,7 @@ let FormPage = class FormPage {
   }
 
   onDeletePic() {
-    localStorage.removeItem('pic');
+    sessionStorage.removeItem('pic');
     console.log('deleted');
     this.imageConverted = null;
     this.addPicActive = false;
@@ -227,13 +236,14 @@ let FormPage = class FormPage {
     if (this.form.status === 'VALID') {
       console.log(this.token, 'token');
       this.usersService.updateUser(this.form.value, this.token).subscribe(data => {
-        //console.log('after update', data);
-        //console.log('submit ok');
+        console.log('after update', data); //console.log('submit ok');
         //console.log(this.form.value);
         //this.usersService.refreshCollection(data);
+
         this.colorBtn = 'warning';
         setTimeout(() => {
           this.colorBtn = 'success';
+          this.router.navigate(['tabs', 'tab2']);
         }, 1000);
         this.isModified = false;
       }); //localStorage.setItem('infos', JSON.stringify(this.form.value));
@@ -253,6 +263,8 @@ FormPage.ctorParameters = () => [{
   type: _services_users_service__WEBPACK_IMPORTED_MODULE_3__.UsersService
 }, {
   type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.ChangeDetectorRef
+}, {
+  type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router
 }];
 
 FormPage.propDecorators = {
@@ -260,7 +272,7 @@ FormPage.propDecorators = {
     type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
   }]
 };
-FormPage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+FormPage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
   selector: 'app-form',
   template: _form_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_form_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -348,7 +360,7 @@ const Camera = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJmb3JtLnBhZ2Uuc2NzcyJ9 */";
+module.exports = ".small-warning {\n  font-size: 0.7rem;\n  font-weight: 800;\n  text-align: justify;\n  padding: 0.5rem;\n  font-style: italic;\n}\n\n.item.sc-ion-label-ios-h,\n.item .sc-ion-label-ios-h {\n  white-space: pre-wrap !important;\n}\n\n.item.sc-ion-label-md-h,\n.item .sc-ion-label-md-h {\n  white-space: pre-wrap !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZvcm0ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsaUJBQUE7RUFDQSxnQkFBQTtFQUNBLG1CQUFBO0VBQ0EsZUFBQTtFQUNBLGtCQUFBO0FBQ0Y7O0FBQ0E7O0VBRUUsZ0NBQUE7QUFFRjs7QUFBQTs7RUFFRSxnQ0FBQTtBQUdGIiwiZmlsZSI6ImZvcm0ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnNtYWxsLXdhcm5pbmd7XG4gIGZvbnQtc2l6ZTogMC43cmVtO1xuICBmb250LXdlaWdodDogODAwO1xuICB0ZXh0LWFsaWduOiBqdXN0aWZ5O1xuICBwYWRkaW5nOiAwLjVyZW07XG4gIGZvbnQtc3R5bGU6IGl0YWxpYztcbn1cbi5pdGVtLnNjLWlvbi1sYWJlbC1pb3MtaCxcbi5pdGVtIC5zYy1pb24tbGFiZWwtaW9zLWh7XG4gIHdoaXRlLXNwYWNlOiBwcmUtd3JhcCFpbXBvcnRhbnQ7XG59XG4uaXRlbS5zYy1pb24tbGFiZWwtbWQtaCxcbi5pdGVtIC5zYy1pb24tbGFiZWwtbWQtaCB7XG4gIHdoaXRlLXNwYWNlOiBwcmUtd3JhcCAhaW1wb3J0YW50O1xufVxuIl19 */";
 
 /***/ }),
 
@@ -358,7 +370,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-content>\n\n\n  <form [formGroup]=\"form\" *ngIf='user'>\n\n    <!-- select gender -->\n    <ion-list>\n      <ion-item>\n        <ion-select placeholder=\"Je suis\" formControlName='gender' (ionChange)=\"selectGender($event)\" required>\n          <ion-select-option value=\"homme\">Homme</ion-select-option>\n          <ion-select-option value=\"femme\">Femme</ion-select-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n\n    <!-- prenom -->\n    <ion-item>\n      <ion-label position=\"floating\">Prénom</ion-label>\n      <ion-input required formControlName='prenom'></ion-input>\n    </ion-item>\n\n    <!-- nom -->\n    <ion-item>\n      <ion-label position=\"floating\">Nom</ion-label>\n      <ion-input required formControlName='nom'></ion-input>\n    </ion-item>\n\n    <!-- tel -->\n    <ion-item>\n      <ion-label position=\"floating\">Téléphone</ion-label>\n      <ion-input required formControlName='tel'></ion-input>\n    </ion-item>\n\n    <!-- adresse -->\n    <ion-item>\n      <ion-label position=\"floating\">Adresse complète</ion-label>\n      <ion-input required formControlName='adresse'></ion-input>\n    </ion-item>\n\n    <!-- email -->\n    <ion-item>\n      <ion-label position=\"floating\">E-mail</ion-label>\n      <ion-input required formControlName='email'></ion-input>\n    </ion-item>\n\n    <!-- pick adjectives -->\n    <ion-list *ngIf=\"user.gender === 'femme'\">\n      <ion-item>\n        <ion-select formControlName='adjs' placeholder=\"Choisir 3 qualités\" [multiple]=\"true\" required\n          (ionChange)=\"selectAdj($event)\">\n          <ion-select-option *ngFor='let i of qualitesFemme' value=\"{{i}}\">{{i}}</ion-select-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n    <ion-list *ngIf=\"user.gender === 'homme'\">\n      <ion-item>\n        <ion-select placeholder=\"Choisir 3 qualités\" [multiple]=\"true\" (ionChange)=\"selectAdj($event)\"\n          formControlName='adjs' required>\n          <ion-select-option *ngFor='let i of qualitesHomme' value=\"{{i}}\">{{i}}</ion-select-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n\n\n    <ion-button expand=\"block\" (click)='onSubmit()' [disabled]='form.invalid' [color]='colorBtn'>\n      Enregistrer</ion-button>\n    <!-- <ion-button *ngIf='isModified' [disabled]='form.invalid' color='danger' expand=\"block\" (click)='onSubmit()'>Mettre à\n      jour</ion-button> -->\n\n  </form>\n\n\n\n\n\n\n  <ion-item>\n    <div style='display: flex; flex-direction: column'>\n      <ion-button (click)='onSelectPic()' [disabled]='addPicActive'>Sélectionner une photo de profil\n      </ion-button>\n      <div *ngIf=\"picSizeExceedeed\">\n        <div class='error'>\n          <p>\n            Désolé, l'image est trop lourde.\n          </p>\n          <p>Veuillez choisir une autre image.</p>\n        </div>\n\n      </div>\n    </div>\n  </ion-item>\n\n\n  <ion-grid *ngIf='imageConverted'>\n    <ion-row>\n      <ion-col size=\"6\">\n        <img [src]=\"imageConverted\">\n        <ion-button (click)='onDeletePic()' color=\"danger\">Supprimer</ion-button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n";
+module.exports = "<ion-content>\n\n\n  <form [formGroup]=\"form\" *ngIf='user'>\n\n    <!-- select gender -->\n    <ion-list>\n      <ion-item>\n        <ion-select placeholder=\"Je suis\" formControlName='gender' (ionChange)=\"selectGender($event)\" required>\n          <ion-select-option value=\"homme\">Homme</ion-select-option>\n          <ion-select-option value=\"femme\">Femme</ion-select-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n\n    <!-- prenom -->\n    <ion-item>\n      <ion-label position=\"floating\">Prénom</ion-label>\n      <ion-input required formControlName='prenom'></ion-input>\n    </ion-item>\n\n    <!-- nom -->\n    <ion-item>\n      <ion-label position=\"floating\">Nom</ion-label>\n      <ion-input required formControlName='nom'></ion-input>\n    </ion-item>\n\n    <!-- tel -->\n    <ion-item>\n      <ion-label position=\"floating\">Téléphone</ion-label>\n      <ion-input required formControlName='tel'></ion-input>\n    </ion-item>\n\n    <!-- adresse -->\n    <ion-item>\n      <ion-label position=\"floating\">Adresse complète</ion-label>\n      <ion-input required formControlName='adresse'></ion-input>\n    </ion-item>\n\n    <!-- email -->\n    <ion-item>\n      <ion-label position=\"floating\">E-mail</ion-label>\n      <ion-input required formControlName='email'></ion-input>\n    </ion-item>\n\n    <!-- pick adjectives -->\n    <ion-list *ngIf=\"user.gender === 'femme'\">\n      <ion-item>\n        <ion-select formControlName='adjs' placeholder=\"Choisir 3 qualités\" [multiple]=\"true\" required\n          (ionChange)=\"selectAdj($event)\">\n          <ion-select-option *ngFor='let i of qualitesFemme' value=\"{{i}}\">{{i}}</ion-select-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n    <ion-list *ngIf=\"user.gender === 'homme'\">\n      <ion-item>\n        <ion-select placeholder=\"Choisir 3 qualités\" [multiple]=\"true\" (ionChange)=\"selectAdj($event)\"\n          formControlName='adjs' required>\n          <ion-select-option *ngFor='let i of qualitesHomme' value=\"{{i}}\">{{i}}</ion-select-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n\n    <ion-item>\n      <div style='display: flex; flex-direction: column'>\n\n        <ion-button (click)='onSelectPic()' [disabled]='addPicActive'>Sélectionner une photo de profil\n        </ion-button>\n        <ion-label class='small-warning'>Optionnel - Vous pouvez sélectionner une photo à afficher sur la\n          lettre de motivation. Cette photo s'affichera dans les modèles de lettres Design+. Cette photo ne sera pas\n          enregistrée\n          dans notre base de données, mais exclusivement sur votre téléphone.</ion-label>\n\n        <div *ngIf=\"picSizeExceedeed\">\n          <div class='error'>\n            <p>\n              Désolé, l'image est trop lourde.\n            </p>\n            <p>Veuillez choisir une autre image.</p>\n          </div>\n\n        </div>\n      </div>\n    </ion-item>\n\n\n    <ion-grid *ngIf='imageConverted'>\n      <ion-row>\n        <ion-col size=\"6\">\n          <img [src]=\"imageConverted\">\n          <ion-button (click)='onDeletePic()' color=\"danger\">Supprimer</ion-button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n\n\n    <ion-button expand=\"block\" (click)='onSubmit()' [disabled]='form.invalid' [color]='colorBtn'>\n      Suivant</ion-button>\n    <!-- <ion-button *ngIf='isModified' [disabled]='form.invalid' color='danger' expand=\"block\" (click)='onSubmit()'>Mettre à\n      jour</ion-button> -->\n\n  </form>\n\n\n\n</ion-content>\n";
 
 /***/ })
 

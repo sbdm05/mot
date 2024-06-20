@@ -1,6 +1,242 @@
 "use strict";
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["src_app_tab2_tab2_module_ts"],{
 
+/***/ 6851:
+/*!******************************************************************!*\
+  !*** ./src/app/components/cover-letter-c/cover-letter-c.page.ts ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CoverLetterCPage": () => (/* binding */ CoverLetterCPage)
+/* harmony export */ });
+/* harmony import */ var _Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 2321);
+/* harmony import */ var _cover_letter_c_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cover-letter-c.page.html?ngResource */ 5445);
+/* harmony import */ var _cover_letter_c_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cover-letter-c.page.scss?ngResource */ 3909);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _ionic_native_pdf_generator_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/pdf-generator/ngx */ 7330);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _template_screenshot_template_screenshot_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../template-screenshot/template-screenshot.page */ 8225);
+
+
+
+
+
+
+
+
+let CoverLetterCPage = class CoverLetterCPage {
+  constructor(modalController, pdfGenerator) {
+    this.modalController = modalController;
+    this.pdfGenerator = pdfGenerator;
+    this.today = Date.now();
+  }
+
+  ngAfterViewInit() {
+    this.onGeneratePreview();
+  }
+
+  onGeneratePreview() {
+    // 1 - on créé un PDF
+    this.content = document.getElementById('main').innerHTML;
+    console.log(this.content); // ok j'ai le contenu html
+    // ici on vérifie encore le base64
+
+    if (this.content && this.user) {
+      const options = {
+        documentSize: 'A4',
+        type: 'base64' // landscape: 'portrait',
+        // fileName: 'cover-letter.pdf',
+
+      };
+      this.pdfGenerator.fromData(this.content, options).then(base64 => {
+        console.log('base64 present ou pas', base64); // ici renvoie une chaine de caractères
+        //console.log(this.content); // ici content visible
+
+        this.openPdfPreview(base64);
+      }).catch(error => {
+        console.log('error', error);
+      });
+    }
+  }
+
+  openPdfPreview(base64) {
+    var _this = this;
+
+    return (0,_Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      console.log(base64, 'depuis openPdfPreview'); // string
+      // documentation
+      // ici on passe à la modal le document au format base64 et le contenu HTML
+      // pour générer le pdf
+
+      const coverLetter = yield _this.createModal(_template_screenshot_template_screenshot_page__WEBPACK_IMPORTED_MODULE_4__.TemplateScreenshotPage, {
+        base64,
+        htmlBase: _this.content
+      });
+      yield coverLetter.present();
+    })();
+  }
+
+  createModal(component, componentProps, cssClass) {
+    var _this2 = this;
+
+    return (0,_Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      const modal = yield _this2.modalController.create({
+        component: _template_screenshot_template_screenshot_page__WEBPACK_IMPORTED_MODULE_4__.TemplateScreenshotPage,
+        cssClass,
+        componentProps,
+        backdropDismiss: true
+      });
+      return modal;
+    })();
+  }
+
+  closeModal() {
+    this.modalController.dismiss();
+  }
+
+};
+
+CoverLetterCPage.ctorParameters = () => [{
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController
+}, {
+  type: _ionic_native_pdf_generator_ngx__WEBPACK_IMPORTED_MODULE_3__.PDFGenerator
+}];
+
+CoverLetterCPage.propDecorators = {
+  user: [{
+    type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
+  }]
+};
+CoverLetterCPage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+  selector: 'app-cover-letter-c',
+  template: _cover_letter_c_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_cover_letter_c_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], CoverLetterCPage);
+
+
+/***/ }),
+
+/***/ 6705:
+/*!****************************************************************************!*\
+  !*** ./src/app/components/cover-letter-simple/cover-letter-simple.page.ts ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CoverLetterSimplePage": () => (/* binding */ CoverLetterSimplePage)
+/* harmony export */ });
+/* harmony import */ var _Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 2321);
+/* harmony import */ var _cover_letter_simple_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cover-letter-simple.page.html?ngResource */ 8515);
+/* harmony import */ var _cover_letter_simple_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cover-letter-simple.page.scss?ngResource */ 508);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _ionic_native_pdf_generator_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/pdf-generator/ngx */ 7330);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _template_screenshot_template_screenshot_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../template-screenshot/template-screenshot.page */ 8225);
+
+
+
+
+
+
+
+
+let CoverLetterSimplePage = class CoverLetterSimplePage {
+  constructor(modalController, pdfGenerator) {
+    this.modalController = modalController;
+    this.pdfGenerator = pdfGenerator;
+    this.today = Date.now();
+  }
+
+  ngAfterViewInit() {
+    this.onGeneratePreview();
+  }
+
+  onGeneratePreview() {
+    // 1 - on créé un PDF
+    this.content = document.getElementById('main').innerHTML;
+    console.log(this.content); // ok j'ai le contenu html
+    // ici on vérifie encore le base64
+
+    if (this.content && this.user) {
+      const options = {
+        documentSize: 'A4',
+        type: 'base64' // landscape: 'portrait',
+        // fileName: 'cover-letter.pdf',
+
+      };
+      this.pdfGenerator.fromData(this.content, options).then(base64 => {
+        console.log('base64 present ou pas', base64); // ici renvoie une chaine de caractères
+        //console.log(this.content); // ici content visible
+
+        this.openPdfPreview(base64);
+      }).catch(error => {
+        console.log('error', error);
+      });
+    }
+  }
+
+  openPdfPreview(base64) {
+    var _this = this;
+
+    return (0,_Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      console.log(base64, 'depuis openPdfPreview'); // string
+      // documentation
+      // ici on passe à la modal le document au format base64 et le contenu HTML
+      // pour générer le pdf
+
+      const coverLetter = yield _this.createModal(_template_screenshot_template_screenshot_page__WEBPACK_IMPORTED_MODULE_4__.TemplateScreenshotPage, {
+        base64,
+        htmlBase: _this.content
+      });
+      yield coverLetter.present();
+    })();
+  }
+
+  createModal(component, componentProps, cssClass) {
+    var _this2 = this;
+
+    return (0,_Users_macbookpro_Documents_agence_projetsApp_motivpro_motivation_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      const modal = yield _this2.modalController.create({
+        component: _template_screenshot_template_screenshot_page__WEBPACK_IMPORTED_MODULE_4__.TemplateScreenshotPage,
+        cssClass,
+        componentProps,
+        backdropDismiss: true
+      });
+      return modal;
+    })();
+  }
+
+  closeModal() {
+    this.modalController.dismiss();
+  }
+
+};
+
+CoverLetterSimplePage.ctorParameters = () => [{
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController
+}, {
+  type: _ionic_native_pdf_generator_ngx__WEBPACK_IMPORTED_MODULE_3__.PDFGenerator
+}];
+
+CoverLetterSimplePage.propDecorators = {
+  user: [{
+    type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
+  }]
+};
+CoverLetterSimplePage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+  selector: 'app-cover-letter-simple',
+  template: _cover_letter_simple_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_cover_letter_simple_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], CoverLetterSimplePage);
+
+
+/***/ }),
+
 /***/ 3092:
 /*!*********************************************!*\
   !*** ./src/app/tab2/tab2-routing.module.ts ***!
@@ -142,17 +378,18 @@ let Tab2Page = class Tab2Page {
     this.purchaseService = purchaseService;
     this.isAccordionExpanded = true;
     this.colorBtn = 'success';
-    this.textBtn = 'Enregistrer';
+    this.textBtn = 'Suivant';
     this.addPicActive = false;
     this.picSizeExceedeed = false;
     this.purchaseState = this.purchaseService.purchaseState; // est-ce que la photo de profil existe ?
 
-    this.selectedPic = localStorage.getItem('pic');
+    this.selectedPic = sessionStorage.getItem('pic');
 
     if (this.selectedPic) {
       console.log(this.selectedPic, 'yes');
       this.imageConverted = this.selectedPic;
     } else {
+      console.log(this.selectedPic, 'nopic');
       this.imageConverted = null;
     }
   }
@@ -217,7 +454,7 @@ let Tab2Page = class Tab2Page {
 
   ionViewDidEnter() {
     console.log('test enter');
-    this.selectedPic = localStorage.getItem('pic');
+    this.selectedPic = sessionStorage.getItem('pic');
 
     if (this.selectedPic) {
       console.log(this.selectedPic, 'yes');
@@ -229,6 +466,12 @@ let Tab2Page = class Tab2Page {
 
 
   ngOnInit() {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      this.token = token;
+    }
+
     this.usersService.userData$.subscribe(data => {
       if (data) {
         console.log(data, 'data depuis tab2'); // Accéder aux données stockées dans le BehaviorSubject
@@ -275,7 +518,7 @@ let Tab2Page = class Tab2Page {
           //this.user.pic = this.imageConverted;
           // on store l'image dans le localStorage
 
-          localStorage.setItem('pic', _this.imageConverted); // disabled the add button
+          sessionStorage.setItem('pic', _this.imageConverted); // disabled the add button
 
           _this.addPicActive = true;
         } else {
@@ -287,11 +530,11 @@ let Tab2Page = class Tab2Page {
   }
 
   onDeletePic() {
-    localStorage.removeItem('pic');
+    sessionStorage.removeItem('pic');
     console.log('deleted');
     this.imageConverted = null;
     this.addPicActive = false;
-  } // étape 1 pour enregistrer les infos
+  } // étape 1 pour enregistrer les infos de l'entreprise
 
 
   saveInfos() {
@@ -305,11 +548,12 @@ let Tab2Page = class Tab2Page {
       this.colorBtn = 'warning';
       this.textBtn = 'Enregistrement en cours';
       setTimeout(() => {
-        this.colorBtn = 'success';
-        this.textBtn = 'Enregistrer';
+        // this.colorBtn = 'success';
+        // this.textBtn = 'Enregistrer';
+        this.onSaved();
       }, 1000);
     });
-  } // étape pour stocker la candidature
+  } // étape pour stocker la candidature dans l'historique
 
 
   onSaved() {
@@ -321,7 +565,8 @@ let Tab2Page = class Tab2Page {
       this.textBtn = 'Enregistrement en cours';
       setTimeout(() => {
         this.colorBtn = 'success';
-        this.textBtn = 'Enregistrer';
+        this.textBtn = 'Enregistré';
+        this.router.navigate(['tabs', 'tab-template-letters']);
       }, 1000);
     });
   }
@@ -407,6 +652,16 @@ let Tab2Page = class Tab2Page {
         _this4.modalInstance = null; // Reset modal instance after dismissal
       }
     })();
+  }
+
+  scrollToSection() {
+    const element = document.getElementById('btn');
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
   }
 
 };
@@ -509,6 +764,26 @@ const Camera = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('
 
 /***/ }),
 
+/***/ 3909:
+/*!*******************************************************************************!*\
+  !*** ./src/app/components/cover-letter-c/cover-letter-c.page.scss?ngResource ***!
+  \*******************************************************************************/
+/***/ ((module) => {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjb3Zlci1sZXR0ZXItYy5wYWdlLnNjc3MifQ== */";
+
+/***/ }),
+
+/***/ 508:
+/*!*****************************************************************************************!*\
+  !*** ./src/app/components/cover-letter-simple/cover-letter-simple.page.scss?ngResource ***!
+  \*****************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjb3Zlci1sZXR0ZXItc2ltcGxlLnBhZ2Uuc2NzcyJ9 */";
+
+/***/ }),
+
 /***/ 1597:
 /*!************************************************!*\
   !*** ./src/app/tab2/tab2.page.scss?ngResource ***!
@@ -519,13 +794,33 @@ module.exports = "@charset \"UTF-8\";\nion-label.sc-ion-label-md-h.sc-ion-label-
 
 /***/ }),
 
+/***/ 5445:
+/*!*******************************************************************************!*\
+  !*** ./src/app/components/cover-letter-c/cover-letter-c.page.html?ngResource ***!
+  \*******************************************************************************/
+/***/ ((module) => {
+
+module.exports = "<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-buttons (click)=\"closeModal()\" slot=\"start\">\n      <ion-button slot=\"icon\">\n        <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title class=\"title-ios ion-text-capitalize\">Modèle Yellish</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-button (click)=\"closeModal()\">\n    <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>Revenir à l'écran d'accueil\n  </ion-button>\n  <div id='main'\n    style='border:none; font-size:16px; padding:10px 35px; margin: 0 auto;font-family: arial;visibility: hidden;'>\n    <div id=\"container\" style='padding: 2rem 5rem;'>\n      <header style='display: flex; align-items: center; border-top: 3px solid black;border-bottom: 3px solid black;'>\n        <div\n          style='flex:1;margin: 24px; border-right: 3px solid black; padding: 16px; background-color:white;text-align: right;'>\n          <!-- ici icône -->\n          <p>\n            <ion-icon name=\"pin\"></ion-icon> {{user.adresse}}\n          </p>\n          <p>\n            <ion-icon name=\"phone-portrait\"></ion-icon> {{user.tel}}\n          </p>\n          <p>\n            <ion-icon name=\"send\"></ion-icon> {{user.email}}\n          </p>\n        </div>\n        <div style='flex:2; font-size:16px; font-weight: 600'>\n\n          <p style='font-size:24px'>{{user.prenom}} {{user.nom}}</p>\n          <p style='padding: 6px; color: white; background-color: rgb(255, 175, 3)'>{{user?.letters[0].intitule}}</p>\n\n        </div>\n\n      </header>\n\n      <section id='contactInfos' style='text-align: right;'>\n        <p>{{user.letters[0].societe}}</p>\n        <p>{{user.letters[0].contact}}</p>\n        <p>{{user.letters[0].adresseSociete}}</p>\n        <p>{{user.letters[0].cpVille}}</p>\n      </section>\n\n      <!-- partie expert -->\n      <section id='content' *ngIf=\"user.letters[0].experience ===  'expert' \" style='text-align: justify;'>\n        <p style='padding:10px 0px; text-align: right;'>Le {{today | date:'dd/MM/yyyy'}}</p>\n        <p style='padding-bottom:10px'>Objet : candidature pour le poste de {{user.letters[0].intitule}}</p>\n        <p *ngIf='user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          {{user.letters[0].contact}},\n        </p>\n        <p *ngIf='!user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          Madame, Monsieur,\n        </p>\n        <!-- premier paragraphe -->\n        <p>\n          Je suis actuellement à la recherche d'un emploi dans votre secteur d'activité, c'est pourquoi, je me permets\n          de\n          vous écrire pour postuler au poste de {{user.letters[0].intitule}}.</p>\n        <!-- second paragraphe -->\n        <p>\n          En effet, j'ai déjà pu exercer à ce poste lors d'une précédente mission. Cette expérience a été très\n          enrichissante et\n          formatrice. Je souhaiterais vivement mettre ces compétences à profit dans votre structure. Dès le début de\n          notre collaboration, vous pourrez constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et\n          {{user.adjs[2]}} des qualités essentielles dans ce métier. </p>\n\n        <!-- conclusion -->\n        <p>Je suis disponible pour m'entretenir avec vous, par téléphone ou en personne afin de déterminer comment je\n          pourrais contribuer au mieux au développement de votre entreprise. </p>\n        <p>Je vous remercie de l'attention que vous pourrez accorder à ma candidature,</p>\n        <p>Sincères salutations,</p>\n\n        <p style='margin:24px 0rem; font-weight:600'>{{user.prenom}} {{user.nom}}</p>\n        <div style='border-bottom: 3px solid black;'></div>\n      </section>\n\n      <!-- partie débutant -->\n      <section id='content' style='text-align: justify;' *ngIf=\"user.letters[0].experience ===  'debutant' \">\n        <p style='padding:10px 0px; text-align: right;'>Le {{today | date:'dd/MM/yyyy'}}</p>\n        <p style='padding-bottom:10px'>Objet : candidature pour le poste de {{user.letters[0].intitule}}</p>\n        <p *ngIf='user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          {{user.letters[0].contact}},\n        </p>\n        <p *ngIf='!user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          Madame, Monsieur,\n        </p>\n        <!-- premier paragraphe -->\n        <p>\n          Je suis actuellement à la recherche d'un emploi dans votre secteur d'activité, c'est pourquoi, je me permets\n          de\n          vous écrire pour postuler au poste de {{user.letters[0].intitule}}.\n        </p>\n        <p>\n          <!-- si pas expérience -->\n          <span *ngIf=\"user.gender ==='femme'\">\n            Je débute mon activité professionnelle avec beaucoup d'enthousiasme à l'idée de m'intégrer à une nouvelle\n            équipe et\n            d'acquérir de nouvelles compétences. Ma capacité d'adaptation et mon envie de bien faire les tâches\n            demandées me\n            permettront d'être opérationnelle rapidement. Je souhaiterais vivement mettre ces compétences à profit dans\n            votre\n            structure.\n          </span>\n          <span *ngIf=\"user.gender ==='homme'\">\n            Je débute mon activité professionnelle avec beaucoup d'enthousiasme à l'idée de m'intégrer à une nouvelle\n            équipe et\n            d'acquérir de nouvelles compétences. Ma capacité d'adaptation et mon envie de bien faire les tâches\n            demandées me\n            permettront d'être opérationnel rapidement. Je souhaiterais vivement mettre ces compétences à profit dans\n            votre\n            structure.\n          </span>\n        </p>\n\n        <!-- second paragraphe -->\n\n        <p>Dès le début de notre collaboration, vous pourrez constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et\n          {{user.adjs[2]}}, des qualités essentielles dans ce métier. </p>\n        <!-- conclusion -->\n        <p>Je suis disponible pour m'entretenir avec vous, par téléphone ou en personne afin de déterminer comment je\n          pourrais contribuer au mieux au développement de votre entreprise. </p>\n        <p>Je vous remercie de l'attention que vous pourrez accorder à ma candidature,</p>\n        <p>Sincères salutations,</p>\n\n        <p style='margin:24px 0px; font-weight:600'>{{user.prenom}} {{user.nom}}</p>\n        <div style='border-bottom: 3px solid black;'></div>\n      </section>\n\n    </div>\n\n\n\n  </div>\n</ion-content>\n";
+
+/***/ }),
+
+/***/ 8515:
+/*!*****************************************************************************************!*\
+  !*** ./src/app/components/cover-letter-simple/cover-letter-simple.page.html?ngResource ***!
+  \*****************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "<ion-header>\n  <ion-toolbar color=\"shade\">\n    <ion-buttons (click)=\"closeModal()\" slot=\"start\">\n      <ion-button slot=\"icon\">\n        <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title class=\"title-ios ion-text-capitalize\">Modèle 2</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n\n  <ion-button (click)=\"closeModal()\">\n    <ion-icon class=\"icon\" name=\"arrow-back-outline\"></ion-icon>Revenir à l'écran d'accueil\n  </ion-button>\n\n\n  <div id='main' style='font-family: arial; font-size:16px; padding:10px 35px; visibility: hidden'>\n    <div id=\"container\" style='padding: 3rem 5rem;'>\n      <header style='display: flex; text-align: left;'>\n        <div style='flex:1; background-color:white;font-size:16px;'>\n          <!-- ici icône -->\n          <p>{{user.prenom}} {{user.nom}}</p>\n          <p>\n            <ion-icon name=\"pin\"></ion-icon> {{user.adresse}}\n          </p>\n          <p>\n            <ion-icon name=\"phone-portrait\"></ion-icon> {{user.tel}}\n          </p>\n          <p>\n            <ion-icon name=\"send\"></ion-icon> {{user.email}}\n          </p>\n\n\n        </div>\n      </header>\n\n      <section id='contactInfos' style='text-align: right;'>\n        <p>{{user.letters[0].societe}}</p>\n        <p>{{user.letters[0].contact}}</p>\n        <p>{{user.letters[0].adresseSociete}}</p>\n        <p>{{user.letters[0].cpVille}}</p>\n      </section>\n\n      <!-- partie expert -->\n      <section id='content' style='text-align: justify;' *ngIf=\"user.letters[0].experience ===  'expert' \">\n        <p style='padding-bottom:35px; text-align: right;'>Le {{today | date:'dd/MM/yyyy'}}</p>\n        <p style='padding-bottom:10px'>Objet : candidature pour le poste de {{user.letters[0].intitule}}</p>\n        <p *ngIf='user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          {{user.letters[0].contact}},\n        </p>\n        <p *ngIf='!user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          Madame, Monsieur,\n        </p>\n        <!-- premier paragraphe -->\n\n        <p>\n          Je suis actuellement à la recherche d'un emploi dans votre secteur d'activité, c'est pourquoi, je me permets\n          de vous\n          écrire pour postuler au poste de {{user.letters[0].intitule}}.\n        </p>\n        <p>\n          <!-- si expérience -->\n          En effet, j'ai déjà pu exercer à ce poste lors d'une précédente mission. Cette expérience a été très\n          enrichissante\n          et\n          formatrice. Je souhaiterais vivement mettre ces compétences à profit dans votre structure.\n        </p>\n\n\n        <!-- second paragraphe -->\n        <p>Dès le début de notre collaboration, vous pourrez constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et\n          {{user.adjs[2]}} des qualités essentielles dans ce métier. </p>\n        <!-- conclusion -->\n        <p>Je suis disponible pour m'entretenir avec vous, par téléphone ou en personne afin de déterminer comment je\n          pourrais contribuer au mieux au développement de votre entreprise. </p>\n        <p>Je vous remercie de l'attention que vous pourrez accorder à ma candidature,</p>\n        <p>Sincères salutations,</p>\n\n        <p>{{user.prenom}} {{user.nom}}</p>\n\n      </section>\n\n      <!-- partie débutant -->\n      <section id='content' style='text-align: justify;' *ngIf=\"user.letters[0].experience ===  'debutant' \">\n        <p style='padding-bottom:35px; text-align: right;'>Le {{today | date:'dd/MM/yyyy'}}</p>\n        <p style='padding-bottom:10px'>Objet : candidature pour le poste de {{user.letters[0].intitule}}</p>\n        <p *ngIf='user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          {{user.letters[0].contact}},\n        </p>\n        <p *ngIf='!user.letters[0].contact' style='padding-bottom:8px; text-align: left;'>\n          Madame, Monsieur,\n        </p>\n\n        <!-- premier paragraphe -->\n        <p>\n          Je suis actuellement à la recherche d'un emploi dans votre secteur d'activité, c'est pourquoi, je me permets\n          de\n          vous\n          écrire pour postuler au poste de {{user.letters[0].intitule}}.\n        </p>\n        <!-- si expérience -->\n        <p>\n          <!-- si pas expérience -->\n          <span *ngIf=\"user.gender ==='femme'\">\n            Je débute mon activité professionnelle avec beaucoup d'enthousiasme à l'idée de m'intégrer à une nouvelle\n            équipe\n            et\n            d'acquérir de nouvelles compétences. Ma capacité d'adaptation et mon envie de bien faire les tâches\n            demandées me\n            permettront d'être opérationnelle rapidement. Je souhaiterais vivement mettre ces compétences à profit dans\n            votre\n            structure.\n          </span>\n          <span *ngIf=\"user.gender ==='homme'\">\n            Je débute mon activité professionnelle avec beaucoup d'enthousiasme à l'idée de m'intégrer à une nouvelle\n            équipe\n            et\n            d'acquérir de nouvelles compétences. Ma capacité d'adaptation et mon envie de bien faire les tâches\n            demandées me\n            permettront d'être opérationnel rapidement. Je souhaiterais vivement mettre ces compétences à profit dans\n            votre\n            structure.\n          </span>\n        </p>\n\n        <!-- second paragraphe -->\n\n        <p>Dès le début de notre collaboration, vous pourrez constater que je suis {{user.adjs[0]}}, {{user.adjs[1]}} et\n          {{user.adjs[2]}}, des qualités essentielles dans ce métier. </p>\n        <!-- conclusion -->\n        <p>Je suis disponible pour m'entretenir avec vous, par téléphone ou en personne afin de déterminer comment je\n          pourrais\n          contribuer au mieux au développement de votre entreprise. </p>\n        <p>Je vous remercie de l'attention que vous pourrez accorder à ma candidature,</p>\n        <p>Sincères salutations,</p>\n\n        <p>{{user.prenom}} {{user.nom}}</p>\n\n      </section>\n    </div>\n\n\n\n  </div>\n</ion-content>\n";
+
+/***/ }),
+
 /***/ 1748:
 /*!************************************************!*\
   !*** ./src/app/tab2/tab2.page.html?ngResource ***!
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header>\n  <ion-toolbar color=\"tertiary\">\n    <!-- <ion-buttons slot=\"start\">\n            <ion-button slot=\"icon\">\n                <ion-icon name=\"menu\"></ion-icon>\n            </ion-button>\n        </ion-buttons> -->\n    <ion-title> Créer une candidature </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <!-- <app-add-sub-block></app-add-sub-block> -->\n\n\n  <!-- <ion-card color=\"danger\" *ngIf=\"!(user?.adjs && user?.adjs.length > 0)\">\n    <ion-card-header>\n      <ion-card-title>Besoin de compléter vos qualités</ion-card-title>\n      <ion-card-subtitle>N'oubliez pas de choisir trois qualités. Le champ à compléter se trouve en-dessous du champ\n        e-mail. </ion-card-subtitle>\n    </ion-card-header>\n\n    <ion-card-content>\n      <a routerLink='../tab1' style='color:white'>Retournez dans l'onglet Mes Infos</a>\n\n    </ion-card-content>\n  </ion-card> -->\n\n  <ion-accordion-group [value]=\"['first']\" (ionChange)=\"saveInfos()\">\n    <ion-accordion value=\"first\" id='first'>\n      <ion-item slot=\"header\" color=\"light\">\n        <ion-label>Etape 1 - Remplir les informations de la société</ion-label>\n      </ion-item>\n      <div class=\"ion-padding\" slot=\"content\">\n        <form [formGroup]=\"form\" *ngIf=\"user\" (ngSubmit)=\"saveInfos()\">\n          <!-- prenom -->\n          <ion-item>\n            <ion-label position=\"floating\">Intitulé du poste (requis)</ion-label>\n            <ion-input formControlName=\"intitule\"></ion-input>\n          </ion-item>\n          <ion-list>\n            <ion-item>\n              <ion-label>Votre expérience</ion-label>\n              <ion-select formControlName=\"experience\" placeholder=\"Niveau d'expérience pour ce poste\">\n                <ion-select-option value=\"debutant\">Débutant</ion-select-option>\n                <ion-select-option value=\"expert\">Déjà exercé un poste similaire</ion-select-option>\n              </ion-select>\n            </ion-item>\n          </ion-list>\n          <ion-item>\n            <ion-label position=\"floating\">Société (requis)</ion-label>\n            <ion-input formControlName=\"societe\"></ion-input>\n          </ion-item>\n          <ion-item>\n            <ion-label position=\"floating\">Nom du contact avec civilité</ion-label>\n            <ion-label style=\"font-style: italic\" position=\"floating\">Laisser vide si pas de nom disponible</ion-label>\n\n            <ion-input formControlName=\"contact\" placeholder=\"Madame Durand\"></ion-input>\n          </ion-item>\n\n\n\n\n          <ion-item>\n            <ion-label position=\"floating\">Adresse (requis)</ion-label>\n            <ion-input formControlName=\"adresseSociete\"></ion-input>\n          </ion-item>\n          <ion-item>\n            <ion-label position=\"floating\">Code Postal et Ville (requis)</ion-label>\n            <ion-input formControlName=\"cpVille\"></ion-input>\n          </ion-item>\n\n          <ion-button [color]=\"colorBtn\" expand=\"block\" type=\"submit\" [disabled]=\"form.invalid\">{{textBtn}}\n          </ion-button>\n        </form>\n      </div>\n    </ion-accordion>\n    <ion-accordion value=\"second\" id='second'>\n      <ion-item slot=\"header\" color=\"light\">\n        <ion-label>Etape 2 - Choisir le modèle</ion-label>\n      </ion-item>\n      <div class=\"ion-padding\" slot=\"content\">\n        <!-- lettre 1 -->\n        <ion-card class=\"ion-no-padding\">\n          <ion-row class=\"ion-align-items-center\">\n            <ion-col size=\"8\" class=\"ion-padding\">\n              <ion-row>\n                <ion-col class=\"bold\">\n                  <h5 class=\"ion-no-margin\">Modèle 1</h5>\n\n                  <img src=\"../../assets/lettres-apercus/cover-letter-1.png\" />\n                </ion-col>\n              </ion-row>\n            </ion-col>\n            <ion-col size=\"4\">\n              <ion-button color=\"success\" (click)=\"openModal('coverLetterComponent')\">\n                Choisir\n              </ion-button>\n            </ion-col>\n          </ion-row>\n        </ion-card>\n\n        <!-- lettre 2 -->\n        <ion-card class=\"ion-no-padding\">\n          <ion-row class=\"ion-align-items-center\">\n            <ion-col size=\"8\" class=\"ion-padding\">\n              <ion-row>\n                <ion-col class=\"bold\">\n                  <h5 class=\"ion-no-margin\">Modèle 2</h5>\n                  <img src=\"../../assets/lettres-apercus/cover-letter.png\" />\n                </ion-col>\n              </ion-row>\n            </ion-col>\n            <ion-col size=\"4\">\n              <ion-button color=\"success\" (click)=\"openModal('coverLetterSimplePage')\">\n                Choisir\n              </ion-button>\n            </ion-col>\n          </ion-row>\n        </ion-card>\n\n        <!-- lettre 3 -->\n        <ion-card class=\"ion-no-padding\">\n          <ion-row class=\"ion-align-items-center\">\n            <ion-col size=\"8\" class=\"ion-padding\">\n              <ion-row>\n                <ion-col class=\"bold\">\n                  <h5 class=\"ion-no-margin\">Modèle 3</h5>\n                  <img src=\"../../assets/lettres-apercus/cover-letter-2.png\" />\n                </ion-col>\n              </ion-row>\n            </ion-col>\n            <ion-col size=\"4\">\n              <ion-button color=\"success\" (click)=\"openModal('coverLetterCPage')\">\n                Choisir\n              </ion-button>\n            </ion-col>\n          </ion-row>\n        </ion-card>\n\n\n\n        <!-- ici code quand monétisation en cours -->\n        <!-- <h2 *ngIf='!(purchaseState| async)?.pro'>Accédez à plus de modèles en devenant Premium</h2>\n        <div [ngClass]=\"{'inactive-part': !(purchaseState| async)?.pro}\"> -->\n\n        <div>\n          <ion-card>\n            <ion-item color='success'>\n              <ion-icon name=\"diamond-outline\" style='padding: 10px;'></ion-icon>\n              <h1>Modèles Lettres Premium</h1>\n            </ion-item>\n\n          </ion-card>\n          <!-- lettre 4 premium bubble purple-->\n          <ion-card class=\"ion-no-padding\">\n            <ion-row class=\"ion-align-items-center\">\n              <ion-col size=\"6\" class=\"ion-padding\">\n                <ion-row>\n                  <ion-col class=\"bold\">\n                    <h5 class=\"ion-no-margin\">Modèle Premium Bubble</h5>\n                    <img src=\"../../assets/lettres-apercus/cover-letter-premium-bubble.png\" />\n                  </ion-col>\n                </ion-row>\n              </ion-col>\n              <ion-col size=\"6\">\n                <ion-button color=\"success\" (click)=\"openModal('coverLetterPremiumBubble')\">\n                  Prévisualiser\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </ion-card>\n\n          <!-- lettre 5 premium waves orange -->\n          <ion-card class=\"ion-no-padding\">\n            <ion-row class=\"ion-align-items-center\">\n              <ion-col size=\"6\" class=\"ion-padding\">\n                <ion-row>\n                  <ion-col class=\"bold\">\n                    <h5 class=\"ion-no-margin\">Modèle Premium Waves</h5>\n                    <img src=\"../../assets/lettres-apercus/cover-letter-premium-waves-1.png\" />\n                  </ion-col>\n                </ion-row>\n              </ion-col>\n              <ion-col size=\"6\">\n                <ion-button color=\"success\" (click)=\"openModal('coverLetterPremiumWaves1')\">\n                  Prévisualiser\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </ion-card>\n\n          <!-- lettre 6 premium waves yellow -->\n          <ion-card class=\"ion-no-padding\">\n            <ion-row class=\"ion-align-items-center\">\n              <ion-col size=\"6\" class=\"ion-padding\">\n                <ion-row>\n                  <ion-col class=\"bold\">\n                    <h5 class=\"ion-no-margin\">Modèle Premium Waves Yellish</h5>\n                    <img src=\"../../assets/lettres-apercus/cover-letter-premium-waves-yellish.png\" />\n                  </ion-col>\n                </ion-row>\n              </ion-col>\n              <ion-col size=\"6\">\n                <ion-button color=\"success\" (click)=\"openModal('coverLetterPremiumWaves2')\">\n                  Prévisualiser\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </ion-card>\n\n          <!-- lettre 6 premium blue mountains -->\n          <ion-card class=\"ion-no-padding\">\n            <ion-row class=\"ion-align-items-center\">\n              <ion-col size=\"6\" class=\"ion-padding\">\n                <ion-row>\n                  <ion-col class=\"bold\">\n                    <h5 class=\"ion-no-margin\">Modèle Premium Pic Grey</h5>\n                    <img src=\"../../assets/lettres-apercus/cover-letter-premium-pic-grey.jpg\" />\n                  </ion-col>\n                </ion-row>\n              </ion-col>\n              <ion-col size=\"6\">\n                <ion-button color=\"success\" (click)=\"openModal('coverLetterPremiumPicGrey')\">\n                  Prévisualiser\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </ion-card>\n        </div>\n\n\n      </div>\n    </ion-accordion>\n\n    <ion-accordion value=\"third\">\n      <ion-item slot=\"header\" color=\"light\">\n        <ion-label>Etape 3 - Sauvegarder votre candidature</ion-label>\n      </ion-item>\n      <div class=\"ion-padding\" slot=\"content\">\n        <ion-text color=\"primary\">\n          <p>\n            Pour une meilleur gestion de votre recherche d'emploi, n'oubliez pas\n            d'enregistrer cette candidature dans votre historique.\n          </p>\n        </ion-text>\n        <ion-button expand=\"block\" [color]=\"colorBtn\" (click)=\"onSaved()\">{{this.textBtn}}</ion-button>\n      </div>\n    </ion-accordion>\n  </ion-accordion-group>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <!-- <ion-button expand=\"block\" (click)='onSaved()'>AJOUTER A L'HISTORIQUE</ion-button> -->\n  </ion-toolbar>\n</ion-footer>\n";
+module.exports = "<ion-header>\n  <ion-toolbar color=\"tertiary\">\n    <!-- <ion-buttons slot=\"start\">\n            <ion-button slot=\"icon\">\n                <ion-icon name=\"menu\"></ion-icon>\n            </ion-button>\n        </ion-buttons> -->\n    <ion-title> Quelle entreprise ? </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <!-- <app-add-sub-block></app-add-sub-block> -->\n\n\n  <!-- <ion-card color=\"danger\" *ngIf=\"!(user?.adjs && user?.adjs.length > 0)\">\n    <ion-card-header>\n      <ion-card-title>Besoin de compléter vos qualités</ion-card-title>\n      <ion-card-subtitle>N'oubliez pas de choisir trois qualités. Le champ à compléter se trouve en-dessous du champ\n        e-mail. </ion-card-subtitle>\n    </ion-card-header>\n\n    <ion-card-content>\n      <a routerLink='../tab1' style='color:white'>Retournez dans l'onglet Mes Infos</a>\n\n    </ion-card-content>\n  </ion-card> -->\n\n  <div class=\"ion-padding\">\n    <form [formGroup]=\"form\" *ngIf=\"user\" (ngSubmit)=\"saveInfos()\">\n      <!-- prenom -->\n      <ion-item>\n        <ion-label position=\"floating\">Intitulé du poste (requis)</ion-label>\n        <ion-input formControlName=\"intitule\"></ion-input>\n      </ion-item>\n      <ion-list>\n        <ion-item>\n          <ion-label>Votre expérience</ion-label>\n          <ion-select formControlName=\"experience\" placeholder=\"Niveau d'expérience pour ce poste\">\n            <ion-select-option value=\"debutant\">Débutant</ion-select-option>\n            <ion-select-option value=\"expert\">Déjà exercé un poste similaire</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-list>\n      <ion-item>\n        <ion-label position=\"floating\">Société (requis)</ion-label>\n        <ion-input formControlName=\"societe\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\">Nom du contact avec civilité</ion-label>\n        <ion-label style=\"font-style: italic\" position=\"floating\">Laisser vide si pas de nom disponible</ion-label>\n\n        <ion-input formControlName=\"contact\" placeholder=\"Madame Durand\"></ion-input>\n      </ion-item>\n\n\n\n\n      <ion-item>\n        <ion-label position=\"floating\">Adresse (requis)</ion-label>\n        <ion-input formControlName=\"adresseSociete\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\">Code Postal et Ville (requis)</ion-label>\n        <ion-input formControlName=\"cpVille\"></ion-input>\n      </ion-item>\n\n      <ion-button [color]=\"colorBtn\" expand=\"block\" type=\"submit\" [disabled]=\"form.invalid\" id='btn'>{{textBtn}}\n      </ion-button>\n    </form>\n  </div>\n</ion-content>\n\n<ion-fab slot=\"fixed\" horizontal=\"end\" vertical=\"bottom\">\n  <ion-fab-button (click)=\"scrollToSection()\">\n    <ion-icon name=\"chevron-down-circle-outline\"></ion-icon>\n  </ion-fab-button>\n</ion-fab>\n\n<ion-footer>\n  <ion-toolbar>\n    <!-- <ion-button expand=\"block\" (click)='onSaved()'>AJOUTER A L'HISTORIQUE</ion-button> -->\n  </ion-toolbar>\n</ion-footer>\n";
 
 /***/ })
 

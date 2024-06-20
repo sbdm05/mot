@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UsersService } from '../services/users.service';
 import { User } from '../user/user';
 
@@ -8,10 +9,11 @@ import { User } from '../user/user';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
 })
-export class Tab3Page implements OnInit {
+export class Tab3Page {
   public user!: User;
   public savedLetters!: [];
   token!: any;
+  userDataSubscription: Subscription;
   constructor(
     private usersService: UsersService,
     private router: Router,
@@ -41,13 +43,35 @@ export class Tab3Page implements OnInit {
     // }
   }
 
-  ngOnInit() {
+  ionViewDidEnter() {
+    console.log('yes');
+    this.userDataSubscription = this.usersService.userData$.subscribe({
+      next: (data) => {
+        this.user = data;
+        console.log(data, 'user depuis tab1'); // Accéder aux données stockées dans le BehaviorSubject
+        //this.cdr.detectChanges();
+        if (data.savedLetters) {
+          this.savedLetters = data.savedLetters;
+          console.log(this.savedLetters);
+          //this.cdr.detectChanges();
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  ngOnInit2() {
     if (this.token) {
+      console.log('yes token');
+
       try {
         this.usersService.userData$.subscribe((data) => {
           //console.log(data.user, 'data');
           if (data) {
             this.user = data;
+            console.log(this.user);
 
             if (data.savedLetters) {
               this.savedLetters = data.savedLetters;
@@ -80,7 +104,8 @@ export class Tab3Page implements OnInit {
     this.router.navigate(['/signup']);
   }
 
-  onDestroy() {
-    //this.user = new User();
-  }
+  // onDestroy() {
+  //   //this.user = new User();
+  //   this.userDataSubscription.unsubscribe();
+  // }
 }

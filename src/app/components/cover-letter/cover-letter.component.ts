@@ -31,7 +31,8 @@ export class CoverLetterComponent implements OnInit, AfterViewInit {
 
   constructor(
     private modalController: ModalController,
-    private pdfGenerator: PDFGenerator
+    private pdfGenerator: PDFGenerator,
+    private router: Router
   ) {}
 
   ngAfterViewInit() {

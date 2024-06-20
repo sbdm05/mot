@@ -36,11 +36,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-    <key>NSCameraUsageDescription</key>
-        <string>to capture image</string>
+        <key>NSCameraUsageDescription</key>
+        <string>Permettre à l'application d'accèder à la caméra pour ajouter une photo de profil</string>
         <key>NSPhotoLibraryAddUsageDescription</key>
-        <string>to add image</string>
+        <string>Permettre à l'application d'accèder à votre bibliothèque de photos pour ajouter une photo de profil</string>
         <key>NSPhotoLibraryUsageDescription</key>
-        <string>To use the camera</string>
+        <string>Permettre à l'application d'ajouter des images à votre bibliothèque de photos</string>
 </dict>
 </plist>

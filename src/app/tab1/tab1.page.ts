@@ -146,6 +146,10 @@ export class Tab1Page implements OnInit, OnChanges {
     }
   }
 
+  onDashboard() {
+    this.router.navigate(['tabs', 'tab3']);
+  }
+
   // ngOnDestroy() {
   //   this.user = new User();
   //   this.userDataSubscription.unsubscribe();

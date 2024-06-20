@@ -136,13 +136,33 @@ let Tab3Page = class Tab3Page {
         //   this.router.navigate(['/']);
         // }
     }
-    ngOnInit() {
+    ionViewDidEnter() {
+        console.log('yes');
+        this.userDataSubscription = this.usersService.userData$.subscribe({
+            next: (data) => {
+                this.user = data;
+                console.log(data, 'user depuis tab1'); // Accéder aux données stockées dans le BehaviorSubject
+                //this.cdr.detectChanges();
+                if (data.savedLetters) {
+                    this.savedLetters = data.savedLetters;
+                    console.log(this.savedLetters);
+                    //this.cdr.detectChanges();
+                }
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
+    }
+    ngOnInit2() {
         if (this.token) {
+            console.log('yes token');
             try {
                 this.usersService.userData$.subscribe((data) => {
                     //console.log(data.user, 'data');
                     if (data) {
                         this.user = data;
+                        console.log(this.user);
                         if (data.savedLetters) {
                             this.savedLetters = data.savedLetters;
                             console.log(this.savedLetters);
@@ -173,9 +193,6 @@ let Tab3Page = class Tab3Page {
         console.log(this.token);
         localStorage.removeItem('token');
         this.router.navigate(['/signup']);
-    }
-    onDestroy() {
-        //this.user = new User();
     }
 };
 Tab3Page.ctorParameters = () => [
@@ -211,7 +228,7 @@ module.exports = ".card-historique {\n  width: 100%;\n  padding: 1rem;\n}\n\nspa
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"true\">\n  <ion-toolbar color=\"tertiary\">\n    <ion-title>\n      Historique\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n\n  <ng-container *ngIf=\"savedLetters?.length> 0; then content else noContent\"></ng-container>\n  <ng-template #content>\n    <ion-list *ngIf='user'>\n      <ion-item-sliding *ngFor=\"let letter of user.savedLetters, index as index\">\n        <ion-item>\n          <ion-card class='card-historique'>\n            <p>Vous avez créé une nouvelle candidature le {{letter.date}}</p>\n            <ion-label><span>Entreprise :</span> {{letter.newValue.societe}}</ion-label>\n            <ion-label><span>Lieu :</span> {{letter.newValue.adresseSociete}} - {{letter.newValue.cpVille}}</ion-label>\n            <ion-label><span>Contact :</span> {{letter.newValue.contact}}</ion-label>\n\n\n            <ion-label><span>Poste :</span> {{letter.newValue.intitule}}</ion-label>\n\n          </ion-card>\n\n        </ion-item>\n\n        <ion-item-options>\n          <ion-item-option color=\"danger\" (click)='onDelete(user, letter)'>Supprimer</ion-item-option>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n  </ng-template>\n\n  <ng-template #noContent>\n\n    <ion-card>\n      <ion-card-title>Aucun historique</ion-card-title>\n      <ion-card-content>Pour créer une lettre, rendez-vous dans l'onglet Créer une lettre.</ion-card-content>\n\n    </ion-card>\n  </ng-template>\n\n\n\n\n</ion-content>\n";
+module.exports = "<ion-header [translucent]=\"true\">\n  <ion-toolbar color=\"tertiary\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/tabs/tab1\"></ion-back-button>\n    </ion-buttons>\n    <ion-title>\n      Historique\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n\n  <ng-container *ngIf=\"savedLetters?.length> 0; then content else noContent\"></ng-container>\n  <ng-template #content>\n    <ion-list *ngIf='user'>\n      <ion-item-sliding *ngFor=\"let letter of user.savedLetters, index as index\">\n        <ion-item>\n          <ion-card class='card-historique'>\n            <p>Vous avez créé une nouvelle candidature le {{letter.date}}</p>\n            <ion-label><span>Entreprise :</span> {{letter.newValue.societe}}</ion-label>\n            <ion-label><span>Lieu :</span> {{letter.newValue.adresseSociete}} - {{letter.newValue.cpVille}}</ion-label>\n            <ion-label><span>Contact :</span> {{letter.newValue.contact}}</ion-label>\n\n\n            <ion-label><span>Poste :</span> {{letter.newValue.intitule}}</ion-label>\n\n          </ion-card>\n\n        </ion-item>\n\n        <ion-item-options>\n          <ion-item-option color=\"danger\" (click)='onDelete(user, letter)'>Supprimer</ion-item-option>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n  </ng-template>\n\n  <ng-template #noContent>\n\n    <ion-card>\n      <ion-card-title>Aucun historique</ion-card-title>\n      <ion-card-content>Pour créer une lettre, rendez-vous dans l'onglet Créer une lettre.</ion-card-content>\n\n    </ion-card>\n  </ng-template>\n\n\n\n\n</ion-content>\n";
 
 /***/ })
 
